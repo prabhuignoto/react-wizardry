@@ -1,0 +1,55 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.tabs {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0;
+  margin: 0;
+}
+
+.tab {
+  border-radius: 50%;
+  background: #f8f8f8;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+  font-size: 1.2rem;
+  position: relative;
+  background: #fff;
+  box-shadow: inset 0 0 14px 2px rgba(0, 0, 0, 0.1),
+    0 0 2px 1px rgba(0, 0, 0, 0.2);
+
+  &:not(:first-child) {
+    margin: 0 4rem;
+  }
+
+  &:first-child {
+    margin-right: 4rem;
+  }
+
+  &.selected {
+    background: #007fff;
+    color: #fff;
+  }
+
+  &:not(:last-child)::after {
+    content: "";
+    display: block;
+    width: 8rem;
+    height: 3px;
+    position: absolute;
+    background: #4ca5ff;
+    left: 2rem;
+    z-index: 0;
+  }
+}

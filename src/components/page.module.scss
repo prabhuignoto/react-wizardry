@@ -1,0 +1,30 @@
+.page_wrapper {
+  padding: 0.5rem 0;
+  transition: opacity 0.25s ease-out;
+
+  &.hide {
+    opacity: 0;
+  }
+}
+
+.fields_wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.form_field_wrapper {
+  padding: 0.5rem 0;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 1rem;
+  font-weight: 500;
+  border-bottom: 2px solid #007fff;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}

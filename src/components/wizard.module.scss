@@ -1,0 +1,41 @@
+$padding: 1.5rem;
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  background: #f8f8f8;
+  padding: $padding;
+  border-radius: 4px;
+  box-shadow: 1px 1px 10px 2px #dcdcdc;
+}
+
+.header_wrapper {
+  margin: 0.5rem 0;
+  width: calc(100% - $padding);
+}
+
+.body_wrapper {
+  width: calc(100% - $padding);
+  margin: 0.5rem 0;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  max-height: 2400px;
+}
+
+.pages_wrapper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  position: absolute;
+  z-index: 0;
+  transition: transform 0.3s ease-in-out;
+}
+
+.footer_wrapper {
+  width: calc(100% - $padding);
+  margin: 0.5rem 0;
+}
