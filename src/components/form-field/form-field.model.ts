@@ -6,7 +6,7 @@ export type FormFieldProps = {
   type?: "text" | "datetime" | "checkbox" | "select";
   label?: string;
   selectOptions?: Option[];
-  onInput?: (val: string, id: string) => void;
+  onInput?: (val: string | string[] | number, id: string) => void;
   isValid?: boolean | null;
   data?: any;
   placeholder?: string;

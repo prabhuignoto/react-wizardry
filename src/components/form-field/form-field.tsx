@@ -42,12 +42,16 @@ const FormField: FunctionComponent<FormFieldProps> = ({
       {isValid ? (
         <span
           className={classNames(styles.status, isValid ? styles.success : "")}
+          role="img"
+          aria-label="success"
         >
           <CheckIcon />
         </span>
       ) : !isValid && isValid !== null ? (
         <span
           className={classNames(styles.status, !isValid ? styles.fail : "")}
+          role="img"
+          aria-label="fail"
         >
           <WarnIcon />
         </span>
