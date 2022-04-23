@@ -23,11 +23,13 @@ function App() {
                 label: "Last Name",
                 name: "lastName",
                 type: "text",
+                isRequired: true,
               },
               {
                 label: "Email",
                 name: "email",
                 type: "text",
+                isRequired: true,
               },
               {
                 name: "dateOfBirth",

@@ -4,6 +4,17 @@
   justify-content: flex-end;
 }
 
+.button_controls {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.message {
+  display: block;
+}
+
 .button {
   border: 0;
   background: none;

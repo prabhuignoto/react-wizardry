@@ -9,9 +9,9 @@ import React, {
   useState,
 } from "react";
 import { useDebouncedCallback } from "use-debounce";
-import { FormField } from "./form-field";
-import { FormFieldProps } from "./form-field.model";
-import { PageModelProps } from "./page.model";
+import { FormField } from "../form-field/form-field";
+import { FormFieldProps } from "../form-field/form-field.model";
+import { PageModelProps } from "../page/page.model";
 import styles from "./page.module.scss";
 
 const Page = forwardRef<{ height: number; id: string }, PageModelProps>(

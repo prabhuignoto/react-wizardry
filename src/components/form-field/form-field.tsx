@@ -5,8 +5,8 @@ import React, {
   useCallback,
   useMemo,
 } from "react";
-import CheckIcon from "../icons/check";
-import WarnIcon from "../icons/warning";
+import CheckIcon from "../../icons/check";
+import WarnIcon from "../../icons/warning";
 import { FormFieldProps } from "./form-field.model";
 import styles from "./form-field.module.scss";
 
@@ -19,6 +19,7 @@ const FormField: FunctionComponent<FormFieldProps> = ({
   selectOptions = [],
   onInput,
   isValid,
+  placeholder,
 }) => {
   const labelId = useMemo(() => `input-${id}`, []);
 
@@ -60,6 +61,8 @@ const FormField: FunctionComponent<FormFieldProps> = ({
           required={isRequired}
           aria-labelledby={labelId}
           onInput={handleInput}
+          placeholder={placeholder}
+          name={name}
         />
       )}
       {type === "checkbox" && (
@@ -67,6 +70,7 @@ const FormField: FunctionComponent<FormFieldProps> = ({
           type="checkbox"
           required={isRequired}
           aria-labelledby={labelId}
+          name={name}
         />
       )}
       {type === "select" && (
@@ -81,6 +85,7 @@ const FormField: FunctionComponent<FormFieldProps> = ({
           type="datetime-local"
           required={isRequired}
           aria-labelledby={labelId}
+          name={name}
         />
       )}
     </div>

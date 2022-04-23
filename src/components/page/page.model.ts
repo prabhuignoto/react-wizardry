@@ -1,4 +1,4 @@
-import { FormFieldProps } from "./form-field.model";
+import { FormFieldProps } from "../form-field/form-field.model";
 
 export type PageModelProps = {
   id: string;
@@ -11,5 +11,5 @@ export type PageModelProps = {
   title?: string;
   width?: number;
   hide?: boolean;
-  isValid?: boolean | null;
+  state: "NOT_VALIDATED" | "SUCCESS" | "FAIL";
 };

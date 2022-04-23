@@ -8,10 +8,10 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { Page } from "./page";
-import { PageModelProps } from "./page.model";
-import { WizardFooter } from "./wizard-footer";
-import { WizardHeader } from "./wizard-header";
+import { Page } from "./page/page";
+import { PageModelProps } from "./page/page.model";
+import { WizardFooter } from "./wizard-footer/wizard-footer";
+import { WizardHeader } from "./wizard-header/wizard-header";
 import { WizardProps } from "./wizard.model";
 import styles from "./wizard.module.scss";
 
@@ -21,12 +21,12 @@ type PageDim = {
 };
 
 const Wizard: FunctionComponent<WizardProps> = ({ pages }) => {
-  /** wizard state */
+  /** pages state */
   const [wizardPages, setWizardPages] = useState<PageModelProps[]>(
     pages.map((page) => ({
       ...page,
       id: nanoid(),
-      isValid: null,
+      state: "NOT_VALIDATED",
     }))
   );
 
@@ -36,21 +36,21 @@ const Wizard: FunctionComponent<WizardProps> = ({ pages }) => {
 
   const pageHeights = useRef<PageDim[]>([]);
 
-  /** handlers */
-  const handleNext = useCallback(() => {
-    const curIndex = wizardPages.findIndex((page) => page.id === activePageId);
-
-    if (curIndex + 1 < wizardPages.length) {
-      const newPageId = wizardPages[curIndex + 1].id;
-      setActivePageId(newPageId);
-    }
+  const activeIndex = useMemo(() => {
+    return wizardPages.findIndex((page) => page.id === activePageId) || 0;
   }, [activePageId, wizardPages.length]);
 
-  const handlePrevious = useCallback(() => {
-    const curIndex = wizardPages.findIndex((page) => page.id === activePageId);
+  /** handlers */
+  const handleNext = useCallback(() => {
+    if (activeIndex + 1 < wizardPages.length) {
+      const newPageId = wizardPages[activeIndex + 1].id;
+      setActivePageId(newPageId);
+    }
+  }, [activePageId, wizardPages.length, activeIndex]);
 
-    if (curIndex - 1 >= 0) {
-      const newPageId = wizardPages[curIndex - 1].id;
+  const handlePrevious = useCallback(() => {
+    if (activeIndex - 1 >= 0) {
+      const newPageId = wizardPages[activeIndex - 1].id;
       setActivePageId(newPageId);
     }
   }, [activePageId]);
@@ -101,43 +101,25 @@ const Wizard: FunctionComponent<WizardProps> = ({ pages }) => {
     }
   }, [pagesLoaded]);
 
-  const activeIndex = useMemo(() => {
-    return wizardPages.findIndex((page) => page.id === activePageId) || 0;
-  }, [activePageId]);
-
   const pagesStyle = useMemo(() => {
     return {
       transform: `translateX(-${activeIndex * wizardWidth}px)`,
     } as CSSProperties;
   }, [activePageId, wizardPages.length, wizardWidth, activeIndex]);
 
-  const onChange = useCallback(
-    (id: string, success: boolean) => {
-      console.log(id, success);
-      setWizardPages((prev) =>
-        prev.map((page) => {
-          if (page.id === id) {
-            return {
-              ...page,
-              isValid: success,
-            };
-          }
-          return page;
-        })
-      );
-    },
-    [wizardPages.length]
-  );
-
-  const disableNext = useMemo(() => {
-    const page = wizardPages.find((x) => x.id === activePageId);
-
-    if (page?.isValid === null) {
-      return page.fields.some((f) => f.isRequired);
-    }
-
-    return page?.isValid !== null && !page?.isValid;
-  }, [activePageId, JSON.stringify(wizardPages)]);
+  const onChange = useCallback((id: string, success: boolean) => {
+    setWizardPages((prev) =>
+      prev.map((page) => {
+        if (page.id === id) {
+          return {
+            ...page,
+            state: success ? "SUCCESS" : "FAIL",
+          };
+        }
+        return page;
+      })
+    );
+  }, []);
 
   return (
     <div className={styles.wrapper}>
@@ -162,9 +144,8 @@ const Wizard: FunctionComponent<WizardProps> = ({ pages }) => {
         <WizardFooter
           onNext={handleNext}
           onPrev={handlePrevious}
-          disableNext={disableNext}
-          totalPages={pages.length}
-          activeIndex={activeIndex}
+          pages={wizardPages}
+          activeId={activePageId}
         />
       </div>
     </div>

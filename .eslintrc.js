@@ -17,4 +17,9 @@ module.exports = {
     "no-use-before-define": "off",
     "react/prop-types": "off",
   },
+  settings: {
+    react: {
+      version: "detect",
+    }
+  }
 };
