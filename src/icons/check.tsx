@@ -9,7 +9,6 @@ const SvgComponent = () => (
     strokeWidth={2}
     strokeLinecap="round"
     strokeLinejoin="round"
-    className="feather feather-check"
   >
     <path d="M20 6 9 17l-5-5" />
   </svg>

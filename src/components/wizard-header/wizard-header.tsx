@@ -11,6 +11,8 @@ const WizardTab: FunctionComponent<WizardTabProps> = ({
   selected,
   state,
   label,
+  highlight,
+  disable,
 }) => {
   const containerClass = useMemo(
     () =>
@@ -22,10 +24,16 @@ const WizardTab: FunctionComponent<WizardTabProps> = ({
 
   const tabClass = useMemo(
     () =>
-      classNames(styles.tab, selected ? styles.selected : "", {
-        [styles[state.toLowerCase()]]: true,
-      }),
-    [state, selected]
+      classNames(
+        styles.tab,
+        selected ? styles.selected : "",
+        {
+          [styles[state.toLowerCase()]]: true,
+        },
+        highlight ? styles.highlight : "",
+        disable ? styles.disabled : ""
+      ),
+    [state, selected, highlight, disable]
   );
 
   const getLabel = useMemo(
@@ -47,6 +55,7 @@ const WizardTab: FunctionComponent<WizardTabProps> = ({
 const WizardHeader: FunctionComponent<WizardHeaderProps> = ({
   pages,
   onSelect,
+  activeIndex,
 }) => {
   return (
     <div className={styles.wrapper}>
@@ -59,6 +68,8 @@ const WizardHeader: FunctionComponent<WizardHeaderProps> = ({
             onSelect={(id) => onSelect?.(id)}
             state={state}
             label={index + 1 + ""}
+            highlight={index < activeIndex}
+            disable={index > activeIndex}
           />
         ))}
       </ul>

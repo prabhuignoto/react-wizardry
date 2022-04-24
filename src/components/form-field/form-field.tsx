@@ -5,6 +5,7 @@ import React, {
   useCallback,
   useMemo,
 } from "react";
+import Asterisk from "../../icons/asterisk";
 import CheckIcon from "../../icons/check";
 import WarnIcon from "../../icons/warning";
 import { FormFieldProps } from "./form-field.model";
@@ -59,39 +60,46 @@ const FormField: FunctionComponent<FormFieldProps> = ({
       <label className={styles.form_field_label} id={labelId}>
         {label}
       </label>
-      {type === "text" && (
-        <input
-          type="text"
-          required={isRequired}
-          aria-labelledby={labelId}
-          onInput={handleInput}
-          placeholder={placeholder}
-          name={name}
-        />
-      )}
-      {type === "checkbox" && (
-        <input
-          type="checkbox"
-          required={isRequired}
-          aria-labelledby={labelId}
-          name={name}
-        />
-      )}
-      {type === "select" && (
-        <select>
-          {selectOptions.map((option) => (
-            <option key={option.id}>{option.name}</option>
-          ))}
-        </select>
-      )}
-      {type === "datetime" && (
-        <input
-          type="datetime-local"
-          required={isRequired}
-          aria-labelledby={labelId}
-          name={name}
-        />
-      )}
+      <div className={styles.input_wrapper}>
+        {type === "text" && (
+          <input
+            type="text"
+            required={isRequired}
+            aria-labelledby={labelId}
+            onInput={handleInput}
+            placeholder={placeholder}
+            name={name}
+          />
+        )}
+        {type === "checkbox" && (
+          <input
+            type="checkbox"
+            required={isRequired}
+            aria-labelledby={labelId}
+            name={name}
+          />
+        )}
+        {type === "select" && (
+          <select>
+            {selectOptions.map((option) => (
+              <option key={option.id}>{option.name}</option>
+            ))}
+          </select>
+        )}
+        {type === "datetime" && (
+          <input
+            type="datetime-local"
+            required={isRequired}
+            aria-labelledby={labelId}
+            name={name}
+          />
+        )}
+        {isRequired && (
+          <span className={styles.asterisk}>
+            <Asterisk />
+          </span>
+        )}
+      </div>
     </div>
   );
 };

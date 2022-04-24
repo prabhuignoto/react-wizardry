@@ -124,7 +124,11 @@ const Wizard: FunctionComponent<WizardProps> = ({ pages }) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.header_wrapper}>
-        <WizardHeader pages={wizardPages} onSelect={handleSelection} />
+        <WizardHeader
+          pages={wizardPages}
+          onSelect={handleSelection}
+          activeIndex={activeIndex}
+        />
       </div>
       <div className={styles.body_wrapper} style={bodyStyle} ref={onBodyRef}>
         <div className={styles.pages_wrapper} style={pagesStyle}>

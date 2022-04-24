@@ -38,6 +38,12 @@
   }
 }
 
+.input_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
 .form_field_label {
   margin-bottom: 0.5rem;
   font-size: 1rem;
@@ -68,5 +74,20 @@
   svg {
     width: 80%;
     height: 80%;
+  }
+}
+
+.asterisk {
+  width: 0.7rem;
+  height: 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.5rem;
+  
+  svg {
+    fill: #de1738;
+    height: 100%;
+    width: 100%;
   }
 }
