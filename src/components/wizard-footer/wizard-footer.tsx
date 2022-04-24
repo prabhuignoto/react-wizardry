@@ -10,6 +10,7 @@ const WizardFooter: FunctionComponent<WizardFooterProps> = ({
   onPrev,
   activeId,
   pages,
+  message = "Form has errors. Please fix it to proceed to the next step.",
 }) => {
   const activeIndex = useMemo(
     () => pages.findIndex((p) => p.id === activeId),
@@ -48,14 +49,16 @@ const WizardFooter: FunctionComponent<WizardFooterProps> = ({
 
   return (
     <div className={styles.wizard_footer}>
-      <span className={styles.message}>
-        {isActivePageInvalid
-          ? `Form has errors. Please fix it to proceed to the next step.`
-          : ""}
+      <span className={styles.message} role="alert">
+        {isActivePageInvalid ? message : ""}
       </span>
       <div className={styles.button_controls}>
         {!hideBack && (
-          <button className={styles.button} onClick={onPrev}>
+          <button
+            className={styles.button}
+            onClick={onPrev}
+            aria-label="go back"
+          >
             <span className={styles.btn_icon}>
               <ChevronLeft />
             </span>
@@ -69,6 +72,7 @@ const WizardFooter: FunctionComponent<WizardFooterProps> = ({
               disableNext ? styles.disabled : ""
             )}
             onClick={onNext}
+            aria-label="go forward"
           >
             <span>Next</span>
             <span className={styles.btn_icon}>
@@ -77,7 +81,7 @@ const WizardFooter: FunctionComponent<WizardFooterProps> = ({
           </button>
         )}
         {showFinish && (
-          <button className={styles.button}>
+          <button className={styles.button} aria-label="finish">
             <span>Finish</span>
             <span className={styles.btn_icon}>
               <ChevronRight />

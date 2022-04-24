@@ -7,7 +7,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "format": "npx prettier --write ./src/components/*.{ts,tsx}",
-    "test": "npx vitest",
+    "test": "npx vitest --config ./vitest.config.ts --coverage",
     "lint": "npx eslint ./src/components/**/*.{ts,tsx}"
   },
   "dependencies": {

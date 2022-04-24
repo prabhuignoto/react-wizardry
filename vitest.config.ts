@@ -7,7 +7,7 @@ export default defineConfig({
   test: {
     coverage: {
       enabled: true,
-      include: ["./src/components/**.tsx"],
+      include: ["./src/components/**/*.tsx"],
       reporter: ["text", "json", "html", "lcov", "clover"],
       reportsDirectory: "./coverage"
     },
