@@ -2,7 +2,7 @@ import { PageModelProps } from "../page/page.model";
 
 export type WizardHeaderProps = {
   pages: PageModelProps[];
-  onSelect: (id?: string) => void;
+  onSelect?: (id?: string) => void;
 };
 
 export type WizardTabProps = Pick<WizardHeaderProps, "onSelect"> &

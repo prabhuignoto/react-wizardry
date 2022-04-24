@@ -28,9 +28,14 @@ const WizardTab: FunctionComponent<WizardTabProps> = ({
     [state, selected]
   );
 
+  const getLabel = useMemo(
+    () => state.split("_").join(" ").toLowerCase(),
+    [state]
+  );
+
   return (
-    <li key={id} className={tabClass} onClick={() => onSelect?.(id)}>
-      <span className={containerClass}>
+    <li key={id} className={tabClass} onClick={() => onSelect?.(id)} role="tab">
+      <span className={containerClass} role="img" aria-label={getLabel}>
         {state === "NOT_VALIDATED" && label}
         {state === "SUCCESS" && <CheckIcon />}
         {state === "FAIL" && <WarnIcon />}
@@ -45,13 +50,13 @@ const WizardHeader: FunctionComponent<WizardHeaderProps> = ({
 }) => {
   return (
     <div className={styles.wrapper}>
-      <ul className={styles.tabs}>
+      <ul className={styles.tabs} role="tablist">
         {pages.map(({ id, isActive, state }, index) => (
           <WizardTab
             key={id}
             id={id}
             selected={isActive}
-            onSelect={(id) => onSelect(id)}
+            onSelect={(id) => onSelect?.(id)}
             state={state}
             label={index + 1 + ""}
           />

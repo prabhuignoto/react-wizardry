@@ -46,20 +46,23 @@ const Page = forwardRef<{ height: number; id: string }, PageModelProps>(
       [hide]
     );
 
-    const onHandleInput = useDebouncedCallback((val: string, id: string) => {
-      setFields((prev) =>
-        prev.map((field) => {
-          if (field.id === id) {
-            return {
-              ...field,
-              data: val,
-            };
-          }
-          return field;
-        })
-      );
-      setRevalidate(new Date().getMilliseconds());
-    }, 200);
+    const onHandleInput = useDebouncedCallback(
+      (val: string | string[] | number, id: string) => {
+        setFields((prev) =>
+          prev.map((field) => {
+            if (field.id === id) {
+              return {
+                ...field,
+                data: val,
+              };
+            }
+            return field;
+          })
+        );
+        setRevalidate(new Date().getMilliseconds());
+      },
+      200
+    );
 
     useEffect(() => {
       if (reValidate < 1) {
