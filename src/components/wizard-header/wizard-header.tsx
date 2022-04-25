@@ -1,7 +1,8 @@
 import classNames from "classnames";
-import React, { FunctionComponent, useMemo } from "react";
+import React, { FunctionComponent, useContext, useMemo } from "react";
 import CheckIcon from "../../icons/check";
 import WarnIcon from "../../icons/warning";
+import { WizardContext } from "../wizard";
 import { WizardHeaderProps, WizardTabProps } from "./wizard-header.model";
 import styles from "./wizard-header.module.scss";
 
@@ -42,7 +43,14 @@ const WizardTab: FunctionComponent<WizardTabProps> = ({
   );
 
   return (
-    <li key={id} className={tabClass} onClick={() => onSelect?.(id)} role="tab">
+    <li
+      key={id}
+      className={tabClass}
+      onClick={() => onSelect?.(id)}
+      role="tab"
+      aria-disabled={disable}
+      tabIndex={0}
+    >
       <span className={containerClass} role="img" aria-label={getLabel}>
         {state === "NOT_VALIDATED" && label}
         {state === "SUCCESS" && <CheckIcon />}
@@ -57,6 +65,7 @@ const WizardHeader: FunctionComponent<WizardHeaderProps> = ({
   onSelect,
   activeIndex,
 }) => {
+  const { strict } = useContext(WizardContext);
   return (
     <div className={styles.wrapper}>
       <ul className={styles.tabs} role="tablist">
@@ -69,7 +78,7 @@ const WizardHeader: FunctionComponent<WizardHeaderProps> = ({
             state={state}
             label={index + 1 + ""}
             highlight={index < activeIndex}
-            disable={index > activeIndex}
+            disable={strict && index > activeIndex}
           />
         ))}
       </ul>

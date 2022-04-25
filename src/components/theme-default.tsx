@@ -6,4 +6,6 @@ export const ThemeDefaults = {
   fail: "#de1738",
   textColor: "#000",
   formFieldBorder: "#dcdcdc",
+  inputBackground: "#e8e8e8",
+  inputTextColor: "#000",
 };

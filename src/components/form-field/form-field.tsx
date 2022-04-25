@@ -23,15 +23,22 @@ const FormField: FunctionComponent<FormFieldProps> = ({
   onInput,
   isValid,
   placeholder,
+  disabled,
 }) => {
   const labelId = useMemo(() => `input-${id}`, []);
 
   const { highlightFieldsOnValidation: highlight } = useContext(WizardContext);
 
-  const handleInput = useCallback((ev: FormEvent<HTMLInputElement>) => {
-    const ele = ev.target as HTMLInputElement;
-    onInput?.(ele.value, id || "");
-  }, []);
+  const handleChange = useCallback(
+    (ev: FormEvent<HTMLInputElement | HTMLSelectElement | HTMLTimeElement>) => {
+      const target = ev.target as HTMLInputElement;
+
+      const value = target.files?.length ? target.files[0] : target.value;
+      
+      onInput?.(value, id || "");
+    },
+    []
+  );
 
   const fieldClass = useMemo(
     () =>
@@ -53,6 +60,12 @@ const FormField: FunctionComponent<FormFieldProps> = ({
     []
   );
 
+  const canShowInputText = useMemo(
+    () =>
+      type === "text" || type === "email" || type === "url" || type === "phone",
+    []
+  );
+
   return (
     <div className={fieldClass}>
       {isValid ? (
@@ -68,14 +81,15 @@ const FormField: FunctionComponent<FormFieldProps> = ({
         {label}
       </label>
       <div className={styles.input_wrapper}>
-        {type === "text" && (
+        {canShowInputText && (
           <input
             type="text"
             required={isRequired}
             aria-labelledby={labelId}
-            onInput={handleInput}
+            onChange={handleChange}
             placeholder={placeholder}
             name={name}
+            disabled={disabled}
           />
         )}
         {type === "checkbox" && (
@@ -84,10 +98,11 @@ const FormField: FunctionComponent<FormFieldProps> = ({
             required={isRequired}
             aria-labelledby={labelId}
             name={name}
+            disabled={disabled}
           />
         )}
         {type === "select" && (
-          <select>
+          <select onChange={handleChange} disabled={disabled}>
             {selectOptions.map((option) => (
               <option key={option.id}>{option.name}</option>
             ))}
@@ -99,10 +114,18 @@ const FormField: FunctionComponent<FormFieldProps> = ({
             required={isRequired}
             aria-labelledby={labelId}
             name={name}
+            onChange={handleChange}
+            disabled={disabled}
           />
         )}
         {type === "file" && (
-          <input type="file" required={isRequired} name={name} />
+          <input
+            type="file"
+            required={isRequired}
+            name={name}
+            onChange={handleChange}
+            disabled={disabled}
+          />
         )}
         {isRequired && (
           <span className={styles.asterisk}>

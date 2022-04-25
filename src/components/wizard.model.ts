@@ -6,6 +6,8 @@ export type WizardProps = {
   pages: WizardPageProps[];
   theme?: Theme;
   highlightFieldsOnValidation?: boolean;
+  strict?: boolean;
+  validationDelay?: number;
 };
 
 export type Theme = {
@@ -16,4 +18,6 @@ export type Theme = {
   success?: string;
   textColor?: string;
   formFieldBorder?: string;
+  inputBackground?: string;
+  inputTextColor?: string;
 };

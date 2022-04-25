@@ -17,7 +17,11 @@ function App() {
           formFieldBorder: "#000",
           success: "#519259",
           fail: "#cf352e",
+          inputBackground: "#464646",
+          inputTextColor: "#fff",
         }}
+        strict
+        validationDelay={150}
         pages={[
           {
             title: "Introduction",
@@ -37,7 +41,7 @@ function App() {
               {
                 label: "Email",
                 name: "email",
-                type: "text",
+                type: "email",
                 isRequired: true,
               },
               {
@@ -68,6 +72,18 @@ function App() {
                 type: "file",
                 isRequired: true,
               },
+              {
+                name: "Portfolio site",
+                label: "Portfolio",
+                type: "url",
+                isRequired: true,
+              },
+              {
+                name: "Phone number",
+                label: "Phone",
+                type: "phone",
+                isRequired: true,
+              },
             ],
           },
           {
@@ -77,6 +93,7 @@ function App() {
                 label: "Choose a range",
                 name: "range",
                 type: "select",
+                isRequired: true,
                 selectOptions: [
                   { name: "one", value: "one" },
                   {

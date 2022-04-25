@@ -2,6 +2,7 @@ import classNames from "classnames";
 import { nanoid } from "nanoid";
 import React, {
   forwardRef,
+  useContext,
   useEffect,
   useImperativeHandle,
   useMemo,
@@ -9,9 +10,11 @@ import React, {
   useState,
 } from "react";
 import { useDebouncedCallback } from "use-debounce";
+import { validator } from "../../utils";
 import { FormField } from "../form-field/form-field";
 import { FormFieldProps } from "../form-field/form-field.model";
 import { PageModelProps } from "../page/page.model";
+import { WizardContext } from "../wizard";
 import styles from "./page.module.scss";
 
 const Page = forwardRef<{ height: number; id: string }, PageModelProps>(
@@ -19,6 +22,8 @@ const Page = forwardRef<{ height: number; id: string }, PageModelProps>(
     const pageRef = useRef<HTMLDivElement>(null);
 
     const isFirstRender = useRef(true);
+
+    const { validationDelay } = useContext(WizardContext);
 
     const [_fields, setFields] = useState<FormFieldProps[]>(
       fields.map((field) => ({
@@ -47,7 +52,7 @@ const Page = forwardRef<{ height: number; id: string }, PageModelProps>(
     );
 
     const onHandleInput = useDebouncedCallback(
-      (val: string | string[] | number, id: string) => {
+      (val: string | string[] | number | File, id: string) => {
         setFields((prev) =>
           prev.map((field) => {
             if (field.id === id) {
@@ -61,7 +66,7 @@ const Page = forwardRef<{ height: number; id: string }, PageModelProps>(
         );
         setRevalidate(new Date().getMilliseconds());
       },
-      200
+      validationDelay
     );
 
     useEffect(() => {
@@ -75,7 +80,7 @@ const Page = forwardRef<{ height: number; id: string }, PageModelProps>(
           if (ids.indexOf(field.id) > -1) {
             return {
               ...field,
-              isValid: !!field.data,
+              isValid: validator(field.data, field.type),
             };
           }
 
@@ -108,7 +113,12 @@ const Page = forwardRef<{ height: number; id: string }, PageModelProps>(
         <header className={styles.header}>{title}</header>
         <div className={styles.fields_wrapper}>
           {_fields.map((field) => (
-            <FormField key={field.id} {...field} onInput={onHandleInput} />
+            <FormField
+              key={field.id}
+              {...field}
+              onInput={onHandleInput}
+              disabled={hide}
+            />
           ))}
         </div>
       </div>

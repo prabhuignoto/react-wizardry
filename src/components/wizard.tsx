@@ -22,16 +22,23 @@ type PageDim = {
   id: string;
 };
 
-type contextType = Pick<WizardProps, "highlightFieldsOnValidation">;
+type contextType = Pick<
+  WizardProps,
+  "highlightFieldsOnValidation" | "strict" | "validationDelay"
+>;
 
 export const WizardContext = createContext<contextType>({
   highlightFieldsOnValidation: false,
+  strict: true,
+  validationDelay: 250,
 });
 
 const Wizard: FunctionComponent<WizardProps> = ({
   pages,
   theme,
   highlightFieldsOnValidation = false,
+  strict = true,
+  validationDelay = 250,
 }) => {
   /** pages state */
   const [wizardPages, setWizardPages] = useState<PageModelProps[]>(
@@ -150,7 +157,9 @@ const Wizard: FunctionComponent<WizardProps> = ({
   );
 
   return (
-    <WizardContext.Provider value={{ highlightFieldsOnValidation }}>
+    <WizardContext.Provider
+      value={{ highlightFieldsOnValidation, strict, validationDelay }}
+    >
       <div className={styles.wrapper} style={rootStyle}>
         <div className={styles.header_wrapper}>
           <WizardHeader
