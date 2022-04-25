@@ -14,18 +14,8 @@ import { PageModelProps } from "./page/page.model";
 import { ThemeDefaults } from "./theme-default";
 import { WizardFooter } from "./wizard-footer/wizard-footer";
 import { WizardHeader } from "./wizard-header/wizard-header";
-import { WizardProps } from "./wizard.model";
+import { contextType, PageDim, WizardProps } from "./wizard.model";
 import styles from "./wizard.module.scss";
-
-type PageDim = {
-  height: number;
-  id: string;
-};
-
-type contextType = Pick<
-  WizardProps,
-  "highlightFieldsOnValidation" | "strict" | "validationDelay"
->;
 
 export const WizardContext = createContext<contextType>({
   highlightFieldsOnValidation: false,
@@ -39,6 +29,7 @@ const Wizard: FunctionComponent<WizardProps> = ({
   highlightFieldsOnValidation = false,
   strict = true,
   validationDelay = 250,
+  onFinish,
 }) => {
   /** pages state */
   const [wizardPages, setWizardPages] = useState<PageModelProps[]>(
@@ -53,34 +44,33 @@ const Wizard: FunctionComponent<WizardProps> = ({
   const [wizardWidth, setWizardWidth] = useState(0);
   const [pagesLoaded, setPagesLoaded] = useState(false);
 
+  const bodyNode = useRef<HTMLDivElement | null>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
   const finalTheme = useRef<{ [key: string]: string }>(
     Object.assign({}, ThemeDefaults, theme)
   );
 
   const pageHeights = useRef<PageDim[]>([]);
 
-  const activeIndex = useMemo(() => {
-    return wizardPages.findIndex((page) => page.id === activePageId) || 0;
-  }, [activePageId, wizardPages.length]);
-
   /** handlers */
   const handleNext = useCallback(() => {
     if (activeIndex + 1 < wizardPages.length) {
-      const newPageId = wizardPages[activeIndex + 1].id;
-      setActivePageId(newPageId);
+      setActiveIndex(activeIndex + 1);
     }
-  }, [activePageId, wizardPages.length, activeIndex]);
+  }, [wizardPages.length, activeIndex]);
 
   const handlePrevious = useCallback(() => {
     if (activeIndex - 1 >= 0) {
-      const newPageId = wizardPages[activeIndex - 1].id;
-      setActivePageId(newPageId);
+      setActiveIndex(activeIndex - 1);
     }
-  }, [activePageId]);
+  }, [wizardPages.length, activeIndex]);
 
   const handleSelection = (id?: string) => {
     if (id) {
+      const index = wizardPages.findIndex((page) => page.id === id);
       setActivePageId(id);
+      setActiveIndex(index);
     }
   };
 
@@ -99,12 +89,14 @@ const Wizard: FunctionComponent<WizardProps> = ({
 
   const onBodyRef = useCallback((node: HTMLDivElement) => {
     if (node) {
+      bodyNode.current = node;
       setWizardWidth(node.clientWidth);
     }
   }, []);
 
   /** side effects */
   useEffect(() => {
+    // console.log(activePageId);
     setWizardPages((prev) =>
       prev.map((page) => ({
         ...page,
@@ -112,6 +104,14 @@ const Wizard: FunctionComponent<WizardProps> = ({
       }))
     );
   }, [activePageId]);
+
+  useEffect(() => {
+    const page = wizardPages[activeIndex];
+
+    if (page) {
+      setActivePageId(page.id);
+    }
+  }, [activeIndex]);
 
   /** memoized functions */
   const bodyStyle = useMemo(() => {
@@ -156,6 +156,30 @@ const Wizard: FunctionComponent<WizardProps> = ({
     []
   );
 
+  const handleFinish = useCallback(() => {
+    const node = bodyNode.current;
+    if (node) {
+      const pages = node.querySelectorAll(".rc-wiz-page");
+      const result: any = {};
+
+      pages.forEach((page) => {
+        const title = page.getAttribute("data-title");
+
+        if (title) {
+          result[title] = Array.from(page.querySelectorAll("input")).reduce(
+            (a, b) =>
+              Object.assign({}, a, {
+                [b.name]: b.value,
+              }),
+            {}
+          );
+        }
+      });
+
+      onFinish?.(result);
+    }
+  }, []);
+
   return (
     <WizardContext.Provider
       value={{ highlightFieldsOnValidation, strict, validationDelay }}
@@ -186,6 +210,7 @@ const Wizard: FunctionComponent<WizardProps> = ({
           <WizardFooter
             onNext={handleNext}
             onPrev={handlePrevious}
+            onFinish={handleFinish}
             pages={wizardPages}
             activeId={activePageId}
           />

@@ -1,10 +1,5 @@
 import classNames from "classnames";
-import React, {
-  FunctionComponent,
-  useCallback,
-  useContext,
-  useMemo,
-} from "react";
+import React, { FunctionComponent, useContext, useMemo } from "react";
 import ChevronLeft from "../../icons/chevron-left";
 import ChevronRight from "../../icons/chevron-right";
 import { WizardContext } from "../wizard";
@@ -14,6 +9,7 @@ import styles from "./wizard-footer.module.scss";
 const WizardFooter: FunctionComponent<WizardFooterProps> = ({
   onNext,
   onPrev,
+  onFinish,
   activeId,
   pages,
   message = "Form has errors. Please fix it to proceed to the next step.",
@@ -59,11 +55,11 @@ const WizardFooter: FunctionComponent<WizardFooterProps> = ({
     return activePage?.state === "FAIL";
   }, [activePage?.state, strict]);
 
-  const handleNext = useCallback(() => {
+  const handleNext = () => {
     if (!disableNext) {
       onNext?.();
     }
-  }, [disableNext]);
+  };
 
   return (
     <div className={styles.wizard_footer}>
@@ -101,7 +97,11 @@ const WizardFooter: FunctionComponent<WizardFooterProps> = ({
           </button>
         )}
         {showFinish && (
-          <button className={styles.button} aria-label="finish">
+          <button
+            className={styles.button}
+            aria-label="finish"
+            onClick={onFinish}
+          >
             <span>Finish</span>
             <span className={styles.btn_icon}>
               <ChevronRight />

@@ -66,6 +66,7 @@ const WizardHeader: FunctionComponent<WizardHeaderProps> = ({
   activeIndex,
 }) => {
   const { strict } = useContext(WizardContext);
+  // console.log(activeIndex);
   return (
     <div className={styles.wrapper}>
       <ul className={styles.tabs} role="tablist">

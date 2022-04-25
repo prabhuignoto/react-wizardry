@@ -47,7 +47,8 @@ const Page = forwardRef<{ height: number; id: string }, PageModelProps>(
     }, [width]);
 
     const pageClass = useMemo(
-      () => classNames(styles.page_wrapper, hide ? styles.hide : ""),
+      () =>
+        classNames(styles.page_wrapper, hide ? styles.hide : "", "rc-wiz-page"),
       [hide]
     );
 
@@ -109,7 +110,7 @@ const Page = forwardRef<{ height: number; id: string }, PageModelProps>(
     }, []);
 
     return (
-      <div className={pageClass} ref={pageRef} style={style}>
+      <div className={pageClass} ref={pageRef} style={style} data-title={title}>
         <header className={styles.header}>{title}</header>
         <div className={styles.fields_wrapper}>
           {_fields.map((field) => (

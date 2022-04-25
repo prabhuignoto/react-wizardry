@@ -6,7 +6,7 @@ function App() {
   return (
     <div
       className="App"
-      style={{ width: "900px", margin: "0 auto", marginTop: "1rem" }}
+      style={{ width: "950px", margin: "0 auto", marginTop: "1rem" }}
     >
       <Wizard
         theme={{
@@ -20,8 +20,9 @@ function App() {
           inputBackground: "#464646",
           inputTextColor: "#fff",
         }}
-        strict
         validationDelay={150}
+        // strict={false}
+        onFinish={(val) => console.log(val)}
         pages={[
           {
             title: "Introduction",

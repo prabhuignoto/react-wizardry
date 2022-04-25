@@ -8,6 +8,7 @@ export type WizardProps = {
   highlightFieldsOnValidation?: boolean;
   strict?: boolean;
   validationDelay?: number;
+  onFinish?: (values: { [key: string]: string | number | File }) => void;
 };
 
 export type Theme = {
@@ -21,3 +22,13 @@ export type Theme = {
   inputBackground?: string;
   inputTextColor?: string;
 };
+
+export type PageDim = {
+  height: number;
+  id: string;
+};
+
+export type contextType = Pick<
+  WizardProps,
+  "highlightFieldsOnValidation" | "strict" | "validationDelay"
+>;

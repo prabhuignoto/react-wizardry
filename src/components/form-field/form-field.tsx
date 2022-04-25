@@ -125,10 +125,11 @@ const FormField: FunctionComponent<FormFieldProps> = ({
             name={name}
             onChange={handleChange}
             disabled={disabled}
+            aria-labelledby={labelId}
           />
         )}
         {isRequired && (
-          <span className={styles.asterisk}>
+          <span className={styles.asterisk} role="img" aria-label="important field">
             <Asterisk />
           </span>
         )}
