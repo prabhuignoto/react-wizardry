@@ -20,10 +20,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 2rem;
-  height: 2rem;
+  width: 1.5rem;
+  height: 1.5rem;
   cursor: pointer;
-  font-size: 1.2rem;
+  font-size: 1rem;
   position: relative;
   background: #fff;
   box-shadow: inset 0 0 14px 2px rgba(0, 0, 0, 0.1),
@@ -41,11 +41,12 @@
   &.disabled {
     cursor: not-allowed;
     pointer-events: none;
-    opacity: 0.5;
+    opacity: 0.75;
   }
 
-  &.selected:not(.fail) {
-    background: #007fff;
+  &.selected:not(.fail),
+  &.success {
+    background: var(--rc-wiz-primary);
     color: #fff;
   }
 
@@ -68,13 +69,13 @@
   }
 
   &.selected.fail:before {
-    border: 2px solid #de1738;
-    box-shadow: 0 0 4px 1px rgba(222, 23, 56, 0.5);
+    border: 2px solid var(--rc-wiz-fail);
+    box-shadow: 0 0 4px 1px rgba(var(--rc-wiz-fail), 0.5);
   }
 
   &.selected:not(.fail):before {
-    box-shadow: 0 0 4px 1px rgba(0, 127, 255, 0.5);
-    border: 2px solid #007fff;
+    box-shadow: 0 0 4px 1px rgba(var(--rc-wiz-primary), 0.5);
+    border: 2px solid var(--rc-wiz-primary);
   }
 
   &:not(:last-child)::after {
@@ -83,12 +84,12 @@
     width: 8rem;
     height: 3px;
     position: absolute;
-    left: 2rem;
+    left: 1.5rem;
     z-index: 0;
   }
 
   &:not(:last-child).highlight::after {
-    background: #007fff;
+    background: var(--rc-wiz-primary);
   }
 
   &:not(:last-child):not(.highlight)::after {
@@ -105,11 +106,11 @@
   z-index: 1;
 
   &.fail {
-    color: #de1738;
+    color: var(--rc-wiz-fail);
   }
 
   svg {
-    width: 100%;
-    height: 100%;
+    width: 80%;
+    height: 80%;
   }
 }

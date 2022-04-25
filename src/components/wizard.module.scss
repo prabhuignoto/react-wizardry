@@ -6,7 +6,7 @@ $padding: 1.5rem;
   align-items: flex-start;
   justify-content: center;
   width: 100%;
-  background: #f8f8f8;
+  background: var(--rc-wiz-background);
   padding: $padding;
   border-radius: 4px;
   box-shadow: 1px 1px 10px 2px #dcdcdc;

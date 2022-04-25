@@ -15,6 +15,7 @@
 
 .message {
   display: block;
+  color: var(--rc-wiz-textColor);
 }
 
 .button {
@@ -23,11 +24,24 @@
   border-radius: 4px;
   font-size: 1rem;
   font-weight: normal;
-  background: #007fff;
+  background: var(--rc-wiz-primary);
   color: #fff;
-  padding: 0.5rem 0.75rem;
+  padding: 0.25rem;
   cursor: pointer;
-  display: flex;
+  min-width: 70px;
+  min-height: 35px;
+
+  display: grid;
+  justify-items: center;
+  align-items: center;
+
+  &.back {
+    grid-template-columns: 30% 70%;
+  }
+
+  &:not(.back) {
+    grid-template-columns: 70% 30%;
+  }
 
   &:last-child {
     margin-left: 0.5rem;

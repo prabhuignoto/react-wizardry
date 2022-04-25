@@ -14,7 +14,7 @@ specifiers:
   eslint-config-prettier: ^8.5.0
   eslint-config-standard: ^17.0.0
   eslint-plugin-import: ^2.22.1
-  eslint-plugin-n: ^15.1.0
+  eslint-plugin-n: ^15.2.0
   eslint-plugin-node: ^11.1.0
   eslint-plugin-promise: ^6.0.0
   eslint-plugin-react: ^7.29.4
@@ -49,9 +49,9 @@ devDependencies:
   c8: 7.11.2
   eslint: 8.14.0
   eslint-config-prettier: 8.5.0_eslint@8.14.0
-  eslint-config-standard: 17.0.0_288458a4b7d86b306f0e96ba7939a3dc
+  eslint-config-standard: 17.0.0_14af0798efd537ecbc8732fe6f15829c
   eslint-plugin-import: 2.26.0_eslint@8.14.0
-  eslint-plugin-n: 15.1.0_eslint@8.14.0
+  eslint-plugin-n: 15.2.0_eslint@8.14.0
   eslint-plugin-node: 11.1.0_eslint@8.14.0
   eslint-plugin-promise: 6.0.0_eslint@8.14.0
   eslint-plugin-react: 7.29.4_eslint@8.14.0
@@ -1444,7 +1444,7 @@ packages:
       eslint: 8.14.0
     dev: true
 
-  /eslint-config-standard/17.0.0_288458a4b7d86b306f0e96ba7939a3dc:
+  /eslint-config-standard/17.0.0_14af0798efd537ecbc8732fe6f15829c:
     resolution: {integrity: sha512-/2ks1GKyqSOkH7JFvXJicu0iMpoojkwB+f5Du/1SC0PtBL+s8v30k9njRZ21pm2drKYm2342jFnGWzttxPmZVg==}
     peerDependencies:
       eslint: ^8.0.1
@@ -1454,7 +1454,7 @@ packages:
     dependencies:
       eslint: 8.14.0
       eslint-plugin-import: 2.26.0_eslint@8.14.0
-      eslint-plugin-n: 15.1.0_eslint@8.14.0
+      eslint-plugin-n: 15.2.0_eslint@8.14.0
       eslint-plugin-promise: 6.0.0_eslint@8.14.0
     dev: true
 
@@ -1517,8 +1517,8 @@ packages:
       tsconfig-paths: 3.14.1
     dev: true
 
-  /eslint-plugin-n/15.1.0_eslint@8.14.0:
-    resolution: {integrity: sha512-Tgx4Z58QXv2Ha7Qzp0u4wavnZNZ3AOievZMxrAxi7nvDbzD5B/JqOD80LHYcGHFZc2HD9jDmM/+KWMPov46a4A==}
+  /eslint-plugin-n/15.2.0_eslint@8.14.0:
+    resolution: {integrity: sha512-lWLg++jGwC88GDGGBX3CMkk0GIWq0y41aH51lavWApOKcMQcYoL3Ayd0lEdtD3SnQtR+3qBvWQS3qGbR2BxRWg==}
     engines: {node: '>=12.22.0'}
     peerDependencies:
       eslint: '>=7.0.0'
@@ -1528,7 +1528,7 @@ packages:
       eslint-plugin-es: 4.1.0_eslint@8.14.0
       eslint-utils: 3.0.0_eslint@8.14.0
       ignore: 5.2.0
-      is-core-module: 2.8.1
+      is-core-module: 2.9.0
       minimatch: 3.1.2
       resolve: 1.22.0
       semver: 6.3.0
@@ -2070,6 +2070,12 @@ packages:
 
   /is-core-module/2.8.1:
     resolution: {integrity: sha512-SdNCUs284hr40hFTFP6l0IfZ/RSrMXF3qgoRHd3/79unUTvrFO/JoXwkGm+5J/Oe3E/b5GsnG330uUNgRpu1PA==}
+    dependencies:
+      has: 1.0.3
+    dev: true
+
+  /is-core-module/2.9.0:
+    resolution: {integrity: sha512-+5FPy5PnwmO3lvfMb0AsoPaBG+5KHUI0wYFXOtYPnVVVspTFUuMZNfNaNVRt3FZadstu2c8x23vykRW/NBoU6A==}
     dependencies:
       has: 1.0.3
     dev: true

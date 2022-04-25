@@ -1,5 +1,6 @@
 import { nanoid } from "nanoid";
 import React, {
+  createContext,
   CSSProperties,
   FunctionComponent,
   useCallback,
@@ -10,6 +11,7 @@ import React, {
 } from "react";
 import { Page } from "./page/page";
 import { PageModelProps } from "./page/page.model";
+import { ThemeDefaults } from "./theme-default";
 import { WizardFooter } from "./wizard-footer/wizard-footer";
 import { WizardHeader } from "./wizard-header/wizard-header";
 import { WizardProps } from "./wizard.model";
@@ -20,7 +22,17 @@ type PageDim = {
   id: string;
 };
 
-const Wizard: FunctionComponent<WizardProps> = ({ pages }) => {
+type contextType = Pick<WizardProps, "highlightFieldsOnValidation">;
+
+export const WizardContext = createContext<contextType>({
+  highlightFieldsOnValidation: false,
+});
+
+const Wizard: FunctionComponent<WizardProps> = ({
+  pages,
+  theme,
+  highlightFieldsOnValidation = false,
+}) => {
   /** pages state */
   const [wizardPages, setWizardPages] = useState<PageModelProps[]>(
     pages.map((page) => ({
@@ -33,6 +45,10 @@ const Wizard: FunctionComponent<WizardProps> = ({ pages }) => {
   const [activePageId, setActivePageId] = useState(wizardPages[0].id);
   const [wizardWidth, setWizardWidth] = useState(0);
   const [pagesLoaded, setPagesLoaded] = useState(false);
+
+  const finalTheme = useRef<{ [key: string]: string }>(
+    Object.assign({}, ThemeDefaults, theme)
+  );
 
   const pageHeights = useRef<PageDim[]>([]);
 
@@ -121,38 +137,52 @@ const Wizard: FunctionComponent<WizardProps> = ({ pages }) => {
     );
   }, []);
 
+  const rootStyle = useMemo(
+    () =>
+      Object.keys(finalTheme.current).reduce(
+        (a, b) =>
+          Object.assign({}, a, {
+            [`--rc-wiz-${b}`]: finalTheme.current[b],
+          }),
+        {}
+      ) as CSSProperties,
+    []
+  );
+
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.header_wrapper}>
-        <WizardHeader
-          pages={wizardPages}
-          onSelect={handleSelection}
-          activeIndex={activeIndex}
-        />
-      </div>
-      <div className={styles.body_wrapper} style={bodyStyle} ref={onBodyRef}>
-        <div className={styles.pages_wrapper} style={pagesStyle}>
-          {wizardPages.map((page, index) => (
-            <Page
-              {...page}
-              key={page.id}
-              ref={initHeights}
-              width={wizardWidth}
-              hide={activeIndex !== index}
-              onChange={onChange}
-            />
-          ))}
+    <WizardContext.Provider value={{ highlightFieldsOnValidation }}>
+      <div className={styles.wrapper} style={rootStyle}>
+        <div className={styles.header_wrapper}>
+          <WizardHeader
+            pages={wizardPages}
+            onSelect={handleSelection}
+            activeIndex={activeIndex}
+          />
+        </div>
+        <div className={styles.body_wrapper} style={bodyStyle} ref={onBodyRef}>
+          <div className={styles.pages_wrapper} style={pagesStyle}>
+            {wizardPages.map((page, index) => (
+              <Page
+                {...page}
+                key={page.id}
+                ref={initHeights}
+                width={wizardWidth}
+                hide={activeIndex !== index}
+                onChange={onChange}
+              />
+            ))}
+          </div>
+        </div>
+        <div className={styles.footer_wrapper}>
+          <WizardFooter
+            onNext={handleNext}
+            onPrev={handlePrevious}
+            pages={wizardPages}
+            activeId={activePageId}
+          />
         </div>
       </div>
-      <div className={styles.footer_wrapper}>
-        <WizardFooter
-          onNext={handleNext}
-          onPrev={handlePrevious}
-          pages={wizardPages}
-          activeId={activePageId}
-        />
-      </div>
-    </div>
+    </WizardContext.Provider>
   );
 };
 

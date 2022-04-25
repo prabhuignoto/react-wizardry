@@ -55,7 +55,7 @@ const WizardFooter: FunctionComponent<WizardFooterProps> = ({
       <div className={styles.button_controls}>
         {!hideBack && (
           <button
-            className={styles.button}
+            className={classNames(styles.button, styles.back)}
             onClick={onPrev}
             aria-label="go back"
           >

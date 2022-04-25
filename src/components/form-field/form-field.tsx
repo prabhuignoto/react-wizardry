@@ -3,11 +3,13 @@ import React, {
   FormEvent,
   FunctionComponent,
   useCallback,
+  useContext,
   useMemo,
 } from "react";
 import Asterisk from "../../icons/asterisk";
 import CheckIcon from "../../icons/check";
-import WarnIcon from "../../icons/warning";
+import Exclamation from "../../icons/exclamation";
+import { WizardContext } from "./../wizard";
 import { FormFieldProps } from "./form-field.model";
 import styles from "./form-field.module.scss";
 
@@ -24,6 +26,8 @@ const FormField: FunctionComponent<FormFieldProps> = ({
 }) => {
   const labelId = useMemo(() => `input-${id}`, []);
 
+  const { highlightFieldsOnValidation: highlight } = useContext(WizardContext);
+
   const handleInput = useCallback((ev: FormEvent<HTMLInputElement>) => {
     const ele = ev.target as HTMLInputElement;
     onInput?.(ele.value, id || "");
@@ -33,28 +37,31 @@ const FormField: FunctionComponent<FormFieldProps> = ({
     () =>
       classNames(
         styles.form_field,
-        isValid ? styles.is_valid : isValid !== null ? styles.is_not_valid : ""
+        isValid ? styles.is_valid : isValid !== null ? styles.is_not_valid : "",
+        highlight ? styles.highlight : ""
       ),
+    [isValid, highlight]
+  );
+
+  const checkClass = useMemo(
+    () => classNames(styles.status, isValid ? styles.success : ""),
     [isValid]
+  );
+
+  const warnClass = useMemo(
+    () => classNames(styles.status, !isValid ? styles.fail : ""),
+    []
   );
 
   return (
     <div className={fieldClass}>
       {isValid ? (
-        <span
-          className={classNames(styles.status, isValid ? styles.success : "")}
-          role="img"
-          aria-label="success"
-        >
+        <span className={checkClass} role="img" aria-label="success">
           <CheckIcon />
         </span>
       ) : !isValid && isValid !== null ? (
-        <span
-          className={classNames(styles.status, !isValid ? styles.fail : "")}
-          role="img"
-          aria-label="fail"
-        >
-          <WarnIcon />
+        <span className={warnClass} role="img" aria-label="fail">
+          <Exclamation />
         </span>
       ) : null}
       <label className={styles.form_field_label} id={labelId}>
@@ -93,6 +100,9 @@ const FormField: FunctionComponent<FormFieldProps> = ({
             aria-labelledby={labelId}
             name={name}
           />
+        )}
+        {type === "file" && (
+          <input type="file" required={isRequired} name={name} />
         )}
         {isRequired && (
           <span className={styles.asterisk}>

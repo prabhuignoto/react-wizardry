@@ -9,6 +9,15 @@ function App() {
       style={{ width: "900px", margin: "0 auto", marginTop: "1rem" }}
     >
       <Wizard
+        theme={{
+          primary: "#007fff",
+          background: "#000",
+          textColor: "#fff",
+          formFieldBackground: "#282828",
+          formFieldBorder: "#000",
+          success: "#519259",
+          fail: "#cf352e",
+        }}
         pages={[
           {
             title: "Introduction",
@@ -51,6 +60,12 @@ function App() {
                 label: "Last Name",
                 name: "lastName",
                 type: "text",
+                isRequired: true,
+              },
+              {
+                name: "CV",
+                label: "Upload your CV",
+                type: "file",
                 isRequired: true,
               },
             ],

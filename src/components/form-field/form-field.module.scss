@@ -1,10 +1,12 @@
+@use "sass:color";
+
 .form_field {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   margin-bottom: 1rem;
   padding: 1.2rem 1rem;
-  background: #fff;
+  background: var(--rc-wiz-formFieldBackground);
   border-radius: 4px;
   width: calc(100% - 3rem);
   position: relative;
@@ -15,26 +17,26 @@
     border-radius: 4px;
     border: none;
     background: #e8e8e8;
-    height: 30px;
+    height: 28px;
     min-width: 300px;
     font-size: 1rem;
 
     &:focus {
-      outline: 2px solid #007fff;
+      outline: 2px solid var(--rc-wiz-primary);
     }
   }
 
-  &.is_valid {
-    border: 1px solid rgba(29, 185, 84, 1);
+  &.is_valid.highlight {
+    border: 1px solid var(--rc-wiz-success);
   }
 
-  &.is_not_valid {
-    border: 1px solid rgba(222, 23, 56, 0.25);
-    box-shadow: inset 0 0 20px 1px rgba(222, 23, 56, 0.1);
+  &.is_not_valid.highlight {
+    border: 1px solid var(--rc-wiz-fail);
+    // box-shadow: inset 0 0 20px 1px rgba(var(--rc-wiz-fail), 0.1);
   }
 
   &:not(.is_valid):not(.is_not_valid) {
-    border: 1px solid #dcdcdc;
+    border: 1px solid var(--rc-wiz-formFieldBorder);
   }
 }
 
@@ -47,6 +49,7 @@
 .form_field_label {
   margin-bottom: 0.5rem;
   font-size: 1rem;
+  color: var(--rc-wiz-textColor);
 }
 
 .status {
@@ -63,12 +66,16 @@
   transition: background 0.2s ease-in, color 0.2s ease-in;
 
   &.success {
-    background: #1db954;
+    background: var(--rc-wiz-success);
     color: #fff;
   }
 
   &.fail {
-    color: #de1738;
+    background: var(--rc-wiz-fail);
+
+    svg {
+      fill: #fff;
+    }
   }
 
   svg {
@@ -84,9 +91,9 @@
   align-items: center;
   justify-content: center;
   margin-left: 0.5rem;
-  
+
   svg {
-    fill: #de1738;
+    fill: var(--rc-wiz-fail);
     height: 100%;
     width: 100%;
   }

@@ -3,7 +3,7 @@ export type FormFieldProps = {
   id?: string;
   isRequired?: boolean;
   regex?: string;
-  type?: "text" | "datetime" | "checkbox" | "select";
+  type?: "text" | "datetime" | "checkbox" | "select" | "file";
   label?: string;
   selectOptions?: Option[];
   onInput?: (val: string | string[] | number, id: string) => void;
@@ -17,4 +17,3 @@ export type Option = {
   name: string;
   value: string;
 };
-  
