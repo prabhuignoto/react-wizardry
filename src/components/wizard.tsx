@@ -163,7 +163,7 @@ const Wizard: FunctionComponent<WizardProps> = ({
       const result: any = {};
 
       pages.forEach((page) => {
-        const title = page.getAttribute("data-title");
+        const title = page.getAttribute("data-title")?.toLowerCase();
 
         if (title) {
           result[title] = Array.from(page.querySelectorAll("input")).reduce(

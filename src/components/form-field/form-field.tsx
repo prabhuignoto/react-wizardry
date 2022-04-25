@@ -34,7 +34,7 @@ const FormField: FunctionComponent<FormFieldProps> = ({
       const target = ev.target as HTMLInputElement;
 
       const value = target.files?.length ? target.files[0] : target.value;
-      
+
       onInput?.(value, id || "");
     },
     []
@@ -60,11 +60,21 @@ const FormField: FunctionComponent<FormFieldProps> = ({
     []
   );
 
-  const canShowInputText = useMemo(
-    () =>
-      type === "text" || type === "email" || type === "url" || type === "phone",
-    []
-  );
+  const getInputType = useMemo(() => {
+    if (type !== "select" && type !== "textarea") {
+      return (
+        <input
+          type={type === "datetime" ? "datetime-local" : type}
+          required={isRequired}
+          aria-labelledby={labelId}
+          onChange={handleChange}
+          placeholder={placeholder}
+          name={name}
+          disabled={disabled}
+        />
+      );
+    }
+  }, [type, labelId, disabled]);
 
   return (
     <div className={fieldClass}>
@@ -81,26 +91,7 @@ const FormField: FunctionComponent<FormFieldProps> = ({
         {label}
       </label>
       <div className={styles.input_wrapper}>
-        {canShowInputText && (
-          <input
-            type="text"
-            required={isRequired}
-            aria-labelledby={labelId}
-            onChange={handleChange}
-            placeholder={placeholder}
-            name={name}
-            disabled={disabled}
-          />
-        )}
-        {type === "checkbox" && (
-          <input
-            type="checkbox"
-            required={isRequired}
-            aria-labelledby={labelId}
-            name={name}
-            disabled={disabled}
-          />
-        )}
+        {getInputType}
         {type === "select" && (
           <select onChange={handleChange} disabled={disabled}>
             {selectOptions.map((option) => (
@@ -108,28 +99,12 @@ const FormField: FunctionComponent<FormFieldProps> = ({
             ))}
           </select>
         )}
-        {type === "datetime" && (
-          <input
-            type="datetime-local"
-            required={isRequired}
-            aria-labelledby={labelId}
-            name={name}
-            onChange={handleChange}
-            disabled={disabled}
-          />
-        )}
-        {type === "file" && (
-          <input
-            type="file"
-            required={isRequired}
-            name={name}
-            onChange={handleChange}
-            disabled={disabled}
-            aria-labelledby={labelId}
-          />
-        )}
         {isRequired && (
-          <span className={styles.asterisk} role="img" aria-label="important field">
+          <span
+            className={styles.asterisk}
+            role="img"
+            aria-label="important field"
+          >
             <Asterisk />
           </span>
         )}

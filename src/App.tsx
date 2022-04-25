@@ -20,7 +20,7 @@ function App() {
           inputBackground: "#464646",
           inputTextColor: "#fff",
         }}
-        validationDelay={150}
+        validationDelay={100}
         // strict={false}
         onFinish={(val) => console.log(val)}
         pages={[
@@ -40,43 +40,14 @@ function App() {
                 isRequired: true,
               },
               {
-                label: "Email",
-                name: "email",
-                type: "email",
-                isRequired: true,
-              },
-              {
                 name: "dateOfBirth",
                 type: "datetime",
                 label: "Date of Birth",
               },
-            ],
-          },
-          {
-            title: "employment",
-            fields: [
               {
-                label: "First Name",
-                name: "firstName",
-                type: "text",
-                isRequired: true,
-              },
-              {
-                label: "Last Name",
-                name: "lastName",
-                type: "text",
-                isRequired: true,
-              },
-              {
-                name: "CV",
-                label: "Upload your CV",
-                type: "file",
-                isRequired: true,
-              },
-              {
-                name: "Portfolio site",
-                label: "Portfolio",
-                type: "url",
+                label: "Email",
+                name: "email",
+                type: "email",
                 isRequired: true,
               },
               {
@@ -88,39 +59,71 @@ function App() {
             ],
           },
           {
-            title: "salary",
+            title: "Employment",
             fields: [
               {
-                label: "Choose a range",
-                name: "range",
-                type: "select",
+                label: "Company Name",
+                name: "companyName",
+                type: "text",
                 isRequired: true,
-                selectOptions: [
-                  { name: "one", value: "one" },
-                  {
-                    name: "two",
-                    value: "two",
-                  },
-                ],
               },
               {
-                label: "Last Name",
-                name: "lastName",
+                label: "Designation",
+                name: "designation",
                 type: "text",
+                isRequired: true,
               },
             ],
           },
           {
-            title: "polo",
+            title: "CV & Social Links",
             fields: [
               {
-                label: "First Name",
-                name: "firstName",
-                type: "text",
+                name: "CV",
+                label: "Upload your CV",
+                type: "file",
+                isRequired: true,
               },
               {
-                label: "Last Name",
-                name: "lastName",
+                label: "Portfolio URL",
+                name: "Portfolio",
+                type: "url",
+                isRequired: true,
+              },
+              {
+                label: "Linkedin URL",
+                name: "linkedin",
+                type: "url",
+                isRequired: true,
+              },
+              {
+                label: "Github URL",
+                name: "Github",
+                type: "url",
+              },
+              {
+                name: "twitter",
+                label: "Twitter URL",
+                type: "url",
+              },
+            ],
+          },
+          {
+            title: "salary",
+            fields: [
+              {
+                label: "Select your current salary range",
+                name: "salaryRange",
+                type: "select",
+                isRequired: true,
+                selectOptions: [
+                  { name: "10,000$ - 50,000$", value: "10-50k" },
+                  { name: "50,000$ - 100,000$", value: "50-100k" },
+                ],
+              },
+              {
+                label: "Expected Salary",
+                name: "expectedSalary",
                 type: "text",
               },
             ],
