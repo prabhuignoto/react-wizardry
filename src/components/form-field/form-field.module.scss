@@ -16,10 +16,11 @@
   input {
     border-radius: 4px;
     border: none;
-    background: #e8e8e8;
+    background: var(--rc-wiz-inputBackground);
     height: 28px;
     min-width: 300px;
     font-size: 1rem;
+    color: var(--rc-wiz-inputTextColor);
 
     &:focus {
       outline: 2px solid var(--rc-wiz-primary);
@@ -32,7 +33,6 @@
 
   &.is_not_valid.highlight {
     border: 1px solid var(--rc-wiz-fail);
-    // box-shadow: inset 0 0 20px 1px rgba(var(--rc-wiz-fail), 0.1);
   }
 
   &:not(.is_valid):not(.is_not_valid) {
@@ -60,10 +60,10 @@
   top: 50%;
   right: 1rem;
   transform: translateY(-50%);
-  height: 1.5rem;
-  width: 1.5rem;
+  height: 1.25rem;
+  width: 1.25rem;
   border-radius: 50%;
-  transition: background 0.2s ease-in, color 0.2s ease-in;
+  transition: background 0.25s ease-in, color 0.25s ease-in, fill 0.25s ease-in;
 
   &.success {
     background: var(--rc-wiz-success);
@@ -79,8 +79,8 @@
   }
 
   svg {
-    width: 80%;
-    height: 80%;
+    width: 70%;
+    height: 70%;
   }
 }
 

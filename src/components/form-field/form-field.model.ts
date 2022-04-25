@@ -3,13 +3,14 @@ export type FormFieldProps = {
   id?: string;
   isRequired?: boolean;
   regex?: string;
-  type?: "text" | "datetime" | "checkbox" | "select" | "file";
+  type?: InputType;
   label?: string;
   selectOptions?: Option[];
-  onInput?: (val: string | string[] | number, id: string) => void;
+  onInput?: (val: string | string[] | number | File, id: string) => void;
   isValid?: boolean | null;
   data?: any;
   placeholder?: string;
+  disabled?: boolean;
 };
 
 export type Option = {
@@ -17,3 +18,15 @@ export type Option = {
   name: string;
   value: string;
 };
+
+export type InputType =
+  | "text"
+  | "datetime"
+  | "checkbox"
+  | "select"
+  | "file"
+  | "email"
+  | "number"
+  | "url"
+  | "phone"
+  | "textarea";

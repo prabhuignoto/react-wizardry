@@ -1,7 +1,13 @@
 import classNames from "classnames";
-import React, { FunctionComponent, useMemo } from "react";
+import React, {
+  FunctionComponent,
+  useCallback,
+  useContext,
+  useMemo,
+} from "react";
 import ChevronLeft from "../../icons/chevron-left";
 import ChevronRight from "../../icons/chevron-right";
+import { WizardContext } from "../wizard";
 import { WizardFooterProps } from "../wizard-footer/wizard-footer.model";
 import styles from "./wizard-footer.module.scss";
 
@@ -18,6 +24,8 @@ const WizardFooter: FunctionComponent<WizardFooterProps> = ({
   );
 
   const hideBack = useMemo(() => activeIndex === 0, [activeIndex]);
+
+  const { strict } = useContext(WizardContext);
 
   const hideNext = useMemo(
     () => activeIndex === pages.length - 1,
@@ -40,12 +48,22 @@ const WizardFooter: FunctionComponent<WizardFooterProps> = ({
   );
 
   const disableNext = useMemo(() => {
+    if (!strict) {
+      return false;
+    }
+
     if (activePage?.state === "NOT_VALIDATED") {
       return activePage?.fields.some((field) => field.isRequired);
     }
 
     return activePage?.state === "FAIL";
-  }, [activePage?.state]);
+  }, [activePage?.state, strict]);
+
+  const handleNext = useCallback(() => {
+    if (!disableNext) {
+      onNext?.();
+    }
+  }, [disableNext]);
 
   return (
     <div className={styles.wizard_footer}>
@@ -71,8 +89,10 @@ const WizardFooter: FunctionComponent<WizardFooterProps> = ({
               styles.button,
               disableNext ? styles.disabled : ""
             )}
-            onClick={onNext}
+            onClick={handleNext}
             aria-label="go forward"
+            aria-disabled={disableNext}
+            disabled={disableNext}
           >
             <span>Next</span>
             <span className={styles.btn_icon}>
