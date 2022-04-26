@@ -19,11 +19,14 @@ const config = {
   output: {
     path: path.resolve(__dirname, "dist"),
     clean: true,
+    filename: "wizard.js",
   },
   plugins: [
-    new MiniCssExtractPlugin(),
+    new MiniCssExtractPlugin({
+      filename: "wizard.css",
+    }),
     new BundleAnalyzerPlugin({
-      openAnalyzer: true,
+      openAnalyzer: false,
     }),
 
     // Add your plugins here
