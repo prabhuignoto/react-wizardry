@@ -12,6 +12,7 @@ import React, {
 import { Page } from "./page/page";
 import { PageModelProps } from "./page/page.model";
 import { ThemeDefaults } from "./theme-default";
+import { WizardFinish } from "./wizard-finish";
 import { WizardFooter } from "./wizard-footer/wizard-footer";
 import { WizardHeader } from "./wizard-header/wizard-header";
 import { contextType, PageDim, WizardProps } from "./wizard.model";
@@ -43,6 +44,7 @@ const Wizard: FunctionComponent<WizardProps> = ({
   const [activePageId, setActivePageId] = useState(wizardPages[0].id);
   const [wizardWidth, setWizardWidth] = useState(0);
   const [pagesLoaded, setPagesLoaded] = useState(false);
+  const [wizardComplete, setWizardComplete] = useState(false);
 
   const bodyNode = useRef<HTMLDivElement | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -177,6 +179,7 @@ const Wizard: FunctionComponent<WizardProps> = ({
       });
 
       onFinish?.(result);
+      setWizardComplete(true);
     }
   }, []);
 
@@ -186,34 +189,40 @@ const Wizard: FunctionComponent<WizardProps> = ({
     >
       <div className={styles.wrapper} style={rootStyle}>
         <div className={styles.header_wrapper}>
-          <WizardHeader
-            pages={wizardPages}
-            onSelect={handleSelection}
-            activeIndex={activeIndex}
-          />
+          {!wizardComplete && (
+            <WizardHeader
+              pages={wizardPages}
+              onSelect={handleSelection}
+              activeIndex={activeIndex}
+            />
+          )}
         </div>
         <div className={styles.body_wrapper} style={bodyStyle} ref={onBodyRef}>
           <div className={styles.pages_wrapper} style={pagesStyle}>
-            {wizardPages.map((page, index) => (
-              <Page
-                {...page}
-                key={page.id}
-                ref={initHeights}
-                width={wizardWidth}
-                hide={activeIndex !== index}
-                onChange={onChange}
-              />
-            ))}
+            {!wizardComplete &&
+              wizardPages.map((page, index) => (
+                <Page
+                  {...page}
+                  key={page.id}
+                  ref={initHeights}
+                  width={wizardWidth}
+                  hide={activeIndex !== index}
+                  onChange={onChange}
+                />
+              ))}
           </div>
+          {wizardComplete && <WizardFinish />}
         </div>
         <div className={styles.footer_wrapper}>
-          <WizardFooter
-            onNext={handleNext}
-            onPrev={handlePrevious}
-            onFinish={handleFinish}
-            pages={wizardPages}
-            activeId={activePageId}
-          />
+          {!wizardComplete && (
+            <WizardFooter
+              onNext={handleNext}
+              onPrev={handlePrevious}
+              onFinish={handleFinish}
+              pages={wizardPages}
+              activeId={activePageId}
+            />
+          )}
         </div>
       </div>
     </WizardContext.Provider>

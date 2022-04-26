@@ -4,7 +4,7 @@ import { describe, expect, it, vi } from "vitest";
 import { FormField } from "../form-field";
 import styles from "../form-field.module.scss";
 
-describe("FormField", () => {
+describe.concurrent("FormField", () => {
   it("should render text box", () => {
     const { getByText } = render(
       <FormField id="123" name="date" label="first name" />

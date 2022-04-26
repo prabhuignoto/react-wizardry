@@ -25,16 +25,20 @@ const pages: PageModelProps[] = [
   },
 ];
 
-describe("Wizard Header", () => {
+describe.concurrent("Wizard Header", () => {
   it("should render the header", () => {
-    const { getByRole, getAllByRole } = render(<WizardHeader pages={pages} />);
+    const { getByRole, getAllByRole } = render(
+      <WizardHeader pages={pages} activeIndex={0} />
+    );
 
     expect(getByRole("tablist")).toBeInTheDocument();
     expect(getAllByRole("tab")).toHaveLength(3);
   });
 
   it("should render icon states", () => {
-    const { getAllByRole } = render(<WizardHeader pages={pages} />);
+    const { getAllByRole } = render(
+      <WizardHeader pages={pages} activeIndex={0} />
+    );
 
     expect(getAllByRole("img")).toHaveLength(3);
 

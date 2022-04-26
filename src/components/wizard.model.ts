@@ -21,6 +21,8 @@ export type Theme = {
   formFieldBorder?: string;
   inputBackground?: string;
   inputTextColor?: string;
+  tabColor?: string;
+  tabLineColor?: string;
 };
 
 export type PageDim = {

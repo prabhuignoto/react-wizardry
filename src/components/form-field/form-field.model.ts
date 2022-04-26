@@ -2,6 +2,7 @@ export type FormFieldProps = {
   name: string;
   id?: string;
   isRequired?: boolean;
+  validate?: boolean;
   regex?: string;
   type?: InputType;
   label?: string;

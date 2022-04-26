@@ -93,11 +93,18 @@ const FormField: FunctionComponent<FormFieldProps> = ({
       <div className={styles.input_wrapper}>
         {getInputType}
         {type === "select" && (
-          <select onChange={handleChange} disabled={disabled}>
+          <select
+            onChange={handleChange}
+            disabled={disabled}
+            aria-labelledby={labelId}
+          >
             {selectOptions.map((option) => (
               <option key={option.id}>{option.name}</option>
             ))}
           </select>
+        )}
+        {type === "textarea" && (
+          <textarea disabled={disabled} aria-labelledby={labelId}></textarea>
         )}
         {isRequired && (
           <span

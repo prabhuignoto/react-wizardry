@@ -79,7 +79,7 @@ const WizardHeader: FunctionComponent<WizardHeaderProps> = ({
             state={state}
             label={index + 1 + ""}
             highlight={index < activeIndex}
-            disable={strict && index > activeIndex && state !== "SUCCESS"}
+            disable={strict && state !== "SUCCESS"}
           />
         ))}
       </ul>
@@ -88,3 +88,4 @@ const WizardHeader: FunctionComponent<WizardHeaderProps> = ({
 };
 
 export { WizardHeader };
+

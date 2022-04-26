@@ -19,10 +19,12 @@ function App() {
           fail: "#cf352e",
           inputBackground: "#464646",
           inputTextColor: "#fff",
+          tabLineColor: "#464646",
+          tabColor: "#7d7d7d",
         }}
         validationDelay={100}
-        // strict={false}
         onFinish={(val) => console.log(val)}
+        // strict={false}
         pages={[
           {
             title: "Introduction",

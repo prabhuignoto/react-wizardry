@@ -26,7 +26,7 @@ const pages: PageModelProps[] = [
   },
 ];
 
-describe("WizardFooter", () => {
+describe.concurrent("WizardFooter", () => {
   it("should render", () => {
     const { container } = render(<WizardFooter pages={pages} />);
 

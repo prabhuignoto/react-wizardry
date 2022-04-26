@@ -1,0 +1,29 @@
+.wizard_finish {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: var(--rc-wiz-textColor);
+  margin-left: 0.5rem;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  color: var(--rc-wiz-textColor);
+
+  svg {
+    width: 100%;
+    height: 100%;
+    fill: var(--rc-wiz-primary);
+  }
+}
