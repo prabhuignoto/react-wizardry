@@ -12,7 +12,7 @@
 
 </div>
 
-'react-wizardry' is a data-driven smart wizard component for creating powerful forms with in built validations.
+> react-wizardry is a data-driven smart wizard component for creating powerful forms with in built validations.
 
 ---
 
