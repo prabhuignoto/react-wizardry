@@ -38,7 +38,7 @@ function App() {
               {
                 label: "Last Name",
                 name: "lastName",
-                type: "text",
+                type: "text", 
                 isRequired: true,
               },
               {
