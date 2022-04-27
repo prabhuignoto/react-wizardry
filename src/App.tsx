@@ -84,6 +84,7 @@ function App() {
                 label: "Portfolio URL",
                 name: "Portfolio",
                 type: "url",
+                isRequired: true,
               },
               {
                 label: "Linkedin URL",

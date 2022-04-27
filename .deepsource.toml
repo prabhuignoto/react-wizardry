@@ -9,7 +9,7 @@ exclude_patterns = [
   "/dist/**",
   "/coverage/**",
   "/cache/**",
-  "App.tsx"
+  "**App.tsx"
 ]
 
 [[analyzers]]

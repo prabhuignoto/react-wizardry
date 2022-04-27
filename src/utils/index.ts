@@ -1,36 +1,39 @@
 import { InputType } from "../components/form-field/form-field.model";
 
-export function isDateValid(date: Date) {
+export function isDateValid(date: Date): boolean {
   return date instanceof Date && date.getTime() > 0;
 }
 
-export function isEmailValid(email: string) {
+export function isEmailValid(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-export function isFileValid(file: File) {
+export function isFileValid(file: File): boolean {
   return file instanceof File;
 }
 
-export function isNumberValid(number: number) {
+export function isNumberValid(number: number): boolean {
   return !isNaN(number);
 }
 
-export function isStringValid(string: string) {
+export function isStringValid(string: string): boolean {
   return typeof string === "string" && string.length > 0;
 }
 
-export function isUrlValid(url: string) {
-  return /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/.test(
+export function isUrlValid(url: string): boolean {
+  return /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/.test(
     url
   );
 }
 
-export function isPhoneValid(phone: string) {
+export function isPhoneValid(phone: string): boolean {
   return /^\+?[0-9]{10,15}$/.test(phone);
 }
 
-export function validator(data: string | File | number | string[], type?: InputType) {
+export function validator(
+  data: string | File | number | string[],
+  type?: InputType
+): boolean {
   switch (type) {
     case "text":
       return isStringValid(data as string);
