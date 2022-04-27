@@ -30,7 +30,7 @@ const config = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: "wizard.css",
+      filename: pkg.name + ".css",
     }),
     new BundleAnalyzerPlugin({
       openAnalyzer: false,
@@ -51,6 +51,10 @@ const config = {
         use: [
           {
             loader: "babel-loader",
+            options: {
+              presets: ["@babel/preset-env"],
+              plugins: ["@babel/plugin-transform-runtime"]
+            },
           },
           "ts-loader",
         ],
