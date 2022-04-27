@@ -24,7 +24,7 @@ function App() {
         }}
         validationDelay={100}
         onFinish={(val) => console.log(val)}
-        // strict={false}
+        strict={false}
         pages={[
           {
             title: "Introduction",
@@ -38,8 +38,7 @@ function App() {
               {
                 label: "Last Name",
                 name: "lastName",
-                type: "text", 
-                isRequired: true,
+                type: "text",
               },
               {
                 name: "dateOfBirth",
@@ -50,13 +49,11 @@ function App() {
                 label: "Email",
                 name: "email",
                 type: "email",
-                isRequired: true,
               },
               {
                 name: "Phone number",
                 label: "Phone",
                 type: "phone",
-                isRequired: true,
               },
             ],
           },
@@ -67,13 +64,11 @@ function App() {
                 label: "Company Name",
                 name: "companyName",
                 type: "text",
-                isRequired: true,
               },
               {
                 label: "Designation",
                 name: "designation",
                 type: "text",
-                isRequired: true,
               },
             ],
           },
@@ -84,19 +79,16 @@ function App() {
                 name: "CV",
                 label: "Upload your CV",
                 type: "file",
-                isRequired: true,
               },
               {
                 label: "Portfolio URL",
                 name: "Portfolio",
                 type: "url",
-                isRequired: true,
               },
               {
                 label: "Linkedin URL",
                 name: "linkedin",
                 type: "url",
-                isRequired: true,
               },
               {
                 label: "Github URL",
@@ -117,7 +109,7 @@ function App() {
                 label: "Select your current salary range",
                 name: "salaryRange",
                 type: "select",
-                isRequired: true,
+
                 selectOptions: [
                   { name: "10,000$ - 50,000$", value: "10-50k" },
                   { name: "50,000$ - 100,000$", value: "50-100k" },

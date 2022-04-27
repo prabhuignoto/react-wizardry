@@ -21,8 +21,6 @@ const Page = forwardRef<{ height: number; id: string }, PageModelProps>(
   ({ fields, title, id, width, hide, onChange }: PageModelProps, ref) => {
     const pageRef = useRef<HTMLDivElement>(null);
 
-    const isFirstRender = useRef(true);
-
     const { validationDelay } = useContext(WizardContext);
 
     const [_fields, setFields] = useState<FormFieldProps[]>(
@@ -34,6 +32,8 @@ const Page = forwardRef<{ height: number; id: string }, PageModelProps>(
     );
 
     const [reValidate, setRevalidate] = useState(0);
+
+    const interacted = useRef<Boolean>(false);
 
     useImperativeHandle(ref, () => ({
       height: pageRef.current?.clientHeight || 0,
@@ -54,6 +54,7 @@ const Page = forwardRef<{ height: number; id: string }, PageModelProps>(
 
     const onHandleInput = useDebouncedCallback(
       (val: string | string[] | number | File, id: string) => {
+        interacted.current = true;
         setFields((prev) =>
           prev.map((field) => {
             if (field.id === id) {
@@ -93,7 +94,7 @@ const Page = forwardRef<{ height: number; id: string }, PageModelProps>(
     }, [reValidate, _fields.length]);
 
     useEffect(() => {
-      if (!isFirstRender.current) {
+      if (interacted.current) {
         onChange?.(
           id,
           _fields
@@ -102,12 +103,6 @@ const Page = forwardRef<{ height: number; id: string }, PageModelProps>(
         );
       }
     }, [JSON.stringify(_fields)]);
-
-    useEffect(() => {
-      if (isFirstRender.current) {
-        isFirstRender.current = false;
-      }
-    }, []);
 
     return (
       <div className={pageClass} ref={pageRef} style={style} data-title={title}>

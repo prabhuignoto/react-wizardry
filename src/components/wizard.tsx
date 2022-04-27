@@ -98,7 +98,6 @@ const Wizard: FunctionComponent<WizardProps> = ({
 
   /** side effects */
   useEffect(() => {
-    // console.log(activePageId);
     setWizardPages((prev) =>
       prev.map((page) => ({
         ...page,
