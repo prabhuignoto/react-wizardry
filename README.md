@@ -4,9 +4,10 @@
 </p>
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
+![npm bundle size (version)](https://img.shields.io/bundlephobia/minzip/react-wizardry)
 [![Snyk](https://snyk.io/test/github/prabhuignoto/react-wizardry/badge.svg)](https://snyk.io/test/github/prabhuignoto/react-wizardry)
-[![DeepSource](https://deepsource.io/gh/prabhuignoto/react-wizardry.svg/?label=active+issues&token=Ee287EMM6gK3NGg-jjAbMeKj)](https://deepsource.io/gh/prabhuignoto/react-wizardry/?ref=repository-badge)
 [![Version](https://badgen.net/npm/v/react-wizardry)](/Version)
+<!-- [![DeepSource](https://deepsource.io/gh/prabhuignoto/react-wizardry.svg/?label=active+issues&token=Ee287EMM6gK3NGg-jjAbMeKj)](https://deepsource.io/gh/prabhuignoto/react-wizardry/?ref=repository-badge) -->
 
 </div>
 
@@ -32,6 +33,7 @@
 - [Page](#page)
 - [Form field](#form-field)
 - [Form field types](#form-field-types)
+- [Accessing the wizard data](#accessing-the-wizard-data)
 - [🎨 Theme](#-theme)
 - [CodeSandbox examples](#codesandbox-examples)
 - [⛏️ Built With](#️-built-with)
@@ -85,26 +87,26 @@ The example shows a simple wizard with two pages.
 
 ## ⚙️ Properties
 
-| Name                        | Description                                                                                                                            |
-| :-------------------------- | :------------------------------------------------------------------------------------------------------------------------------------- |
+| Name                          | Description                                                                                                                                    |
+| :---------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------- |
 | `strict`                      | Marks the step validation to be strict. This prevents the user from moving to the next step if the validations are failing in the current step |
-| `theme`                       | Theme object for customized styling                                                                                                    |
-| `highlightFieldsOnValidation` | Highlights the fields when the validation fails or succeeds                                                                            |
-| `pages`                       | Collection of Page object                                                                                                              |
-| `validationDelay`             | Delay in Milliseconds after which a validation is done for a Field                                                                     |
-| `onFinish`                    | Callback executed on final step                                                                                                        |
+| `theme`                       | Theme object for customized styling                                                                                                            |
+| `highlightFieldsOnValidation` | Highlights the fields when the validation fails or succeeds                                                                                    |
+| `pages`                       | Collection of Page object                                                                                                                      |
+| `validationDelay`             | Delay in Milliseconds after which a validation is done for a Field                                                                             |
+| `onFinish`                    | Callback executed on final step. The callback receives an object with the data for each page                                                   |
 
 ## Page
 
 Page object is at the core of the wizard. Page object is used to define the title, description, fields, and validation rules for a page.
 
-| Name     | Description                                                          | Type     |
-| :------- | :------------------------------------------------------------------- | :------- |
-| onChange | Callback executed when any of the Form field value changes(Internal) | Function |
-| fields   | Feilds of the Page                                                   | Array    |
-| isActive | Indicates whether the page is active or not                          | Boolean  |
-| title    | Title of the Page                                                    | String   |
-| state    | State of the Page. can be NOT_VALIDATED | "SUCCESS" | "FAIL"         | String   |
+| Name     | Description                                                          | Type      |
+| :------- | :------------------------------------------------------------------- | :-------- |
+| onChange | Callback executed when any of the Form field value changes(Internal) | Function  |
+| fields   | Feilds of the Page                                                   | Array     |
+| isActive | Indicates whether the page is active or not                          | Boolean   |
+| title    | Title of the Page                                                    | String    |
+| state    | State of the Page. can be NOT_VALIDATED                              | "SUCCESS" | "FAIL" | String |
 
 Here is an examples how to define pages in the wizard. We are defining two pages with two fields.
 
@@ -182,7 +184,7 @@ In the example below we are defining two fields and making them required.
         },
       ],
   },
-},
+]}
 ```
 
 ## Form field types
@@ -202,6 +204,25 @@ Form field supports the following types:
 - **file**: File input field
 
 All the above input types comes with inbuilt validation.
+
+## Accessing the wizard data
+
+The `onFinish` callback receives the wizard data with each key representing a page.
+
+For the getting started example, the `onFinish` callback will receive an object with the following structure:
+
+```js
+{
+  "introduction": {
+    "firstName": "<entered name>",
+    "lastName": "<entered name>",
+  },
+  "contact": {
+    "email": "<entered email id>";
+    "phone": "<entered phone number>",
+  }
+}
+```
 
 ## 🎨 Theme
 
