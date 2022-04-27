@@ -11,9 +11,6 @@ const pkg = require("./package.json");
 
 const isProduction = process.env.NODE_ENV === "production";
 
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
-
 const stylesHandler = MiniCssExtractPlugin.loader;
 
 const config = {

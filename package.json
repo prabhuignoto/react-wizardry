@@ -89,7 +89,7 @@
       }
     }
   },
-  "main": "dist/wizard.js",
+  "main": "dist/react-wizardry.js",
   "devDependencies": {
     "@babel/core": "^7.17.9",
     "@babel/plugin-transform-runtime": "^7.17.0",
