@@ -14,7 +14,7 @@ const isProduction = process.env.NODE_ENV === "production";
 const stylesHandler = MiniCssExtractPlugin.loader;
 
 const config = {
-  entry: "./src/index.js",
+  entry: "./src/react-wizardry.ts",
   devtool: "source-map",
   output: {
     path: path.resolve(__dirname, "dist"),
@@ -50,7 +50,6 @@ const config = {
             loader: "babel-loader",
             options: {
               presets: ["@babel/preset-env"],
-              plugins: ["@babel/plugin-transform-runtime"]
             },
           },
           "ts-loader",

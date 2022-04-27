@@ -25,7 +25,7 @@ export const WizardContext = createContext<contextType>({
 });
 
 const Wizard: FunctionComponent<WizardProps> = ({
-  pages,
+  pages = [],
   theme,
   highlightFieldsOnValidation = false,
   strict = true,
