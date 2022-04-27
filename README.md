@@ -1,10 +1,7 @@
 <p align="center">
   <a href="" rel="noopener">
- <!-- <img width=200px height=200px src="https://i.imgur.com/6wj0hh6.jpg" alt="Project logo"></a> -->
+ <img src="./logo.svg" alt="Project logo"></a>
 </p>
-
-<h3 align="center">react-wizardry</h3>
-
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
 [![Snyk](https://snyk.io/test/github/prabhuignoto/react-wizardry/badge.svg)](https://snyk.io/test/github/prabhuignoto/react-wizardry)
