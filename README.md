@@ -5,10 +5,9 @@
 
 <h3 align="center">react-wizardry</h3>
 
-<div align="center">
-
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
+[![Version](https://badgen.net/npm/v/react-wizardry)](/Version)
 
 </div>
 

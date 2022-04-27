@@ -2,7 +2,6 @@
   "name": "react-wizardry",
   "version": "0.1.5",
   "description": "Data driven smart wizard",
-  "type": "module",
   "keywords": [
     "wizard",
     "react-wizard",
@@ -22,7 +21,9 @@
     "lint": "npx eslint ./src/components/**/*.{ts,tsx}",
     "build:dev": "webpack --mode=development",
     "build:prod": "webpack --mode=production --node-env=production",
-    "watch": "webpack --watch"
+    "watch": "webpack --watch",
+    "snyk:monitor": "npx snyk monitor",
+    "snyk:test": "npx snyk test"
   },
   "publishConfig": {
     "cache": "cache/.npm",

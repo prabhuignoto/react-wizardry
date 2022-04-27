@@ -1,26 +1,32 @@
 // Generated using webpack-cli https://github.com/webpack/webpack-cli
 
-import autoprefixer from "autoprefixer";
-import MiniCssExtractPlugin from "mini-css-extract-plugin";
-import path, { dirname } from "path";
-import PostCSSpresetEnv from "postcss-preset-env";
-import { fileURLToPath } from "url";
-import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
-import NodeExternals from "webpack-node-externals";
+const autoprefixer = require("autoprefixer");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const path = require("path");
+const PostCSSpresetEnv = require("postcss-preset-env");
+// const { fileURLToPath } = require("url");
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
+const NodeExternals = require("webpack-node-externals");
+const pkg = require("./package.json");
 
 const isProduction = process.env.NODE_ENV === "production";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
 
 const stylesHandler = MiniCssExtractPlugin.loader;
 
 const config = {
   entry: "./src/index.js",
+  devtool: "source-map",
   output: {
     path: path.resolve(__dirname, "dist"),
     clean: true,
-    filename: "wizard.js",
+    filename: pkg.name + ".js",
+    library: {
+      name: pkg.name,
+      type: "umd",
+    },
   },
   plugins: [
     new MiniCssExtractPlugin({
@@ -45,9 +51,6 @@ const config = {
         use: [
           {
             loader: "babel-loader",
-            options: {
-              presets: ["@babel/preset-env"],
-            },
           },
           "ts-loader",
         ],
@@ -87,7 +90,7 @@ const config = {
   },
 };
 
-export default () => {
+module.exports = () => {
   if (isProduction) {
     config.mode = "production";
   } else {
