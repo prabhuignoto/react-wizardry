@@ -7,6 +7,8 @@
 
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
+[![Snyk](https://snyk.io/test/github/prabhuignoto/react-wizardry/badge.svg)](https://snyk.io/test/github/prabhuignoto/react-wizardry)
+[![DeepSource](https://deepsource.io/gh/prabhuignoto/react-wizardry.svg/?label=active+issues&token=Ee287EMM6gK3NGg-jjAbMeKj)](https://deepsource.io/gh/prabhuignoto/react-wizardry/?ref=repository-badge)
 [![Version](https://badgen.net/npm/v/react-wizardry)](/Version)
 
 </div>
