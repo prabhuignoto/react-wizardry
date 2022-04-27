@@ -6,6 +6,7 @@ import path, { dirname } from "path";
 import PostCSSpresetEnv from "postcss-preset-env";
 import { fileURLToPath } from "url";
 import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
+import NodeExternals from "webpack-node-externals";
 
 const isProduction = process.env.NODE_ENV === "production";
 
@@ -15,7 +16,7 @@ const __dirname = dirname(__filename);
 const stylesHandler = MiniCssExtractPlugin.loader;
 
 const config = {
-  entry: "./src/components/wizard.tsx",
+  entry: "./src/index.js",
   output: {
     path: path.resolve(__dirname, "dist"),
     clean: true,
@@ -32,20 +33,11 @@ const config = {
     // Add your plugins here
     // Learn more about plugins from https://webpack.js.org/configuration/plugins/
   ],
-  externals: {
-    react: {
-      commonjs: "react",
-      commonjs2: "react",
-      amd: "React",
-      root: "React",
-    },
-    "react-dom": {
-      commonjs: "react-dom",
-      commonjs2: "react-dom",
-      amd: "ReactDOM",
-      root: "ReactDOM",
-    },
-  },
+  externals: [
+    NodeExternals({
+      allowlist: ["nanoid", "classnames", "use-debounce"],
+    }),
+  ],
   module: {
     rules: [
       {
