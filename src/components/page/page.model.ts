@@ -3,8 +3,8 @@ import { FormFieldProps } from "../form-field/form-field.model";
 export type PageModelProps = {
   id: string;
   onChange?: (id: string, success: boolean) => void;
-  data?: any;
   fields: FormFieldProps[];
+  data?: string | number | File | string[];
   isActive?: boolean;
   title?: string;
   width?: number;

@@ -49,7 +49,7 @@ const Wizard: FunctionComponent<WizardProps> = ({
   const bodyNode = useRef<HTMLDivElement | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const finalTheme = useRef<{ [key: string]: string }>(
+  const finalTheme = useRef<{ [key: string]: Object }>(
     Object.assign({}, ThemeDefaults, theme)
   );
 
@@ -161,7 +161,7 @@ const Wizard: FunctionComponent<WizardProps> = ({
     const node = bodyNode.current;
     if (node) {
       const pages = node.querySelectorAll(".rc-wiz-page");
-      const result: any = {};
+      const result: { [key: string]: Object } = {};
 
       pages.forEach((page) => {
         const title = page.getAttribute("data-title")?.toLowerCase();

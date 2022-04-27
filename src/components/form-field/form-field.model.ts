@@ -6,10 +6,10 @@ export type FormFieldProps = {
   regex?: string;
   type?: InputType;
   label?: string;
+  data?: string | number | File | string[];
   selectOptions?: Option[];
   onInput?: (val: string | string[] | number | File, id: string) => void;
   isValid?: boolean | null;
-  data?: any;
   placeholder?: string;
   disabled?: boolean;
 };

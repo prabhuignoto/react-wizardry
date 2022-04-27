@@ -8,7 +8,7 @@ export type WizardProps = {
   highlightFieldsOnValidation?: boolean;
   strict?: boolean;
   validationDelay?: number;
-  onFinish?: (values: { [key: string]: string | number | File }) => void;
+  onFinish?: (values: Object) => void;
 };
 
 export type Theme = {

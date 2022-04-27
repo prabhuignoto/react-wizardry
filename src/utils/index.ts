@@ -30,7 +30,7 @@ export function isPhoneValid(phone: string) {
   return /^\+?[0-9]{10,15}$/.test(phone);
 }
 
-export function validator(data: string | File, type?: InputType) {
+export function validator(data: string | File | number | string[], type?: InputType) {
   switch (type) {
     case "text":
       return isStringValid(data as string);

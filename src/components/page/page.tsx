@@ -18,7 +18,7 @@ import { WizardContext } from "../wizard";
 import styles from "./page.module.scss";
 
 const Page = forwardRef<{ height: number; id: string }, PageModelProps>(
-  ({ fields, title, id, width, hide, onChange }: PageModelProps, ref) => {
+  ({ fields, title, id, width = 0, hide, onChange }: PageModelProps, ref) => {
     const pageRef = useRef<HTMLDivElement>(null);
 
     const { validationDelay } = useContext(WizardContext);
@@ -33,7 +33,7 @@ const Page = forwardRef<{ height: number; id: string }, PageModelProps>(
 
     const [reValidate, setRevalidate] = useState(0);
 
-    const interacted = useRef<Boolean>(false);
+    const interacted = useRef<boolean>(false);
 
     useImperativeHandle(ref, () => ({
       height: pageRef.current?.clientHeight || 0,
@@ -82,7 +82,7 @@ const Page = forwardRef<{ height: number; id: string }, PageModelProps>(
           if (ids.indexOf(field.id) > -1) {
             return {
               ...field,
-              isValid: validator(field.data, field.type),
+              isValid: field.data ? validator(field.data, field.type) : false,
             };
           }
 
