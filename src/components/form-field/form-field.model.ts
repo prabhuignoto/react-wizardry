@@ -7,7 +7,7 @@ export type FormFieldProps = {
   type?: InputType;
   label?: string;
   data?: string | number | File | string[];
-  selectOptions?: Option[];
+  options?: Option[];
   onInput?: (val: string | string[] | number | File, id: string) => void;
   isValid?: boolean | null;
   placeholder?: string;
@@ -17,7 +17,7 @@ export type FormFieldProps = {
 export type Option = {
   id?: string;
   name: string;
-  value: string;
+  value: string | number | boolean;
 };
 
 export type InputType =
@@ -30,4 +30,5 @@ export type InputType =
   | "number"
   | "url"
   | "phone"
+  | "radio"
   | "textarea";

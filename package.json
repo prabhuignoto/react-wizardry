@@ -36,8 +36,7 @@
   ],
   "dependencies": {
     "classnames": "^2.3.1",
-    "nanoid": "^3.3.3",
-    "use-debounce": "^7.0.1"
+    "nanoid": "^3.3.3"
   },
   "peerDependencies": {
     "react": "^17.0.0",
@@ -133,6 +132,7 @@
     "style-loader": "^3.3.1",
     "stylelint": "^14.8.0",
     "stylelint-config-standard": "^25.0.0",
+    "terser-webpack-plugin": "^5.3.1",
     "ts-loader": "^9.2.9",
     "typescript": "^4.6.3",
     "vite": "^2.9.6",

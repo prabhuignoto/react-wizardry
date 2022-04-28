@@ -1,10 +1,12 @@
 import classNames from "classnames";
+import { nanoid } from "nanoid";
 import React, {
   FormEvent,
   FunctionComponent,
   useCallback,
   useContext,
   useMemo,
+  useRef,
 } from "react";
 import Asterisk from "../../icons/asterisk";
 import CheckIcon from "../../icons/check";
@@ -19,23 +21,54 @@ const FormField: FunctionComponent<FormFieldProps> = ({
   isRequired = false,
   type,
   label,
-  selectOptions = [],
+  options = [],
   onInput,
   isValid,
   placeholder,
   disabled,
 }) => {
+  const _options = useRef(
+    options.map((option) => ({
+      ...option,
+      id: nanoid(),
+    }))
+  );
+
   const labelId = useMemo(() => `input-${id}`, []);
+
+  const selectedOptions = useRef<string[]>([]);
 
   const { highlightFieldsOnValidation: highlight } = useContext(WizardContext);
 
   const handleChange = useCallback(
-    (ev: FormEvent<HTMLInputElement | HTMLSelectElement | HTMLTimeElement>) => {
+    (
+      ev: FormEvent<
+        | HTMLInputElement
+        | HTMLSelectElement
+        | HTMLTimeElement
+        | HTMLTextAreaElement
+      >
+    ) => {
+      const target = ev.target as HTMLInputElement;
+      const value = target.files?.length ? target.files[0] : target.value;
+      onInput?.(value, id || "");
+    },
+    []
+  );
+
+  const handleCheckBoxChange = useCallback(
+    (ev: FormEvent<HTMLInputElement>) => {
       const target = ev.target as HTMLInputElement;
 
-      const value = target.files?.length ? target.files[0] : target.value;
+      if (target.checked) {
+        selectedOptions.current.push(target.value);
+      } else {
+        selectedOptions.current = selectedOptions.current.filter(
+          (option) => option !== target.value
+        );
+      }
 
-      onInput?.(value, id || "");
+      onInput?.(selectedOptions.current, id || "");
     },
     []
   );
@@ -60,8 +93,17 @@ const FormField: FunctionComponent<FormFieldProps> = ({
     []
   );
 
+  const isTextField = useMemo(
+    () =>
+      type !== "checkbox" &&
+      type !== "radio" &&
+      type !== "select" &&
+      type !== "textarea",
+    []
+  );
+
   const getInputType = useMemo(() => {
-    if (type !== "select" && type !== "textarea") {
+    if (isTextField) {
       return (
         <input
           type={type === "datetime" ? "datetime-local" : type}
@@ -98,13 +140,47 @@ const FormField: FunctionComponent<FormFieldProps> = ({
             disabled={disabled}
             aria-labelledby={labelId}
           >
-            {selectOptions.map((option) => (
+            {_options.current.map((option) => (
               <option key={option.id}>{option.name}</option>
             ))}
           </select>
         )}
         {type === "textarea" && (
-          <textarea disabled={disabled} aria-labelledby={labelId}></textarea>
+          <textarea
+            disabled={disabled}
+            aria-labelledby={labelId}
+            required={isRequired}
+            onChange={handleChange}
+            name={name}
+          ></textarea>
+        )}
+        {(type === "radio" || type === "checkbox") && (
+          <div className={styles.collection_wrapper}>
+            {_options.current.map(({ name: optionName, id, value }) => (
+              <label key={id}>
+                {type === "radio" ? (
+                  <input
+                    type={type}
+                    name={name}
+                    value={value as string}
+                    onChange={handleChange}
+                    id={id}
+                    key={id}
+                  />
+                ) : (
+                  <input
+                    type={type}
+                    name={name}
+                    value={value as string}
+                    id={id}
+                    key={id}
+                    onChange={handleCheckBoxChange}
+                  />
+                )}
+                {optionName}
+              </label>
+            ))}
+          </div>
         )}
         {isRequired && (
           <span

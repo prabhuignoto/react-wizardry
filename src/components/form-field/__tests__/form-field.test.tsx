@@ -44,7 +44,7 @@ describe.concurrent("FormField", () => {
         label="select options"
         type="select"
         name="select"
-        selectOptions={[
+        options={[
           { name: "one", value: "one" },
           {
             name: "two",
@@ -57,6 +57,14 @@ describe.concurrent("FormField", () => {
     expect(container.querySelector("select")).toBeInTheDocument();
     expect(container.querySelectorAll("option")).toHaveLength(2);
   });
+
+  it("should render text area", () => {
+    const { getByText } = render(
+      <FormField id="123" name="text" label="text" type="textarea" />
+    );
+
+    expect(getByText("text")).toBeInTheDocument();
+  })
 
   it("should render valid icon", () => {
     const { getByLabelText } = render(

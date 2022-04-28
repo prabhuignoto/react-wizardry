@@ -24,7 +24,7 @@ function App() {
         }}
         validationDelay={100}
         onFinish={(val) => console.log(val)}
-        // strict={false}
+        strict={false}
         pages={[
           {
             title: "Introduction",
@@ -71,6 +71,31 @@ function App() {
                 name: "designation",
                 type: "text",
               },
+              {
+                label: "Description",
+                name: "description",
+                type: "textarea",
+              },
+              {
+                label: "Are you currently working?",
+                name: "employed",
+                type: "radio",
+                options: [
+                  { name: "yes", value: true },
+                  { name: "no", value: false },
+                ],
+              },
+              {
+                label: "Choose your skills",
+                name: "skills",
+                type: "checkbox",
+                options: [
+                  { name: "HTML", value: "html" },
+                  { name: "CSS", value: "css" },
+                  { name: "JavaScript", value: "javascript" },
+                  { name: "React", value: "react" },
+                ],
+              },
             ],
           },
           {
@@ -112,7 +137,7 @@ function App() {
                 name: "salaryRange",
                 type: "select",
 
-                selectOptions: [
+                options: [
                   { name: "10,000$ - 50,000$", value: "10-50k" },
                   { name: "50,000$ - 100,000$", value: "50-100k" },
                 ],

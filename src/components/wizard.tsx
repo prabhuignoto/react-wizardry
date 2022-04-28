@@ -9,6 +9,7 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { FormFieldProps } from "./form-field/form-field.model";
 import { Page } from "./page/page";
 import { PageModelProps } from "./page/page.model";
 import { ThemeDefaults } from "./theme-default";
@@ -77,7 +78,7 @@ const Wizard: FunctionComponent<WizardProps> = ({
   };
 
   const initHeights = useCallback(
-    (data: { height: number; id: string }) => {
+    (data: { height: number; id: string; fields: FormFieldProps[] }) => {
       if (data) {
         pageHeights.current.push(data);
 
@@ -165,15 +166,30 @@ const Wizard: FunctionComponent<WizardProps> = ({
 
       pages.forEach((page) => {
         const title = page.getAttribute("data-title")?.toLowerCase();
+        const inputs = Array.from(
+          page.querySelectorAll("input:not([type='checkbox'])")
+        ) as HTMLInputElement[];
+
+        const checkboxes = Array.from(
+          page.querySelectorAll("input[type='checkbox']")
+        ) as HTMLInputElement[];
 
         if (title) {
-          result[title] = Array.from(page.querySelectorAll("input")).reduce(
+          result[title] = inputs.reduce(
             (a, b) =>
               Object.assign({}, a, {
                 [b.name]: b.value,
               }),
             {}
           );
+
+          if (checkboxes.length) {
+            result[title] = Object.assign(result[title], {
+              [checkboxes[0].name]: checkboxes
+                .filter((checkbox) => checkbox.checked)
+                .map((checkbox) => checkbox.value),
+            });
+          }
         }
       });
 

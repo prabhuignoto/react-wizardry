@@ -9,6 +9,7 @@ const NodeExternals = require("webpack-node-externals");
 const pkg = require("./package.json");
 const CopyPlugin = require("copy-webpack-plugin");
 const { BannerPlugin } = require("webpack");
+const TerserPlugin = require("terser-webpack-plugin");
 
 const isProduction = process.env.NODE_ENV === "production";
 
@@ -25,6 +26,21 @@ const config = {
       name: pkg.name,
       type: "umd",
     },
+  },
+  optimization: {
+    minimize: isProduction,
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          output: {
+            comments: false,
+          },
+          compress: {
+            drop_console: true,
+          },
+        },
+      }),
+    ],
   },
   plugins: [
     new MiniCssExtractPlugin({

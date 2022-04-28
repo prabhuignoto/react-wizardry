@@ -2,26 +2,21 @@ import classNames from "classnames";
 import { nanoid } from "nanoid";
 import React, {
   forwardRef,
-  useContext,
   useEffect,
   useImperativeHandle,
   useMemo,
   useRef,
   useState,
 } from "react";
-import { useDebouncedCallback } from "use-debounce";
 import { validator } from "../../utils";
 import { FormField } from "../form-field/form-field";
 import { FormFieldProps } from "../form-field/form-field.model";
 import { PageModelProps } from "../page/page.model";
-import { WizardContext } from "../wizard";
 import styles from "./page.module.scss";
 
 const Page = forwardRef<{ height: number; id: string }, PageModelProps>(
   ({ fields, title, id, width = 0, hide, onChange }: PageModelProps, ref) => {
     const pageRef = useRef<HTMLDivElement>(null);
-
-    const { validationDelay } = useContext(WizardContext);
 
     const [_fields, setFields] = useState<FormFieldProps[]>(
       fields.map((field) => ({
@@ -52,24 +47,24 @@ const Page = forwardRef<{ height: number; id: string }, PageModelProps>(
       [hide]
     );
 
-    const onHandleInput = useDebouncedCallback(
-      (val: string | string[] | number | File, id: string) => {
-        interacted.current = true;
-        setFields((prev) =>
-          prev.map((field) => {
-            if (field.id === id) {
-              return {
-                ...field,
-                data: val,
-              };
-            }
-            return field;
-          })
-        );
-        setRevalidate(new Date().getMilliseconds());
-      },
-      validationDelay
-    );
+    const onHandleInput = (
+      val: string | string[] | number | File,
+      id: string
+    ) => {
+      interacted.current = true;
+      setFields((prev) =>
+        prev.map((field) => {
+          if (field.id === id) {
+            return {
+              ...field,
+              data: val,
+            };
+          }
+          return field;
+        })
+      );
+      setRevalidate(new Date().getMilliseconds());
+    };
 
     useEffect(() => {
       if (reValidate < 1) {

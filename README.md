@@ -93,7 +93,6 @@ The example shows a simple wizard with two pages.
 | `theme`                       | Theme object for customized styling                                                                                                                                |
 | `highlightFieldsOnValidation` | Highlights the fields when the validation fails or succeeds                                                                                                        |
 | `pages`                       | Collection of [Page](#Page) object                                                                                                                                 |
-| `validationDelay`             | Delay in Milliseconds after which a validation is done for a Field                                                                                                 |
 | `onFinish`                    | Callback executed on final step. The callback receives an object with the data for each page                                                                       |
 
 ## Page
