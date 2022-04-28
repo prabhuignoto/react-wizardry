@@ -17,6 +17,8 @@
 
 ![demo](./react-wizardry.gif)
 
+[Demo](https://codesandbox.io/s/react-wizardy-multi-forms-io9ey5)
+
 <h2>Features</h2>
 
 - ⚡Data driven API
