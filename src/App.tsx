@@ -24,7 +24,6 @@ function App() {
         }}
         validationDelay={100}
         onFinish={(val) => console.log(val)}
-        strict={false}
         pages={[
           {
             title: "Introduction",

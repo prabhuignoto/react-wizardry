@@ -32,6 +32,8 @@ const Wizard: FunctionComponent<WizardProps> = ({
   strict = true,
   validationDelay = 250,
   onFinish,
+  finishMessage = "Thanks for submitting the details.",
+  globalFormErrorMessage = "Please correct the errors in the form.",
 }) => {
   /** pages state */
   const [wizardPages, setWizardPages] = useState<PageModelProps[]>(
@@ -226,7 +228,7 @@ const Wizard: FunctionComponent<WizardProps> = ({
                 />
               ))}
           </div>
-          {wizardComplete && <WizardFinish />}
+          {wizardComplete && <WizardFinish message={finishMessage} />}
         </div>
         <div className={styles.footer_wrapper}>
           {!wizardComplete && (
@@ -236,6 +238,7 @@ const Wizard: FunctionComponent<WizardProps> = ({
               onFinish={handleFinish}
               pages={wizardPages}
               activeId={activePageId}
+              message={globalFormErrorMessage}
             />
           )}
         </div>

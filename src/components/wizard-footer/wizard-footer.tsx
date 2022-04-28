@@ -12,7 +12,7 @@ const WizardFooter: FunctionComponent<WizardFooterProps> = ({
   onFinish,
   activeId,
   pages,
-  message = "Form has errors. Please fix it to proceed to the next step.",
+  message,
 }) => {
   const activeIndex = useMemo(
     () => pages.findIndex((p) => p.id === activeId),

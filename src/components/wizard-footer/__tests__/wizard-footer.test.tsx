@@ -79,11 +79,15 @@ describe.concurrent("WizardFooter", () => {
 
   it("should render alert message", () => {
     const { getByRole } = render(
-      <WizardFooter pages={pages} activeId={"page2"} />
+      <WizardFooter
+        pages={pages}
+        activeId={"page2"}
+        message="Please correct the errors in the form."
+      />
     );
 
     expect(getByRole("alert")).toHaveTextContent(
-      "Form has errors. Please fix it to proceed to the next step."
+      "Please correct the errors in the form."
     );
   });
 });

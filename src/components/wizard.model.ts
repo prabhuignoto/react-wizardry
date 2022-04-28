@@ -9,6 +9,8 @@ export type WizardProps = {
   strict?: boolean;
   validationDelay?: number;
   onFinish?: (values: Object) => void;
+  globalFormErrorMessage?: string;
+  finishMessage?: string;
 };
 
 export type Theme = {

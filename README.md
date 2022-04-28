@@ -101,13 +101,15 @@ The example shows a simple wizard with two pages.
 
 Page object is at the core of the wizard. Page object is used to define the title, description, fields, and validation rules for a page.
 
-| Name     | Description                                                          | Type     |
-| :------- | :------------------------------------------------------------------- | :------- |
-| onChange | Callback executed when any of the Form field value changes(Internal) | Function |
-| fields   | Fields of the Page                                                   | Array    |
-| isActive | Indicates whether the page is active or not                          | Boolean  |
-| title    | Title of the Page                                                    | String   |
-| state    | State of the Page. can be `NOT_VALIDATED`, `SUCCESS`, `FAIL`,        | String   |
+| Name                   | Description                                                          | Type     |
+| :--------------------- | :------------------------------------------------------------------- | :------- |
+| onChange               | Callback executed when any of the Form field value changes(Internal) | Function |
+| fields                 | Fields of the Page                                                   | Array    |
+| isActive               | Indicates whether the page is active or not                          | Boolean  |
+| title                  | Title of the Page                                                    | String   |
+| finishMessage          | Custom message to be displayed on finish operation                   | String   |
+| globalFormErrorMessage | Global error message to be displayed on validation failures          | String   |
+| state                  | State of the Page. can be `NOT_VALIDATED`, `SUCCESS`, `FAIL`,        | String   |
 
 > Every page is in the `NOT_VALIDATED` state by default.
 
