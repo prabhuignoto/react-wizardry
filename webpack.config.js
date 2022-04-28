@@ -4,10 +4,11 @@ const autoprefixer = require("autoprefixer");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require("path");
 const PostCSSpresetEnv = require("postcss-preset-env");
-// const { fileURLToPath } = require("url");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const NodeExternals = require("webpack-node-externals");
 const pkg = require("./package.json");
+const CopyPlugin = require("copy-webpack-plugin");
+const { BannerPlugin } = require("webpack");
 
 const isProduction = process.env.NODE_ENV === "production";
 
@@ -31,8 +32,19 @@ const config = {
     }),
     new BundleAnalyzerPlugin({
       openAnalyzer: false,
+      analyzerMode: "static",
     }),
-
+    new CopyPlugin({
+      patterns: [
+        {
+          from: "README.md",
+          to: "README.md",
+        },
+      ],
+    }),
+    new BannerPlugin({
+      banner: `${pkg.name} v${pkg.version}`,
+    }),
     // Add your plugins here
     // Learn more about plugins from https://webpack.js.org/configuration/plugins/
   ],
@@ -47,12 +59,12 @@ const config = {
         test: /\.(tsx|ts)$/,
         use: [
           {
-            loader: "babel-loader",
+            loader: "esbuild-loader",
             options: {
-              presets: ["@babel/preset-env"],
+              target: "es2020",
+              loader: "tsx",
             },
           },
-          "ts-loader",
         ],
         exclude: /node_modules/,
       },

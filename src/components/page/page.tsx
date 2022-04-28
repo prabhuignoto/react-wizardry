@@ -75,7 +75,9 @@ const Page = forwardRef<{ height: number; id: string }, PageModelProps>(
       if (reValidate < 1) {
         return;
       }
-      const ids = _fields.filter((f) => f.isRequired).map((f) => f.id);
+      const ids = _fields
+        .filter((f) => f.isRequired || f.validate)
+        .map((f) => f.id);
 
       setFields((prev) => {
         const result = prev.map((field) => {

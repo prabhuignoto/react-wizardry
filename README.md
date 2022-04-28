@@ -87,26 +87,28 @@ The example shows a simple wizard with two pages.
 
 ## ⚙️ Properties
 
-| Name                          | Description                                                                                                                                    |
-| :---------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------- |
-| `strict`                      | Marks the step validation to be strict. This prevents the user from moving to the next step if the validations are failing in the current step |
-| `theme`                       | Theme object for customized styling                                                                                                            |
-| `highlightFieldsOnValidation` | Highlights the fields when the validation fails or succeeds                                                                                    |
-| `pages`                       | Collection of Page object                                                                                                                      |
-| `validationDelay`             | Delay in Milliseconds after which a validation is done for a Field                                                                             |
-| `onFinish`                    | Callback executed on final step. The callback receives an object with the data for each page                                                   |
+| Name                          | Description                                                                                                                                                        |
+| :---------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `strict`                      | Enables validation rules for all input types in every page of the wizard. The component prevents the user from moving forward unless the errors fixed on the step. |
+| `theme`                       | Theme object for customized styling                                                                                                                                |
+| `highlightFieldsOnValidation` | Highlights the fields when the validation fails or succeeds                                                                                                        |
+| `pages`                       | Collection of [Page](#Page) object                                                                                                                                 |
+| `validationDelay`             | Delay in Milliseconds after which a validation is done for a Field                                                                                                 |
+| `onFinish`                    | Callback executed on final step. The callback receives an object with the data for each page                                                                       |
 
 ## Page
 
 Page object is at the core of the wizard. Page object is used to define the title, description, fields, and validation rules for a page.
 
-| Name     | Description                                                          | Type      |
-| :------- | :------------------------------------------------------------------- | :-------- |
-| onChange | Callback executed when any of the Form field value changes(Internal) | Function  |
-| fields   | Feilds of the Page                                                   | Array     |
-| isActive | Indicates whether the page is active or not                          | Boolean   |
-| title    | Title of the Page                                                    | String    |
-| state    | State of the Page. can be NOT_VALIDATED                              | "SUCCESS" | "FAIL" | String |
+| Name     | Description                                                          | Type     |
+| :------- | :------------------------------------------------------------------- | :------- |
+| onChange | Callback executed when any of the Form field value changes(Internal) | Function |
+| fields   | Fields of the Page                                                   | Array    |
+| isActive | Indicates whether the page is active or not                          | Boolean  |
+| title    | Title of the Page                                                    | String   |
+| state    | State of the Page. can be `NOT_VALIDATED`, `SUCCESS`, `FAIL`,        | String   |
+
+> Every page is in the `NOT_VALIDATED` state by default.
 
 Here is an examples how to define pages in the wizard. We are defining two pages with two fields.
 
@@ -158,9 +160,12 @@ Form field represents an input field in the wizard. Form field is used to define
 | :------------ | :---------------------------------- | :-------- |
 | name          | Name of the Field                   | string    |
 | isRequired    | Marks the field as required         | boolean   |
+| validate      | Enables validation for the field    | boolean   |
 | type          | Type of Field                       | InputType |
 | label         | Label for the field                 | string    |
 | selectOptions | Use this prop when type is "select" | Array     |
+
+> Fields marked as required are automatically validated. If you set `isRequired` to `false` and `validate` to `true`, the wizard will validate and flag the errors, but the step itself will not be marked as invalid.
 
 In the example below we are defining two fields and making them required.
 
@@ -180,12 +185,14 @@ In the example below we are defining two fields and making them required.
           label: "Last Name",
           name: "lastName",
           type: "text",
-          isRequired: true,
+          validate: true,
         },
       ],
   },
 ]}
 ```
+
+Here only the First Name field is required. The last name field will be validated if the user enters a value.
 
 ## Form field types
 

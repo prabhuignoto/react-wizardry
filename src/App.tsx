@@ -24,7 +24,7 @@ function App() {
         }}
         validationDelay={100}
         onFinish={(val) => console.log(val)}
-        strict={false}
+        // strict={false}
         pages={[
           {
             title: "Introduction",
@@ -39,6 +39,7 @@ function App() {
                 label: "Last Name",
                 name: "lastName",
                 type: "text",
+                validate: true,
               },
               {
                 name: "dateOfBirth",
