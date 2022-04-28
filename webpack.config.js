@@ -43,7 +43,7 @@ const config = {
       ],
     }),
     new BannerPlugin({
-      banner: `${pkg.name} v${pkg.version}`,
+      banner: `${pkg.name} v${pkg.version} | ${pkg.license} | ${pkg.homepage} | ${pkg.author}`,
     }),
     // Add your plugins here
     // Learn more about plugins from https://webpack.js.org/configuration/plugins/
@@ -59,12 +59,13 @@ const config = {
         test: /\.(tsx|ts)$/,
         use: [
           {
-            loader: "esbuild-loader",
+            loader: "babel-loader",
             options: {
-              target: "es2020",
-              loader: "tsx",
+              presets: ["@babel/preset-env", "@babel/preset-react"],
+              plugins: ["@babel/plugin-transform-runtime"],
             },
           },
+          "ts-loader",
         ],
         exclude: /node_modules/,
       },
