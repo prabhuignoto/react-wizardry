@@ -1,4 +1,4 @@
-name: Build with Webpack
+name: Test and Lint
 
 on:
   push:
