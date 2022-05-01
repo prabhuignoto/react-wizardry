@@ -89,13 +89,14 @@ The example shows a simple wizard with two pages.
 
 ## ⚙️ Properties
 
-| Name                          | Description                                                                                                                                                        |
-| :---------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `strict`                      | Enables validation rules for all input types in every page of the wizard. The component prevents the user from moving forward unless the errors fixed on the step. |
-| `theme`                       | Theme object for customized styling                                                                                                                                |
-| `highlightFieldsOnValidation` | Highlights the fields when the validation fails or succeeds                                                                                                        |
-| `pages`                       | Collection of [Page](#Page) object                                                                                                                                 |
-| `onFinish`                    | Callback executed on final step. The callback receives an object with the data for each page                                                                       |
+| Name                          | Description                                                                                                                                                        | Default |
+| :---------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| `strict`                      | Enables validation rules for all input types in every page of the wizard. The component prevents the user from moving forward unless the errors fixed on the step. | false   |
+| `theme`                       | [Theme](#🎨-theme) object for customized styling                                                                                                                  |         |
+| `highlightFieldsOnValidation` | Highlights the fields when the validation fails or succeeds                                                                                                        | false   |
+| `pages`                       | Collection of [Page](#Page) object                                                                                                                                 |         |
+| `onFinish`                    | Callback executed on final step.                                                                                                                                   |         |
+| `RTL`                         | Enables right to left mode                                                                                                                                         | false   |
 
 ## Page
 
@@ -110,7 +111,6 @@ Page object is at the core of the wizard. Page object is used to define the titl
 | onChange               | Callback executed when any of the Form field value changes(Internal) | Function |
 | state                  | State of the Page. can be `NOT_VALIDATED`, `SUCCESS`, `FAIL`,        | String   |
 | title                  | Title of the Page                                                    | String   |
-| RTL                    | Enables right to left mode                                           | String   |
 
 > Every page is in the `NOT_VALIDATED` state by default.
 
