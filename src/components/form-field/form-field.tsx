@@ -38,7 +38,8 @@ const FormField: FunctionComponent<FormFieldProps> = ({
 
   const selectedOptions = useRef<string[]>([]);
 
-  const { highlightFieldsOnValidation: highlight } = useContext(WizardContext);
+  const { highlightFieldsOnValidation: highlight, RTL } =
+    useContext(WizardContext);
 
   const handleChange = useCallback(
     (
@@ -78,18 +79,29 @@ const FormField: FunctionComponent<FormFieldProps> = ({
       classNames(
         styles.form_field,
         isValid ? styles.is_valid : isValid !== null ? styles.is_not_valid : "",
-        highlight ? styles.highlight : ""
+        highlight ? styles.highlight : "",
+        RTL ? styles.RTL : ""
       ),
     [isValid, highlight]
   );
 
   const checkClass = useMemo(
-    () => classNames(styles.status, isValid ? styles.success : ""),
+    () =>
+      classNames(
+        styles.status,
+        isValid ? styles.success : "",
+        RTL ? styles.RTL : ""
+      ),
     [isValid]
   );
 
   const warnClass = useMemo(
-    () => classNames(styles.status, !isValid ? styles.fail : ""),
+    () =>
+      classNames(
+        styles.status,
+        !isValid ? styles.fail : "",
+        RTL ? styles.RTL : ""
+      ),
     []
   );
 
@@ -184,7 +196,7 @@ const FormField: FunctionComponent<FormFieldProps> = ({
         )}
         {isRequired && (
           <span
-            className={styles.asterisk}
+            className={classNames(styles.asterisk, RTL ? styles.RTL : "")}
             role="img"
             aria-label="important field"
           >

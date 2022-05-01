@@ -14,6 +14,7 @@ const WizardTab: FunctionComponent<WizardTabProps> = ({
   label,
   highlight,
   disable,
+  RTL,
 }) => {
   const containerClass = useMemo(
     () =>
@@ -32,7 +33,8 @@ const WizardTab: FunctionComponent<WizardTabProps> = ({
           [styles[state.toLowerCase()]]: true,
         },
         highlight ? styles.highlight : "",
-        disable ? styles.disabled : ""
+        disable ? styles.disabled : "",
+        RTL ? styles.RTL : ""
       ),
     [state, selected, highlight, disable]
   );
@@ -66,9 +68,14 @@ const WizardHeader: FunctionComponent<WizardHeaderProps> = ({
   activeIndex,
 }) => {
   const { strict } = useContext(WizardContext);
-  // console.log(activeIndex);
+  const { RTL } = useContext(WizardContext);
+
+  const wrapperClass = useMemo(
+    () => classNames(styles.wrapper, RTL ? styles.RTL : ""),
+    []
+  );
   return (
-    <div className={styles.wrapper}>
+    <div className={wrapperClass}>
       <ul className={styles.tabs} role="tablist">
         {pages.map(({ id, isActive, state }, index) => (
           <WizardTab
@@ -80,6 +87,7 @@ const WizardHeader: FunctionComponent<WizardHeaderProps> = ({
             label={index + 1 + ""}
             highlight={index < activeIndex}
             disable={strict && state !== "SUCCESS"}
+            RTL={RTL}
           />
         ))}
       </ul>
@@ -88,4 +96,3 @@ const WizardHeader: FunctionComponent<WizardHeaderProps> = ({
 };
 
 export { WizardHeader };
-

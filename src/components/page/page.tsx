@@ -2,6 +2,7 @@ import classNames from "classnames";
 import { nanoid } from "nanoid";
 import React, {
   forwardRef,
+  useContext,
   useEffect,
   useImperativeHandle,
   useMemo,
@@ -12,6 +13,7 @@ import { validator } from "../../utils";
 import { FormField } from "../form-field/form-field";
 import { FormFieldProps } from "../form-field/form-field.model";
 import { PageModelProps } from "../page/page.model";
+import { WizardContext } from "../wizard";
 import styles from "./page.module.scss";
 
 const Page = forwardRef<{ height: number; id: string }, PageModelProps>(
@@ -29,6 +31,8 @@ const Page = forwardRef<{ height: number; id: string }, PageModelProps>(
     const [reValidate, setRevalidate] = useState(0);
 
     const interacted = useRef<boolean>(false);
+
+    const { RTL } = useContext(WizardContext);
 
     useImperativeHandle(ref, () => ({
       height: pageRef.current?.clientHeight || 0,
@@ -103,8 +107,12 @@ const Page = forwardRef<{ height: number; id: string }, PageModelProps>(
 
     return (
       <div className={pageClass} ref={pageRef} style={style} data-title={title}>
-        <header className={styles.header}>{title}</header>
-        <div className={styles.fields_wrapper}>
+        <header className={classNames(styles.header, RTL ? styles.RTL : "")}>
+          {title}
+        </header>
+        <div
+          className={classNames(styles.fields_wrapper, RTL ? styles.RTL : "")}
+        >
           {_fields.map((field) => (
             <FormField
               key={field.id}
