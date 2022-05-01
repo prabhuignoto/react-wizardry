@@ -89,14 +89,14 @@ The example shows a simple wizard with two pages.
 
 ## ⚙️ Properties
 
-| Name                          | Description                                                                                                                                                        | Default |
-| :---------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| `strict`                      | Enables validation rules for all input types in every page of the wizard. The component prevents the user from moving forward unless the errors fixed on the step. | false   |
-| `theme`                       | [Theme](#🎨-theme) object for customized styling                                                                                                                  |         |
-| `highlightFieldsOnValidation` | Highlights the fields when the validation fails or succeeds                                                                                                        | false   |
-| `pages`                       | Collection of [Page](#Page) object                                                                                                                                 |         |
-| `onFinish`                    | Callback executed on final step.                                                                                                                                   |         |
-| `RTL`                         | Enables right to left mode                                                                                                                                         | false   |
+| Name                          | Description                                                                                                                                                          | Default |
+| :---------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| `strict`                      | Enables validation rules for all input types on all pages. The component prevents the user from progressing until the errors in the current step have been corrected | false   |
+| `theme`                       | [Theme](#🎨-theme) object for customized styling                                                                                                                    |         |
+| `highlightFieldsOnValidation` | Highlights the fields when the validation fails or succeeds                                                                                                          | false   |
+| `pages`                       | Collection of [Page](#Page) object                                                                                                                                   |         |
+| `onFinish`                    | Callback executed on final step                                                                                                                                      |         |
+| `RTL`                         | Enables right to left mode                                                                                                                                           | false   |
 
 ## Page
 
