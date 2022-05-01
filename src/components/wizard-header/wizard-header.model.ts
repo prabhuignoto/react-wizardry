@@ -13,4 +13,5 @@ export type WizardTabProps = Pick<WizardHeaderProps, "onSelect"> &
     disable?: boolean;
     label?: string;
     highlight?: boolean;
+    RTL?: boolean;
   };

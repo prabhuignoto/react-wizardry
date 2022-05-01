@@ -11,6 +11,7 @@ export type WizardProps = {
   onFinish?: (values: Object) => void;
   globalFormErrorMessage?: string;
   finishMessage?: string;
+  RTL?: boolean;
 };
 
 export type Theme = {
@@ -34,5 +35,5 @@ export type PageDim = {
 
 export type contextType = Pick<
   WizardProps,
-  "highlightFieldsOnValidation" | "strict" | "validationDelay"
+  "highlightFieldsOnValidation" | "strict" | "validationDelay" | "RTL"
 >;

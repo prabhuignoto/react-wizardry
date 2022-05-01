@@ -23,6 +23,7 @@ export const WizardContext = createContext<contextType>({
   highlightFieldsOnValidation: false,
   strict: true,
   validationDelay: 250,
+  RTL: false,
 });
 
 const Wizard: FunctionComponent<WizardProps> = ({
@@ -32,6 +33,7 @@ const Wizard: FunctionComponent<WizardProps> = ({
   strict = true,
   validationDelay = 250,
   onFinish,
+  RTL = false,
   finishMessage = "Thanks for submitting the details.",
   globalFormErrorMessage = "Please correct the errors in the form.",
 }) => {
@@ -202,7 +204,7 @@ const Wizard: FunctionComponent<WizardProps> = ({
 
   return (
     <WizardContext.Provider
-      value={{ highlightFieldsOnValidation, strict, validationDelay }}
+      value={{ highlightFieldsOnValidation, strict, validationDelay, RTL }}
     >
       <div className={styles.wrapper} style={rootStyle}>
         <div className={styles.header_wrapper}>

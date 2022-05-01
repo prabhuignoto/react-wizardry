@@ -7,10 +7,18 @@
 }
 
 .button_controls {
-  margin-left: auto;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  &.RTL {
+    margin-right: auto;
+    direction: rtl;
+  }
+
+  &:not(.RTL) {
+    margin-left: auto;
+  }
 }
 
 .message {
@@ -43,8 +51,12 @@
     grid-template-columns: 70% 30%;
   }
 
-  &:last-child {
+  &.RTL:not(:last-child) {
     margin-left: 0.5rem;
+  }
+
+  &:not(.RTL):not(:last-child) {
+    margin-right: 0.5rem;
   }
 
   &.disabled {
@@ -52,6 +64,22 @@
     color: #fff;
     cursor: not-allowed;
     pointer-events: none;
+  }
+
+  &.RTL {
+    direction: rtl;
+    // border: 1px solid red;
+  }
+
+  &.RTL:not(:last-child) {
+    // margin-left: 0.5rem;
+    // border: 1px solid red;
+  }
+}
+
+.RTL {
+  .btn_icon {
+    transform: rotate(180deg);
   }
 }
 

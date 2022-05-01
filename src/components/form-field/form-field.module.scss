@@ -39,6 +39,11 @@
   &:not(.is_valid):not(.is_not_valid) {
     border: 1px solid var(--rc-wiz-formFieldBorder);
   }
+
+  &.RTL {
+    direction: rtl;
+    text-align: right;
+  }
 }
 
 .input_wrapper {
@@ -59,7 +64,6 @@
   justify-content: center;
   position: absolute;
   top: 50%;
-  right: 1rem;
   transform: translateY(-50%);
   height: 1.25rem;
   width: 1.25rem;
@@ -79,6 +83,16 @@
     }
   }
 
+  &.RTL {
+    right: auto;
+    left: 1rem;
+  }
+
+  &:not(.RTL) {
+    right: 1rem;
+    left: auto;
+  }
+
   svg {
     width: 70%;
     height: 70%;
@@ -91,7 +105,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: 0.5rem;
+
+  &.RTL {
+    margin-right: 0.5rem;
+  }
+
+  &:not(.RTL) {
+    margin-left: 0.5rem;
+  }
 
   svg {
     fill: var(--rc-wiz-fail);

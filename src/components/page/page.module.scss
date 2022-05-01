@@ -10,7 +10,14 @@
 .fields_wrapper {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+
+  &.RTL {
+    align-items: flex-end;
+  }
+
+  &:not(.RTL) {
+    align-items: flex-start;
+  }
 }
 
 .form_field_wrapper {
@@ -28,4 +35,8 @@
   margin-bottom: 1rem;
   text-transform: uppercase;
   color: var(--rc-wiz-textColor);
+
+  &.RTL {
+    direction: rtl;
+  }
 }

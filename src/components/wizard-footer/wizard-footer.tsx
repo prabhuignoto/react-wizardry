@@ -21,7 +21,14 @@ const WizardFooter: FunctionComponent<WizardFooterProps> = ({
 
   const hideBack = useMemo(() => activeIndex === 0, [activeIndex]);
 
-  const { strict } = useContext(WizardContext);
+  const { strict, RTL } = useContext(WizardContext);
+
+  const footerClass = useMemo(() => classNames(styles.wizard_footer), []);
+
+  const buttonControlsClass = useMemo(
+    () => classNames(styles.button_controls, RTL ? styles.RTL : ""),
+    []
+  );
 
   const hideNext = useMemo(
     () => activeIndex === pages.length - 1,
@@ -62,14 +69,18 @@ const WizardFooter: FunctionComponent<WizardFooterProps> = ({
   };
 
   return (
-    <div className={styles.wizard_footer}>
+    <div className={footerClass}>
       <span className={styles.message} role="alert">
         {isActivePageInvalid ? message : ""}
       </span>
-      <div className={styles.button_controls}>
+      <div className={buttonControlsClass}>
         {!hideBack && (
           <button
-            className={classNames(styles.button, styles.back)}
+            className={classNames(
+              styles.button,
+              styles.back,
+              RTL ? styles.RTL : ""
+            )}
             onClick={onPrev}
             aria-label="go back"
           >
@@ -83,7 +94,8 @@ const WizardFooter: FunctionComponent<WizardFooterProps> = ({
           <button
             className={classNames(
               styles.button,
-              disableNext ? styles.disabled : ""
+              disableNext ? styles.disabled : "",
+              RTL ? styles.RTL : ""
             )}
             onClick={handleNext}
             aria-label="go forward"
@@ -98,7 +110,7 @@ const WizardFooter: FunctionComponent<WizardFooterProps> = ({
         )}
         {showFinish && (
           <button
-            className={styles.button}
+            className={classNames(styles.button, RTL ? styles.RTL : "")}
             aria-label="finish"
             onClick={onFinish}
           >
