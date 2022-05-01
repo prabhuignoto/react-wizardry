@@ -103,13 +103,14 @@ Page object is at the core of the wizard. Page object is used to define the titl
 
 | Name                   | Description                                                          | Type     |
 | :--------------------- | :------------------------------------------------------------------- | :------- |
-| onChange               | Callback executed when any of the Form field value changes(Internal) | Function |
 | fields                 | Fields of the Page                                                   | Array    |
-| isActive               | Indicates whether the page is active or not                          | Boolean  |
-| title                  | Title of the Page                                                    | String   |
 | finishMessage          | Custom message to be displayed on finish operation                   | String   |
 | globalFormErrorMessage | Global error message to be displayed on validation failures          | String   |
+| isActive               | Indicates whether the page is active or not                          | Boolean  |
+| onChange               | Callback executed when any of the Form field value changes(Internal) | Function |
 | state                  | State of the Page. can be `NOT_VALIDATED`, `SUCCESS`, `FAIL`,        | String   |
+| title                  | Title of the Page                                                    | String   |
+| RTL                    | Enables right to left mode                                           | String   |
 
 > Every page is in the `NOT_VALIDATED` state by default.
 
@@ -161,12 +162,12 @@ Form field represents an input field in the wizard. Form field is used to define
 
 | Name          | Description                         | Type      |
 | :------------ | :---------------------------------- | :-------- |
-| name          | Name of the Field                   | string    |
 | isRequired    | Marks the field as required         | boolean   |
-| validate      | Enables validation for the field    | boolean   |
-| type          | Type of Field                       | InputType |
 | label         | Label for the field                 | string    |
+| name          | Name of the Field                   | string    |
 | selectOptions | Use this prop when type is "select" | Array     |
+| type          | Type of Field                       | InputType |
+| validate      | Enables validation for the field    | boolean   |
 
 > Fields marked as required are automatically validated. If you set `isRequired` to `false` and `validate` to `true`, the wizard will validate and flag the errors, but the step itself will not be marked as invalid.
 
@@ -244,14 +245,14 @@ Customize the look and feel of the Wizard through the `theme` object.
 | background          | Background color of the wizard                           | string    | #f8f8f8 |
 | fail                | Colour to signify failed state                           | string    | #de1738 |
 | formFieldBackground | Background color of the Form field                       | string    | #ffffff |
-| primary             | Primary colour. This color will be the predominant color | string    | #007fff |
-| success             | Colour to signify a success state                        | string    | #1db954 |
-| textColor           | Colour of all texts                                      | string    | #000000 |
 | formFieldBorder     | Border colour of the form field                          | string    | #dcdcdc |
 | inputBackground     | Background color of the native input control             | string    | #e8e8e8 |
 | inputTextColor      | Fore color of the text inside the native input control   | string    | #000000 |
+| primary             | Primary colour. This color will be the predominant color | string    | #007fff |
+| success             | Colour to signify a success state                        | string    | #1db954 |
 | tabColor            | Colour of the tab                                        | string    | #f8f8f8 |
 | tabLineColor        | Colour of the line that runs through all the tabs        | string    | #ccc    |
+| textColor           | Colour of all texts                                      | string    | #000000 |
 
 Here is a short example of how to use the theme object.
 
@@ -278,6 +279,7 @@ Here is a short example of how to use the theme object.
   1. [Basic Wizard](https://codesandbox.io/s/react-wizardy-simple-form-vu3y6b)
   2. [Complex Wizard](https://codesandbox.io/s/react-wizardy-multi-forms-io9ey5)
   3. [Wizard with custom theme](https://codesandbox.io/s/react-wizardy-theme-hzf5bx)
+  4. [RTL](https://codesandbox.io/s/react-wizardy-rtl-misojt)
 
 ## ⛏️ Built With
 
