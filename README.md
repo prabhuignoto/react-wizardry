@@ -160,14 +160,15 @@ Here is an examples how to define pages in the wizard. We are defining two pages
 
 Form field represents an input field in the wizard. Form field is used to define the label, type, validation rules, and other properties.
 
-| Name          | Description                         | Type      |
-| :------------ | :---------------------------------- | :-------- |
-| isRequired    | Marks the field as required         | boolean   |
-| label         | Label for the field                 | string    |
-| name          | Name of the Field                   | string    |
-| selectOptions | Use this prop when type is "select" | Array     |
-| type          | Type of Field                       | InputType |
-| validate      | Enables validation for the field    | boolean   |
+| Name              | Description                                                 | Type      |
+| :---------------- | :---------------------------------------------------------- | :-------- |
+| isRequired        | Marks the field as required                                 | boolean   |
+| label             | Label for the field                                         | string    |
+| name              | Name of the Field                                           | string    |
+| selectOptions     | Use this prop when type is "select"                         | Array     |
+| type              | Type of Field                                               | InputType |
+| validate          | Enables validation for the field                            | boolean   |
+| validationMessage | Custom validation message to be shown on validation failure | boolean   |
 
 > Fields marked as required are automatically validated. If you set `isRequired` to `false` and `validate` to `true`, the wizard will validate and flag the errors, but the step itself will not be marked as invalid.
 

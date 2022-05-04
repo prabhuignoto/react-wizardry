@@ -121,9 +121,11 @@ const FormField: FunctionComponent<FormFieldProps> = ({
             type === "checkbox" ? handleCheckBoxChange : handleChange
           }
         />
-        {!isValid && isValid !== null && (
-          <FormFieldMessage message={validationMessage} RTL={RTL} />
-        )}
+        <FormFieldMessage
+          message={validationMessage}
+          RTL={RTL}
+          isValid={isValid}
+        />
       </div>
     </div>
   );

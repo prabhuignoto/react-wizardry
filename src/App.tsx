@@ -24,6 +24,7 @@ function App() {
         }}
         // highlightFieldsOnValidation
         validationDelay={100}
+        // RTL
         onFinish={(val) => console.log(val)}
         pages={[
           {
@@ -49,13 +50,13 @@ function App() {
                 label: "Email",
                 name: "email",
                 type: "email",
+                isRequired: true,
                 validationMessage: "Incorrect email id. example: xxxx@yyy.com",
               },
               {
                 name: "Phone number",
                 label: "Phone",
                 type: "phone",
-                isRequired: true,
               },
             ],
           },
