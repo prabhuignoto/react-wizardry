@@ -14,7 +14,7 @@ export type FormFieldProps = {
   isValid?: boolean | null;
   placeholder?: string;
   disabled?: boolean;
-  validationMessage?: boolean;
+  validationMessage?: string;
 };
 
 export type Option = {

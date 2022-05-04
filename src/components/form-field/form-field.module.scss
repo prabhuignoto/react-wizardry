@@ -50,6 +50,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  flex-wrap: wrap;
 }
 
 .form_field_label {
@@ -77,6 +78,14 @@
 
   &.fail {
     background: var(--rc-wiz-fail);
+
+    svg {
+      fill: #fff;
+    }
+  }
+
+  &.warning {
+    background: var(--rc-wiz-warning);
 
     svg {
       fill: #fff;
@@ -136,5 +145,25 @@
     justify-content: center;
     color: var(--rc-wiz-textColor);
     padding: 0.5rem;
+  }
+}
+
+.form_field_message_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 0.85rem;
+  border-radius: 4px;
+  padding: 0.35rem 0.5rem;
+  background: var(--rc-wiz-primary);
+  transition: background 0.2s ease-in, color 0.2s ease-in;
+
+  &.RTL {
+    margin-right: 2rem;
+  }
+
+  &:not(.RTL) {
+    margin-left: 2rem;
   }
 }

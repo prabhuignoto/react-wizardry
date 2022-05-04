@@ -9,19 +9,20 @@ function App() {
       style={{ width: "950px", margin: "0 auto", marginTop: "1rem" }}
     >
       <Wizard
-        theme={{
-          primary: "#007fff",
-          background: "#000",
-          textColor: "#fff",
-          formFieldBackground: "#282828",
-          formFieldBorder: "#000",
-          success: "#519259",
-          fail: "#cf352e",
-          inputBackground: "#464646",
-          inputTextColor: "#fff",
-          tabLineColor: "#464646",
-          tabColor: "#7d7d7d",
-        }}
+        // theme={{
+        //   primary: "#007fff",
+        //   background: "#000",
+        //   textColor: "#fff",
+        //   formFieldBackground: "#282828",
+        //   formFieldBorder: "#000",
+        //   success: "#519259",
+        //   fail: "#cf352e",
+        //   inputBackground: "#464646",
+        //   inputTextColor: "#fff",
+        //   tabLineColor: "#464646",
+        //   tabColor: "#7d7d7d",
+        // }}
+        // highlightFieldsOnValidation
         validationDelay={100}
         onFinish={(val) => console.log(val)}
         pages={[
@@ -33,6 +34,8 @@ function App() {
                 name: "firstName",
                 type: "text",
                 isRequired: true,
+                placeholder: "Enter your first name",
+                validationMessage: "First name is required",
               },
               {
                 label: "Last Name",
@@ -49,6 +52,8 @@ function App() {
                 label: "Email",
                 name: "email",
                 type: "email",
+                validate: true,
+                validationMessage: "Incorrect email id. example: xxxx@yyy.com",
               },
               {
                 name: "Phone number",
@@ -79,6 +84,7 @@ function App() {
                 label: "Are you currently working?",
                 name: "employed",
                 type: "radio",
+                isRequired: true,
                 options: [
                   { name: "yes", value: true },
                   { name: "no", value: false },
@@ -88,6 +94,7 @@ function App() {
                 label: "Choose your skills",
                 name: "skills",
                 type: "checkbox",
+                isRequired: true,
                 options: [
                   { name: "HTML", value: "html" },
                   { name: "CSS", value: "css" },
@@ -135,6 +142,7 @@ function App() {
                 label: "Select your current salary range",
                 name: "salaryRange",
                 type: "select",
+                isRequired: true,
 
                 options: [
                   { name: "10,000$ - 50,000$", value: "10-50k" },

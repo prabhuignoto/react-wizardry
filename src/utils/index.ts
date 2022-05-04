@@ -40,7 +40,9 @@ export function validator(
     case "datetime":
       return isDateValid(new Date(data as string));
     case "checkbox":
-      return typeof data === "boolean";
+      return Array.isArray(data) && data.length > 0;
+    case "radio":
+      return isStringValid(data as string);
     case "select":
       return typeof data === "string";
     case "file":
@@ -57,5 +59,24 @@ export function validator(
       return isPhoneValid(data as string);
     default:
       return false;
+  }
+}
+
+export function getValidationMessage(type?: InputType) {
+  switch (type) {
+    case "email":
+      return "Please enter a valid email";
+    case "phone":
+      return "Please enter a valid phone number";
+    case "text":
+      return "Please enter a valid text";
+    case "datetime":
+      return "Please enter a valid date";
+    case "radio":
+      return "Please select an option";
+    case "checkbox":
+      return "Please select at least one option";
+    default:
+      return "Please enter a valid value";
   }
 }

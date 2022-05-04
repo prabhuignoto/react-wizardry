@@ -11,6 +11,7 @@ import CheckIcon from "../../icons/check";
 import Exclamation from "../../icons/exclamation";
 import { WizardContext } from "./../wizard";
 import { FormFieldInput } from "./form-field-input";
+import { FormFieldMessage } from "./form-field-message";
 import { FormChangeEvent, FormFieldProps } from "./form-field.model";
 import styles from "./form-field.module.scss";
 
@@ -25,6 +26,7 @@ const FormField: FunctionComponent<FormFieldProps> = ({
   isValid,
   placeholder,
   disabled,
+  validationMessage = "",
 }) => {
   const _options = useRef(
     options.map((option) => ({
@@ -83,17 +85,18 @@ const FormField: FunctionComponent<FormFieldProps> = ({
 
   const warnClass = useMemo(
     () =>
-      classNames(
-        styles.status,
-        !isValid ? styles.fail : "",
-        RTL ? styles.RTL : ""
-      ),
-    []
+      classNames(styles.status, RTL ? styles.RTL : "", {
+        [styles.fail]: !isValid && isRequired,
+        [styles.warning]: !isValid && !isRequired,
+      }),
+    [isValid, isRequired]
   );
+
+  const canShowCheckIcon = useMemo(() => isValid, [isValid]);
 
   return (
     <div className={fieldClass}>
-      {isValid ? (
+      {canShowCheckIcon ? (
         <span className={checkClass} role="img" aria-label="success">
           <CheckIcon />
         </span>
@@ -118,6 +121,9 @@ const FormField: FunctionComponent<FormFieldProps> = ({
             type === "checkbox" ? handleCheckBoxChange : handleChange
           }
         />
+        {!isValid && isValid !== null && (
+          <FormFieldMessage message={validationMessage} RTL={RTL} />
+        )}
       </div>
     </div>
   );

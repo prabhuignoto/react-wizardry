@@ -9,7 +9,7 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { validator } from "../../utils";
+import { getValidationMessage, validator } from "../../utils";
 import { FormField } from "../form-field/form-field";
 import { FormFieldProps } from "../form-field/form-field.model";
 import { PageModelProps } from "../page/page.model";
@@ -25,6 +25,9 @@ const Page = forwardRef<{ height: number; id: string }, PageModelProps>(
         ...field,
         id: nanoid(),
         isValid: null,
+        validate: field.isRequired || field.validate,
+        validationMessage:
+          field.validationMessage || getValidationMessage(field.type),
       }))
     );
 

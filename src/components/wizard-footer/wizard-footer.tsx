@@ -62,6 +62,16 @@ const WizardFooter: FunctionComponent<WizardFooterProps> = ({
     return activePage?.state === "FAIL";
   }, [activePage?.state, strict]);
 
+  const nextButtonClass = useMemo(
+    () =>
+      classNames(
+        styles.button,
+        RTL ? styles.RTL : "",
+        disableNext ? styles.disabled : ""
+      ),
+    [disableNext]
+  );
+
   const handleNext = () => {
     if (!disableNext) {
       onNext?.();
@@ -92,11 +102,7 @@ const WizardFooter: FunctionComponent<WizardFooterProps> = ({
         )}
         {!hideNext && (
           <button
-            className={classNames(
-              styles.button,
-              disableNext ? styles.disabled : "",
-              RTL ? styles.RTL : ""
-            )}
+            className={nextButtonClass}
             onClick={handleNext}
             aria-label="go forward"
             aria-disabled={disableNext}
@@ -110,9 +116,10 @@ const WizardFooter: FunctionComponent<WizardFooterProps> = ({
         )}
         {showFinish && (
           <button
-            className={classNames(styles.button, RTL ? styles.RTL : "")}
+            className={nextButtonClass}
             aria-label="finish"
             onClick={onFinish}
+            disabled={disableNext}
           >
             <span>Finish</span>
             <span className={styles.btn_icon}>

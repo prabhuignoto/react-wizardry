@@ -12,4 +12,5 @@ export const ThemeDefaults: Theme = {
   inputTextColor: "#000",
   tabColor: "#f8f8f8",
   tabLineColor: "#ccc",
+  warning: "#ffae42",
 };
