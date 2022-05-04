@@ -54,6 +54,7 @@ const FormFieldInput: FunctionComponent<FormFieldInputProps> = ({
           onChange={handleChange}
           disabled={disabled}
           aria-labelledby={labelId}
+          placeholder={placeholder}
         >
           {options.map((option) => (
             <option key={option.id}>{option.name}</option>
@@ -68,6 +69,7 @@ const FormFieldInput: FunctionComponent<FormFieldInputProps> = ({
           required={isRequired}
           onChange={handleChange}
           name={name}
+          placeholder={placeholder}
         ></textarea>
       );
     } else if (type === "radio" || type === "checkbox") {
@@ -82,6 +84,7 @@ const FormFieldInput: FunctionComponent<FormFieldInputProps> = ({
                 onChange={handleChange}
                 id={id}
                 key={id}
+                placeholder={placeholder}
               />
               {optionName}
             </label>

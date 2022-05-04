@@ -113,6 +113,7 @@ const FormField: FunctionComponent<FormFieldProps> = ({
           options={_options.current}
           isRequired={isRequired}
           name={name}
+          placeholder={placeholder}
           handleChange={
             type === "checkbox" ? handleCheckBoxChange : handleChange
           }
