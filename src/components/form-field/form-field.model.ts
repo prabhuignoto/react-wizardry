@@ -1,3 +1,5 @@
+import { ChangeEvent } from "react";
+
 export type FormFieldProps = {
   name: string;
   id?: string;
@@ -12,6 +14,7 @@ export type FormFieldProps = {
   isValid?: boolean | null;
   placeholder?: string;
   disabled?: boolean;
+  validationMessage?: string;
 };
 
 export type Option = {
@@ -32,3 +35,9 @@ export type InputType =
   | "phone"
   | "radio"
   | "textarea";
+
+export type FormChangeEvent = (
+  e: ChangeEvent<
+    HTMLSelectElement | HTMLTextAreaElement | HTMLTimeElement | HTMLInputElement
+  >
+) => void;

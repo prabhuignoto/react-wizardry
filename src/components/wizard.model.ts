@@ -26,6 +26,7 @@ export type Theme = {
   inputTextColor?: string;
   tabColor?: string;
   tabLineColor?: string;
+  warning?: string;
 };
 
 export type PageDim = {

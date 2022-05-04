@@ -22,7 +22,9 @@ function App() {
           tabLineColor: "#464646",
           tabColor: "#7d7d7d",
         }}
+        // highlightFieldsOnValidation
         validationDelay={100}
+        // RTL
         onFinish={(val) => console.log(val)}
         pages={[
           {
@@ -32,13 +34,12 @@ function App() {
                 label: "First Name",
                 name: "firstName",
                 type: "text",
-                isRequired: true,
+                placeholder: "Enter your first name",
               },
               {
                 label: "Last Name",
                 name: "lastName",
                 type: "text",
-                validate: true,
               },
               {
                 name: "dateOfBirth",
@@ -49,6 +50,8 @@ function App() {
                 label: "Email",
                 name: "email",
                 type: "email",
+                isRequired: true,
+                validationMessage: "Incorrect email id. example: xxxx@yyy.com",
               },
               {
                 name: "Phone number",
@@ -79,6 +82,7 @@ function App() {
                 label: "Are you currently working?",
                 name: "employed",
                 type: "radio",
+                isRequired: true,
                 options: [
                   { name: "yes", value: true },
                   { name: "no", value: false },
@@ -88,6 +92,7 @@ function App() {
                 label: "Choose your skills",
                 name: "skills",
                 type: "checkbox",
+                isRequired: true,
                 options: [
                   { name: "HTML", value: "html" },
                   { name: "CSS", value: "css" },
@@ -135,6 +140,7 @@ function App() {
                 label: "Select your current salary range",
                 name: "salaryRange",
                 type: "select",
+                isRequired: true,
 
                 options: [
                   { name: "10,000$ - 50,000$", value: "10-50k" },
