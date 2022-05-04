@@ -62,7 +62,7 @@ export function validator(
   }
 }
 
-export function getValidationMessage(type?: InputType) {
+export function getValidationMessage(type?: InputType): string {
   switch (type) {
     case "email":
       return "Please enter a valid email";
