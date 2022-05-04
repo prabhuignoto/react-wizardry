@@ -36,6 +36,7 @@
 - [Form field](#form-field)
 - [Form field types](#form-field-types)
 - [Accessing the wizard data](#accessing-the-wizard-data)
+- [Custom validation messages](#custom-validation-messages)
 - [🎨 Theme](#-theme)
 - [CodeSandbox examples](#codesandbox-examples)
 - [⛏️ Built With](#️-built-with)
@@ -89,14 +90,14 @@ The example shows a simple wizard with two pages.
 
 ## ⚙️ Properties
 
-| Name                          | Description                                                                                                                                                          | Default |
-| :---------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| `strict`                      | Enables validation rules for all input types on all pages. The component prevents the user from progressing until the errors in the current step have been corrected | false   |
-| `theme`                       | [Theme](#🎨-theme) object for customized styling                                                                                                                    |         |
-| `highlightFieldsOnValidation` | Highlights the fields when the validation fails or succeeds                                                                                                          | false   |
-| `pages`                       | Collection of [Page](#Page) object                                                                                                                                   |         |
-| `onFinish`                    | Callback executed on final step                                                                                                                                      |         |
-| `RTL`                         | Enables right to left mode                                                                                                                                           | false   |
+| Name                          | Description                                                                                                                                                                                           | Default |
+| :---------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| `strict`                      | Validation rules are applied to all inputs that have been marked for validation or that are required. The component prevents the user from moving on until the current step's errors have been fixed. | false   |
+| `theme`                       | [Theme](#🎨-theme) object for customized styling                                                                                                                                                       |         |
+| `highlightFieldsOnValidation` | Highlights the fields when the validation fails or succeeds                                                                                                                                           | false   |
+| `pages`                       | Collection of [Page](#Page) object                                                                                                                                                                    |         |
+| `onFinish`                    | Callback executed on final step                                                                                                                                                                       |         |
+| `RTL`                         | Enables right to left mode                                                                                                                                                                            | false   |
 
 ## Page
 
@@ -234,6 +235,28 @@ For the getting started example, the `onFinish` callback will receive an object 
     "phone": "<entered phone number>",
   }
 }
+```
+
+## Custom validation messages
+
+Validation messages are enabled by default for all fields. However, the `validationMessage` property allows you to customize the message for each field.
+
+```jsx
+<Wizard
+  pages={[
+    {
+      title: "Introduction",
+      fields: [
+        {
+          label: "First Name",
+          name: "firstName",
+          type: "text",
+          isRequired: true,
+          validationMessage: "Please enter your first name",
+        },
+      ],
+  },
+]}
 ```
 
 ## 🎨 Theme
