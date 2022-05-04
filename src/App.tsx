@@ -9,19 +9,19 @@ function App() {
       style={{ width: "950px", margin: "0 auto", marginTop: "1rem" }}
     >
       <Wizard
-        // theme={{
-        //   primary: "#007fff",
-        //   background: "#000",
-        //   textColor: "#fff",
-        //   formFieldBackground: "#282828",
-        //   formFieldBorder: "#000",
-        //   success: "#519259",
-        //   fail: "#cf352e",
-        //   inputBackground: "#464646",
-        //   inputTextColor: "#fff",
-        //   tabLineColor: "#464646",
-        //   tabColor: "#7d7d7d",
-        // }}
+        theme={{
+          primary: "#007fff",
+          background: "#000",
+          textColor: "#fff",
+          formFieldBackground: "#282828",
+          formFieldBorder: "#000",
+          success: "#519259",
+          fail: "#cf352e",
+          inputBackground: "#464646",
+          inputTextColor: "#fff",
+          tabLineColor: "#464646",
+          tabColor: "#7d7d7d",
+        }}
         // highlightFieldsOnValidation
         validationDelay={100}
         onFinish={(val) => console.log(val)}
@@ -33,15 +33,12 @@ function App() {
                 label: "First Name",
                 name: "firstName",
                 type: "text",
-                isRequired: true,
                 placeholder: "Enter your first name",
-                validationMessage: "First name is required",
               },
               {
                 label: "Last Name",
                 name: "lastName",
                 type: "text",
-                validate: true,
               },
               {
                 name: "dateOfBirth",
@@ -52,13 +49,13 @@ function App() {
                 label: "Email",
                 name: "email",
                 type: "email",
-                validate: true,
                 validationMessage: "Incorrect email id. example: xxxx@yyy.com",
               },
               {
                 name: "Phone number",
                 label: "Phone",
                 type: "phone",
+                isRequired: true,
               },
             ],
           },
