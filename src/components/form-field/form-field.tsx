@@ -1,18 +1,17 @@
 import classNames from "classnames";
 import { nanoid } from "nanoid";
 import React, {
-  FormEvent,
   FunctionComponent,
   useCallback,
   useContext,
   useMemo,
   useRef,
 } from "react";
-import Asterisk from "../../icons/asterisk";
 import CheckIcon from "../../icons/check";
 import Exclamation from "../../icons/exclamation";
 import { WizardContext } from "./../wizard";
-import { FormFieldProps } from "./form-field.model";
+import { FormFieldInput } from "./form-field-input";
+import { FormChangeEvent, FormFieldProps } from "./form-field.model";
 import styles from "./form-field.module.scss";
 
 const FormField: FunctionComponent<FormFieldProps> = ({
@@ -41,38 +40,25 @@ const FormField: FunctionComponent<FormFieldProps> = ({
   const { highlightFieldsOnValidation: highlight, RTL } =
     useContext(WizardContext);
 
-  const handleChange = useCallback(
-    (
-      ev: FormEvent<
-        | HTMLInputElement
-        | HTMLSelectElement
-        | HTMLTimeElement
-        | HTMLTextAreaElement
-      >
-    ) => {
-      const target = ev.target as HTMLInputElement;
-      const value = target.files?.length ? target.files[0] : target.value;
-      onInput?.(value, id || "");
-    },
-    []
-  );
+  const handleChange = useCallback<FormChangeEvent>((ev) => {
+    const target = ev.target as HTMLInputElement;
+    const value = target.files?.length ? target.files[0] : target.value;
+    onInput?.(value, id || "");
+  }, []);
 
-  const handleCheckBoxChange = useCallback(
-    (ev: FormEvent<HTMLInputElement>) => {
-      const target = ev.target as HTMLInputElement;
+  const handleCheckBoxChange = useCallback<FormChangeEvent>((ev) => {
+    const target = ev.target as HTMLInputElement;
 
-      if (target.checked) {
-        selectedOptions.current.push(target.value);
-      } else {
-        selectedOptions.current = selectedOptions.current.filter(
-          (option) => option !== target.value
-        );
-      }
+    if (target.checked) {
+      selectedOptions.current.push(target.value);
+    } else {
+      selectedOptions.current = selectedOptions.current.filter(
+        (option) => option !== target.value
+      );
+    }
 
-      onInput?.(selectedOptions.current, id || "");
-    },
-    []
-  );
+    onInput?.(selectedOptions.current, id || "");
+  }, []);
 
   const fieldClass = useMemo(
     () =>
@@ -105,31 +91,6 @@ const FormField: FunctionComponent<FormFieldProps> = ({
     []
   );
 
-  const isTextField = useMemo(
-    () =>
-      type !== "checkbox" &&
-      type !== "radio" &&
-      type !== "select" &&
-      type !== "textarea",
-    []
-  );
-
-  const getInputType = useMemo(() => {
-    if (isTextField) {
-      return (
-        <input
-          type={type === "datetime" ? "datetime-local" : type}
-          required={isRequired}
-          aria-labelledby={labelId}
-          onChange={handleChange}
-          placeholder={placeholder}
-          name={name}
-          disabled={disabled}
-        />
-      );
-    }
-  }, [type, labelId, disabled]);
-
   return (
     <div className={fieldClass}>
       {isValid ? (
@@ -145,64 +106,17 @@ const FormField: FunctionComponent<FormFieldProps> = ({
         {label}
       </label>
       <div className={styles.input_wrapper}>
-        {getInputType}
-        {type === "select" && (
-          <select
-            onChange={handleChange}
-            disabled={disabled}
-            aria-labelledby={labelId}
-          >
-            {_options.current.map((option) => (
-              <option key={option.id}>{option.name}</option>
-            ))}
-          </select>
-        )}
-        {type === "textarea" && (
-          <textarea
-            disabled={disabled}
-            aria-labelledby={labelId}
-            required={isRequired}
-            onChange={handleChange}
-            name={name}
-          ></textarea>
-        )}
-        {(type === "radio" || type === "checkbox") && (
-          <div className={styles.collection_wrapper}>
-            {_options.current.map(({ name: optionName, id, value }) => (
-              <label key={id}>
-                {type === "radio" ? (
-                  <input
-                    type={type}
-                    name={name}
-                    value={value as string}
-                    onChange={handleChange}
-                    id={id}
-                    key={id}
-                  />
-                ) : (
-                  <input
-                    type={type}
-                    name={name}
-                    value={value as string}
-                    id={id}
-                    key={id}
-                    onChange={handleCheckBoxChange}
-                  />
-                )}
-                {optionName}
-              </label>
-            ))}
-          </div>
-        )}
-        {isRequired && (
-          <span
-            className={classNames(styles.asterisk, RTL ? styles.RTL : "")}
-            role="img"
-            aria-label="important field"
-          >
-            <Asterisk />
-          </span>
-        )}
+        <FormFieldInput
+          type={type}
+          disabled={disabled}
+          id={id}
+          options={_options.current}
+          isRequired={isRequired}
+          name={name}
+          handleChange={
+            type === "checkbox" ? handleCheckBoxChange : handleChange
+          }
+        />
       </div>
     </div>
   );
