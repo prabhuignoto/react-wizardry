@@ -7,7 +7,7 @@ import React, {
   useEffect,
   useMemo,
   useRef,
-  useState,
+  useState
 } from "react";
 import { FormFieldProps } from "./form-field/form-field.model";
 import { Page } from "./page/page";
@@ -85,7 +85,6 @@ const Wizard: FunctionComponent<WizardProps> = ({
   const initHeights = useCallback(
     (data: { height: number; id: string; fields: FormFieldProps[] }) => {
       if (data) {
-        console.log(data);
         pageHeights.current.push(data);
 
         if (wizardPages.length === pageHeights.current.length) {
@@ -125,7 +124,6 @@ const Wizard: FunctionComponent<WizardProps> = ({
   const bodyStyle = useMemo(() => {
     if (pagesLoaded) {
       return {
-        // minHeight: `${Math.max(...pageHeights.current.map((x) => x.height))}px`,
         minHeight: `${bodyHeight}px`,
         overflowY: "auto",
       } as CSSProperties;
@@ -254,3 +252,4 @@ const Wizard: FunctionComponent<WizardProps> = ({
 };
 
 export { Wizard };
+
