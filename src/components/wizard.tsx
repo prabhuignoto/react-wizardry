@@ -36,6 +36,7 @@ const Wizard: FunctionComponent<WizardProps> = ({
   RTL = false,
   finishMessage = "Thanks for submitting the details.",
   globalFormErrorMessage = "Please correct the errors in the form.",
+  bodyHeight = 500,
 }) => {
   /** pages state */
   const [wizardPages, setWizardPages] = useState<PageModelProps[]>(
@@ -84,6 +85,7 @@ const Wizard: FunctionComponent<WizardProps> = ({
   const initHeights = useCallback(
     (data: { height: number; id: string; fields: FormFieldProps[] }) => {
       if (data) {
+        console.log(data);
         pageHeights.current.push(data);
 
         if (wizardPages.length === pageHeights.current.length) {
@@ -123,7 +125,9 @@ const Wizard: FunctionComponent<WizardProps> = ({
   const bodyStyle = useMemo(() => {
     if (pagesLoaded) {
       return {
-        minHeight: `${Math.max(...pageHeights.current.map((x) => x.height))}px`,
+        // minHeight: `${Math.max(...pageHeights.current.map((x) => x.height))}px`,
+        minHeight: `${bodyHeight}px`,
+        overflowY: "auto",
       } as CSSProperties;
     } else {
       return {};

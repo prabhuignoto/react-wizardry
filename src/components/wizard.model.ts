@@ -12,6 +12,7 @@ export type WizardProps = {
   globalFormErrorMessage?: string;
   finishMessage?: string;
   RTL?: boolean;
+  bodyHeight?: number;
 };
 
 export type Theme = {
