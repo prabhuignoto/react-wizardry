@@ -7,7 +7,7 @@ import React, {
   useEffect,
   useMemo,
   useRef,
-  useState
+  useState,
 } from "react";
 import { FormFieldProps } from "./form-field/form-field.model";
 import { Page } from "./page/page";
@@ -252,4 +252,3 @@ const Wizard: FunctionComponent<WizardProps> = ({
 };
 
 export { Wizard };
-
