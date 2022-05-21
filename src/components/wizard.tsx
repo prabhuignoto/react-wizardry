@@ -7,7 +7,7 @@ import React, {
   useEffect,
   useMemo,
   useRef,
-  useState,
+  useState
 } from "react";
 import { FormFieldProps } from "./form-field/form-field.model";
 import { Page } from "./page/page";
@@ -36,6 +36,7 @@ const Wizard: FunctionComponent<WizardProps> = ({
   RTL = false,
   finishMessage = "Thanks for submitting the details.",
   globalFormErrorMessage = "Please correct the errors in the form.",
+  bodyHeight = 500,
 }) => {
   /** pages state */
   const [wizardPages, setWizardPages] = useState<PageModelProps[]>(
@@ -123,7 +124,8 @@ const Wizard: FunctionComponent<WizardProps> = ({
   const bodyStyle = useMemo(() => {
     if (pagesLoaded) {
       return {
-        minHeight: `${Math.max(...pageHeights.current.map((x) => x.height))}px`,
+        minHeight: `${bodyHeight}px`,
+        overflowY: "auto",
       } as CSSProperties;
     } else {
       return {};
@@ -250,3 +252,4 @@ const Wizard: FunctionComponent<WizardProps> = ({
 };
 
 export { Wizard };
+

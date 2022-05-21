@@ -22,7 +22,8 @@ function App() {
           tabLineColor: "#464646",
           tabColor: "#7d7d7d",
         }}
-        // highlightFieldsOnValidation
+        bodyHeight={750}
+        highlightFieldsOnValidation
         validationDelay={100}
         // RTL
         onFinish={(val) => console.log(val)}
