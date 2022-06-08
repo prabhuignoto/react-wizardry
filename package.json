@@ -1,6 +1,6 @@
 {
   "name": "react-wizardry",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "description": "Multi-step form wizard component for React",
   "keywords": [
     "wizard",
