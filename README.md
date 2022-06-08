@@ -37,6 +37,7 @@
 - [Form field types](#form-field-types)
 - [Accessing the wizard data](#accessing-the-wizard-data)
 - [Custom validation messages](#custom-validation-messages)
+- [Custom icons](#custom-icons)
 - [🎨 Theme](#-theme)
 - [CodeSandbox examples](#codesandbox-examples)
 - [⛏️ Built With](#️-built-with)
@@ -90,15 +91,15 @@ The example shows a simple wizard with two pages.
 
 ## ⚙️ Properties
 
-| Name                          | Description                                                                                                                                                                                           | Default |
-| :---------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| `bodyHeight`                  | Sets the height of the form body.                                                                                                                                                                     | 500     |
-| `strict`                      | Validation rules are applied to all inputs that have been marked for validation or that are required. The component prevents the user from moving on until the current step's errors have been fixed. | false   |
-| `theme`                       | [Theme](#🎨-theme) object for customized styling                                                                                                                                                     |         |
-| `highlightFieldsOnValidation` | Highlights the fields when the validation fails or succeeds                                                                                                                                           | false   |
-| `pages`                       | Collection of [Page](#Page) object                                                                                                                                                                    |         |
-| `onFinish`                    | Callback executed on final step                                                                                                                                                                       |         |
-| `RTL`                         | Enables right to left mode                                                                                                                                                                            | false   |
+| Name                          | Description                                                                                                                                                                                              | Default |
+| :---------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| `bodyHeight`                  | Sets the height of the form body.                                                                                                                                                                        | 500     |
+| `strict`                      | Validation rules are applied to all inputs that have been marked for validation or that are required.<br>The component prevents the user from moving on until the current step's errors have been fixed. | false   |
+| `theme`                       | [Theme](#🎨-theme) object for customized styling                                                                                                                                                          |         |
+| `highlightFieldsOnValidation` | Highlights the fields when the validation fails or succeeds                                                                                                                                              | false   |
+| `pages`                       | Collection of [Page](#Page) object                                                                                                                                                                       |         |
+| `onFinish`                    | Callback executed on final step                                                                                                                                                                          |         |
+| `RTL`                         | Enables right to left mode                                                                                                                                                                               | false   |
 
 ## Page
 
@@ -258,6 +259,22 @@ Validation messages are enabled by default for all fields. However, the `validat
       ],
   },
 ]}
+```
+
+## Custom icons
+
+Customize the stepper head's icons by passing an array of icons to the `icons` prop.
+
+```jsx
+<Wizard
+  ...
+  icons={[
+    <User key="usr" />,
+    <Box key="box" />,
+    <Twitter key="twitter" />,
+    <Dollar key="dollar" />,
+  ]}
+/>
 ```
 
 ## 🎨 Theme

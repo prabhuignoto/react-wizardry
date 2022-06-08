@@ -7,7 +7,7 @@ import React, {
   useImperativeHandle,
   useMemo,
   useRef,
-  useState,
+  useState
 } from "react";
 import { getValidationMessage, validator } from "../../utils";
 import { FormField } from "../form-field/form-field";
@@ -17,7 +17,17 @@ import { WizardContext } from "../wizard";
 import styles from "./page.module.scss";
 
 const Page = forwardRef<{ height: number; id: string }, PageModelProps>(
-  ({ fields, title, id, width = 0, hide, onChange }: PageModelProps, ref) => {
+  (
+    {
+      fields,
+      title,
+      id,
+      width = 0,
+      hide,
+      onChange,
+    }: PageModelProps,
+    ref
+  ) => {
     const pageRef = useRef<HTMLDivElement>(null);
 
     const [_fields, setFields] = useState<FormFieldProps[]>(
@@ -35,7 +45,7 @@ const Page = forwardRef<{ height: number; id: string }, PageModelProps>(
 
     const interacted = useRef<boolean>(false);
 
-    const { RTL } = useContext(WizardContext);
+    const { RTL, noPageTitle } = useContext(WizardContext);
 
     useImperativeHandle(ref, () => ({
       height: pageRef.current?.clientHeight || 0,
@@ -110,9 +120,11 @@ const Page = forwardRef<{ height: number; id: string }, PageModelProps>(
 
     return (
       <div className={pageClass} ref={pageRef} style={style} data-title={title}>
-        <header className={classNames(styles.header, RTL ? styles.RTL : "")}>
-          {title}
-        </header>
+        {!noPageTitle && (
+          <header className={classNames(styles.header, RTL ? styles.RTL : "")}>
+            {title}
+          </header>
+        )}
         <div
           className={classNames(styles.fields_wrapper, RTL ? styles.RTL : "")}
         >
@@ -133,3 +145,4 @@ const Page = forwardRef<{ height: number; id: string }, PageModelProps>(
 Page.displayName = "Page";
 
 export { Page };
+

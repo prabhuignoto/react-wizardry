@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import { PageModelProps } from "./page/page.model";
 
 export type WizardPageProps = Pick<PageModelProps, "fields" | "title">;
@@ -13,6 +14,8 @@ export type WizardProps = {
   finishMessage?: string;
   RTL?: boolean;
   bodyHeight?: number;
+  noPageTitle?: boolean;
+  icons?: ReactNode[];
 };
 
 export type Theme = {
@@ -37,5 +40,9 @@ export type PageDim = {
 
 export type contextType = Pick<
   WizardProps,
-  "highlightFieldsOnValidation" | "strict" | "validationDelay" | "RTL"
+  | "highlightFieldsOnValidation"
+  | "strict"
+  | "validationDelay"
+  | "RTL"
+  | "noPageTitle"
 >;
