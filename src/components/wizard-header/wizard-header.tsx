@@ -15,6 +15,7 @@ const WizardTab: FunctionComponent<WizardTabProps> = ({
   highlight,
   disable,
   RTL,
+  icon,
 }) => {
   const containerClass = useMemo(
     () =>
@@ -54,9 +55,9 @@ const WizardTab: FunctionComponent<WizardTabProps> = ({
       tabIndex={0}
     >
       <span className={containerClass} role="img" aria-label={getLabel}>
-        {state === "NOT_VALIDATED" && label}
-        {state === "SUCCESS" && <CheckIcon />}
-        {state === "FAIL" && <WarnIcon />}
+        {icon || (state === "NOT_VALIDATED" ? label : null)}
+        {state === "SUCCESS" && !icon ? <CheckIcon /> : null}
+        {state === "FAIL" && !icon ? <WarnIcon /> : null}
       </span>
     </li>
   );
@@ -66,6 +67,7 @@ const WizardHeader: FunctionComponent<WizardHeaderProps> = ({
   pages,
   onSelect,
   activeIndex,
+  icons,
 }) => {
   const { strict } = useContext(WizardContext);
   const { RTL } = useContext(WizardContext);
@@ -88,6 +90,7 @@ const WizardHeader: FunctionComponent<WizardHeaderProps> = ({
             highlight={index < activeIndex}
             disable={strict && state !== "SUCCESS"}
             RTL={RTL}
+            icon={icons && icons[index]}
           />
         ))}
       </ul>

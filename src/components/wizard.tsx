@@ -24,6 +24,7 @@ export const WizardContext = createContext<contextType>({
   strict: true,
   validationDelay: 250,
   RTL: false,
+  noPageTitle: false,
 });
 
 const Wizard: FunctionComponent<WizardProps> = ({
@@ -37,6 +38,8 @@ const Wizard: FunctionComponent<WizardProps> = ({
   finishMessage = "Thanks for submitting the details.",
   globalFormErrorMessage = "Please correct the errors in the form.",
   bodyHeight = 500,
+  noPageTitle = false,
+  icons = [],
 }) => {
   /** pages state */
   const [wizardPages, setWizardPages] = useState<PageModelProps[]>(
@@ -206,7 +209,13 @@ const Wizard: FunctionComponent<WizardProps> = ({
 
   return (
     <WizardContext.Provider
-      value={{ highlightFieldsOnValidation, strict, validationDelay, RTL }}
+      value={{
+        highlightFieldsOnValidation,
+        strict,
+        validationDelay,
+        RTL,
+        noPageTitle,
+      }}
     >
       <div className={styles.wrapper} style={rootStyle}>
         <div className={styles.header_wrapper}>
@@ -215,6 +224,7 @@ const Wizard: FunctionComponent<WizardProps> = ({
               pages={wizardPages}
               onSelect={handleSelection}
               activeIndex={activeIndex}
+              icons={icons}
             />
           )}
         </div>
