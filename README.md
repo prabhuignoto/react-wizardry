@@ -263,7 +263,7 @@ Validation messages are enabled by default for all fields. However, the `validat
 
 ## Custom icons
 
-Customize the stepper head's icons by passing an array of icons to the `icons` prop.
+You can change the icons on the stepper head by giving the `icons` prop an array of icons as react components.
 
 ```jsx
 <Wizard
