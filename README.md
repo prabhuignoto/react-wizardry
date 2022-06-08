@@ -321,7 +321,8 @@ Here is a short example of how to use the theme object.
   1. [Basic Wizard](https://codesandbox.io/s/react-wizardy-simple-form-vu3y6b)
   2. [Complex Wizard](https://codesandbox.io/s/react-wizardy-multi-forms-io9ey5)
   3. [Wizard with custom theme](https://codesandbox.io/s/react-wizardy-theme-hzf5bx)
-  4. [RTL](https://codesandbox.io/s/react-wizardy-rtl-misojt)
+  4. [Custom Icons](https://codesandbox.io/s/react-wizardy-custom-icons-d2rkin?file=/src/App.js)
+  5. [RTL](https://codesandbox.io/s/react-wizardy-rtl-misojt)
 
 ## ⛏️ Built With
 
