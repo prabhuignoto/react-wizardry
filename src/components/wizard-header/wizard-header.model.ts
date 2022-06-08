@@ -9,8 +9,7 @@ export type WizardHeaderProps = {
 };
 
 export type WizardTabProps = Pick<WizardHeaderProps, "onSelect"> &
-  Pick<PageModelProps, "state"> & {
-    id?: string;
+  Pick<PageModelProps, "state" | "id"> & {
     selected?: boolean;
     disable?: boolean;
     label?: string;
