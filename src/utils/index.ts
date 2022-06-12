@@ -13,7 +13,7 @@ export function isFileValid(file: File): boolean {
 }
 
 export function isNumberValid(number: number): boolean {
-  return !isNaN(number);
+  return !Number.isNaN(number);
 }
 
 export function isStringValid(string: string): boolean {
@@ -36,13 +36,13 @@ export function validator(
 ): boolean {
   switch (type) {
     case "text":
+    case "radio":
+    case "textarea":
       return isStringValid(data as string);
     case "datetime":
       return isDateValid(new Date(data as string));
     case "checkbox":
       return Array.isArray(data) && data.length > 0;
-    case "radio":
-      return isStringValid(data as string);
     case "select":
       return typeof data === "string";
     case "file":
@@ -51,8 +51,6 @@ export function validator(
       return isEmailValid(data as string);
     case "number":
       return isNumberValid(Number(data));
-    case "textarea":
-      return isStringValid(data as string);
     case "url":
       return isUrlValid(data as string);
     case "phone":
