@@ -24,7 +24,7 @@ export type WizardProps = {
   highlightFieldsOnValidation?: boolean;
   strict?: boolean;
   validationDelay?: number;
-  onFinish?: (values: Object) => void;
+  onFinish?: (values: any) => void;
   globalFormErrorMessage?: string;
   finishMessage?: string;
   RTL?: boolean;
