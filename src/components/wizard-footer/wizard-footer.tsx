@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import React, { FunctionComponent, useContext, useMemo } from "react";
+import { FunctionComponent, useContext, useMemo } from "react";
 import ChevronLeft from "../../icons/chevron-left";
 import ChevronRight from "../../icons/chevron-right";
 import { WizardContext } from "../wizard";

@@ -1,4 +1,3 @@
-import React from "react";
 import "./App.css";
 import { Wizard } from "./components/wizard";
 import { Box, Dollar, Twitter, User } from "./example-assets";
@@ -10,19 +9,20 @@ function App() {
       style={{ width: "950px", margin: "0 auto", marginTop: "1rem" }}
     >
       <Wizard
-        // theme={{
-        //   primary: "#007fff",
-        //   background: "#000",
-        //   textColor: "#fff",
-        //   formFieldBackground: "#282828",
-        //   formFieldBorder: "#000",
-        //   success: "#519259",
-        //   fail: "#cf352e",
-        //   inputBackground: "#464646",
-        //   inputTextColor: "#fff",
-        //   tabLineColor: "#464646",
-        //   tabColor: "#7d7d7d",
-        // }}
+        silent
+        theme={{
+          primary: "#007fff",
+          background: "#000",
+          textColor: "#fff",
+          formFieldBackground: "#282828",
+          formFieldBorder: "#000",
+          success: "#519259",
+          fail: "#cf352e",
+          inputBackground: "#464646",
+          inputTextColor: "#fff",
+          tabLineColor: "#464646",
+          tabColor: "#7d7d7d",
+        }}
         icons={[
           <User key="usr" />,
           <Box key="box" />,
@@ -54,7 +54,7 @@ function App() {
               },
               {
                 name: "dateOfBirth",
-                type: "datetime",
+                type: "date",
                 label: "Date of Birth",
               },
               {

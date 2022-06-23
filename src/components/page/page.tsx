@@ -1,13 +1,13 @@
 import classNames from "classnames";
 import { nanoid } from "nanoid";
-import React, {
+import {
   forwardRef,
   useContext,
   useEffect,
   useImperativeHandle,
   useMemo,
   useRef,
-  useState
+  useState,
 } from "react";
 import { getValidationMessage, validator } from "../../utils";
 import { FormField } from "../form-field/form-field";
@@ -17,17 +17,7 @@ import { WizardContext } from "../wizard";
 import styles from "./page.module.scss";
 
 const Page = forwardRef<{ height: number; id: string }, PageModelProps>(
-  (
-    {
-      fields,
-      title,
-      id,
-      width = 0,
-      hide,
-      onChange,
-    }: PageModelProps,
-    ref
-  ) => {
+  ({ fields, title, id, width = 0, hide, onChange }: PageModelProps, ref) => {
     const pageRef = useRef<HTMLDivElement>(null);
 
     const [_fields, setFields] = useState<FormFieldProps[]>(
@@ -145,4 +135,3 @@ const Page = forwardRef<{ height: number; id: string }, PageModelProps>(
 Page.displayName = "Page";
 
 export { Page };
-

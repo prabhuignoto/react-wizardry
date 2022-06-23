@@ -3,21 +3,6 @@ import { PageModelProps } from "./page/page.model";
 
 export type WizardPageProps = Pick<PageModelProps, "fields" | "title">;
 
-export type WizardProps = {
-  pages: WizardPageProps[];
-  theme?: Theme;
-  highlightFieldsOnValidation?: boolean;
-  strict?: boolean;
-  validationDelay?: number;
-  onFinish?: (values: Object) => void;
-  globalFormErrorMessage?: string;
-  finishMessage?: string;
-  RTL?: boolean;
-  bodyHeight?: number;
-  noPageTitle?: boolean;
-  icons?: ReactNode[];
-};
-
 export type Theme = {
   background?: string;
   fail?: string;
@@ -33,6 +18,22 @@ export type Theme = {
   warning?: string;
 };
 
+export type WizardProps = {
+  pages: WizardPageProps[];
+  theme?: Theme;
+  highlightFieldsOnValidation?: boolean;
+  strict?: boolean;
+  validationDelay?: number;
+  onFinish?: (values: any) => void;
+  globalFormErrorMessage?: string;
+  finishMessage?: string;
+  RTL?: boolean;
+  bodyHeight?: number;
+  noPageTitle?: boolean;
+  icons?: ReactNode[];
+  silent?: boolean;
+};
+
 export type PageDim = {
   height: number;
   id: string;
@@ -45,4 +46,5 @@ export type contextType = Pick<
   | "validationDelay"
   | "RTL"
   | "noPageTitle"
+  | "silent"
 >;

@@ -1,26 +1,28 @@
 import classNames from "classnames";
-import React, { FunctionComponent, useMemo } from "react";
+import { FunctionComponent, useMemo } from "react";
 import InfoIcon from "../../icons/info";
-import styles from "./form-field.module.scss";
+import styles from "./form-field-message.module.scss";
 
 export type FormFieldMessageProps = {
   message?: string;
   RTL?: boolean;
   isValid?: boolean | null;
+  show?: boolean;
 };
 
 const FormFieldMessage: FunctionComponent<FormFieldMessageProps> = ({
   message,
   RTL,
   isValid,
+  show,
 }) => {
   const fieldClass = useMemo(() => {
     return classNames(
       styles.form_field_message_wrapper,
       RTL ? styles.RTL : "",
-      !isValid && isValid !== null ? styles.show : styles.hide
+      !isValid && isValid !== null && show ? styles.show : styles.hide
     );
-  }, [isValid]);
+  }, [isValid, show]);
 
   return (
     <div className={fieldClass}>

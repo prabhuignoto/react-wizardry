@@ -1,11 +1,12 @@
 import classNames from "classnames";
 import { nanoid } from "nanoid";
-import React, {
+import {
   FunctionComponent,
   useCallback,
   useContext,
   useMemo,
   useRef,
+  useState,
 } from "react";
 import CheckIcon from "../../icons/check";
 import Exclamation from "../../icons/exclamation";
@@ -39,8 +40,13 @@ const FormField: FunctionComponent<FormFieldProps> = ({
 
   const selectedOptions = useRef<string[]>([]);
 
-  const { highlightFieldsOnValidation: highlight, RTL } =
-    useContext(WizardContext);
+  const {
+    highlightFieldsOnValidation: highlight,
+    RTL,
+    silent,
+  } = useContext(WizardContext);
+
+  const [showFieldMessage, setShowFieldMessage] = useState(!silent);
 
   const handleChange = useCallback<FormChangeEvent>((ev) => {
     const target = ev.target as HTMLInputElement;
@@ -68,9 +74,10 @@ const FormField: FunctionComponent<FormFieldProps> = ({
         styles.form_field,
         isValid ? styles.is_valid : isValid !== null ? styles.is_not_valid : "",
         highlight ? styles.highlight : "",
-        RTL ? styles.RTL : ""
+        RTL ? styles.RTL : "",
+        silent ? styles.no_border : ''
       ),
-    [isValid, highlight]
+    [isValid, highlight, silent]
   );
 
   const checkClass = useMemo(
@@ -94,8 +101,23 @@ const FormField: FunctionComponent<FormFieldProps> = ({
 
   const canShowCheckIcon = useMemo(() => isValid, [isValid]);
 
+  const conditionalProps = useMemo(
+    () =>
+      silent
+        ? {
+            onMouseEnter() {
+              setShowFieldMessage(true);
+            },
+            onMouseLeave() {
+              setShowFieldMessage(false);
+            },
+          }
+        : null,
+    [silent]
+  );
+
   return (
-    <div className={fieldClass}>
+    <div className={fieldClass} {...conditionalProps}>
       {canShowCheckIcon ? (
         <span className={checkClass} role="img" aria-label="success">
           <CheckIcon />
@@ -125,6 +147,7 @@ const FormField: FunctionComponent<FormFieldProps> = ({
           message={validationMessage}
           RTL={RTL}
           isValid={isValid}
+          show={showFieldMessage}
         />
       </div>
     </div>
