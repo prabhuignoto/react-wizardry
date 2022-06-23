@@ -1,5 +1,25 @@
 import { ChangeEvent } from "react";
 
+export type Option = {
+  id?: string;
+  name: string;
+  value: string | number | boolean;
+};
+
+export type InputType =
+  | "text"
+  | "date"
+  | "datetime"
+  | "checkbox"
+  | "select"
+  | "file"
+  | "email"
+  | "number"
+  | "url"
+  | "phone"
+  | "radio"
+  | "textarea";
+
 export type FormFieldProps = {
   name: string;
   id?: string;
@@ -16,25 +36,6 @@ export type FormFieldProps = {
   disabled?: boolean;
   validationMessage?: string;
 };
-
-export type Option = {
-  id?: string;
-  name: string;
-  value: string | number | boolean;
-};
-
-export type InputType =
-  | "text"
-  | "datetime"
-  | "checkbox"
-  | "select"
-  | "file"
-  | "email"
-  | "number"
-  | "url"
-  | "phone"
-  | "radio"
-  | "textarea";
 
 export type FormChangeEvent = (
   e: ChangeEvent<

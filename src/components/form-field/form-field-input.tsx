@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import React, { FunctionComponent, useContext, useMemo } from "react";
+import { FunctionComponent, useContext, useMemo } from "react";
 import Asterisk from "../../icons/asterisk";
 import { WizardContext } from "../wizard";
 import { FormChangeEvent, FormFieldProps } from "./form-field.model";

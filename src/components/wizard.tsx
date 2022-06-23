@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid";
-import React, {
+import {
   createContext,
   CSSProperties,
   FunctionComponent,
@@ -25,6 +25,7 @@ export const WizardContext = createContext<contextType>({
   validationDelay: 250,
   RTL: false,
   noPageTitle: false,
+  silent: false,
 });
 
 const Wizard: FunctionComponent<WizardProps> = ({
@@ -40,6 +41,7 @@ const Wizard: FunctionComponent<WizardProps> = ({
   bodyHeight = 500,
   noPageTitle = false,
   icons = [],
+  silent = false,
 }) => {
   /** pages state */
   const [wizardPages, setWizardPages] = useState<PageModelProps[]>(
@@ -215,6 +217,7 @@ const Wizard: FunctionComponent<WizardProps> = ({
         validationDelay,
         RTL,
         noPageTitle,
+        silent,
       }}
     >
       <div className={styles.wrapper} style={rootStyle}>

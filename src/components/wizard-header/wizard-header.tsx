@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import React, { FunctionComponent, useContext, useMemo } from "react";
+import { FunctionComponent, useContext, useMemo } from "react";
 import CheckIcon from "../../icons/check";
 import WarnIcon from "../../icons/warning";
 import { WizardContext } from "../wizard";
