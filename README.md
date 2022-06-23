@@ -99,7 +99,7 @@ The example shows a simple wizard with two pages.
 | `pages`                       | Collection of [Page](#Page) object                                                                                                                                                                       |         |
 | `strict`                      | Validation rules are applied to all inputs that have been marked for validation or that are required.<br>The component prevents the user from moving on until the current step's errors have been fixed. | false   |
 | `theme`                       | [Theme](#🎨-theme) object for customized styling                                                                                                                                                          |         |
-| `silent`                      | Validation errors are flagged subtly. Validation messages are displayed only when the mouse is hovered over the field.                                                                                   |         |
+| `silent`                      | Validation errors are flagged subtly. Validation messages are displayed only when the mouse is hovered over the field.                                                                                   | false   |
 | `RTL`                         | Enables right to left mode                                                                                                                                                                               | false   |
 
 ## Page
