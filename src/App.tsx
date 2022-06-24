@@ -143,7 +143,6 @@ function App() {
             title: "salary",
           },
         ]}
-        showStepperTitles
         // noPageTitle
         // icons={[
         //   <User key="usr" />,
@@ -151,24 +150,23 @@ function App() {
         //   <Twitter key="twitter" />,
         //   <Dollar key="dollar" />,
         // ]}
-        silent
-        // strict={false}
         // silent
-        // strict={false}
-        // RTL
-        // theme={{
-        //   background: "#000",
-        //   fail: "#cf352e",
-        //   formFieldBackground: "#282828",
-        //   formFieldBorder: "#000",
-        //   inputBackground: "#464646",
-        //   inputTextColor: "#fff",
-        //   primary: "#007fff",
-        //   success: "#519259",
-        //   tabColor: "#7d7d7d",
-        //   tabLineColor: "#464646",
-        //   textColor: "#fff",
-        // }}
+        showStepperTitles
+        silent
+        strict={false}
+        theme={{
+          background: "#000",
+          fail: "#cf352e",
+          formFieldBackground: "#282828",
+          formFieldBorder: "#000",
+          inputBackground: "#464646",
+          inputTextColor: "#fff",
+          primary: "#007fff",
+          success: "#519259",
+          tabColor: "#7d7d7d",
+          tabLineColor: "#464646",
+          textColor: "#fff",
+        }}
         validationDelay={100}
       />
     </div>

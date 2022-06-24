@@ -34,7 +34,7 @@ const Wizard: FunctionComponent<WizardProps> = ({
   icons = [],
   silent = false,
   stepperItemWidth = "200px",
-  showStepperTitles = false
+  showStepperTitles = false,
 }) => {
   /** pages state */
   const [wizardPages, setWizardPages] = useState<PageModelProps[]>(
@@ -178,6 +178,10 @@ const Wizard: FunctionComponent<WizardProps> = ({
           page.querySelectorAll("input[type='checkbox']")
         ) as HTMLInputElement[];
 
+        const dropDowns = Array.from(
+          page.querySelectorAll("select")
+        ) as HTMLSelectElement[];
+
         if (title) {
           result[title] = inputs.reduce(
             (a, b) =>
@@ -192,6 +196,12 @@ const Wizard: FunctionComponent<WizardProps> = ({
               [checkboxes[0].name]: checkboxes
                 .filter((checkbox) => checkbox.checked)
                 .map((checkbox) => checkbox.value),
+            });
+          }
+
+          if (dropDowns.length) {
+            result[title] = Object.assign(result[title], {
+              [dropDowns[0].name]: dropDowns[0].value,
             });
           }
         }
@@ -212,7 +222,7 @@ const Wizard: FunctionComponent<WizardProps> = ({
         silent,
         stepperItemWidth,
         strict,
-        validationDelay
+        validationDelay,
       }}
     >
       <div className={styles.wrapper} style={rootStyle}>

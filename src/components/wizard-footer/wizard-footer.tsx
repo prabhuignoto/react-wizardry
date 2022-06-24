@@ -23,7 +23,10 @@ const WizardFooter: FunctionComponent<WizardFooterProps> = ({
 
   const { strict, RTL } = useContext(WizardContext);
 
-  const footerClass = useMemo(() => classNames(styles.wizard_footer), []);
+  const footerClass = useMemo(
+    () => classNames(styles.wizard_footer, RTL ? styles.RTL : ""),
+    [RTL]
+  );
 
   const buttonControlsClass = useMemo(
     () => classNames(styles.button_controls, RTL ? styles.RTL : ""),

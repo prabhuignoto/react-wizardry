@@ -36,7 +36,8 @@
     border: 1px solid var(--rc-wiz-fail);
   }
 
-  &:not(.is_valid):not(.is_not_valid) {
+  &:not(.is_valid):not(.is_not_valid),
+  &.is_not_valid.no_border {
     border: 1px solid var(--rc-wiz-formFieldBorder);
   }
 
@@ -147,5 +148,3 @@
     padding: 0.5rem;
   }
 }
-
-
