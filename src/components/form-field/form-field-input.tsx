@@ -53,9 +53,12 @@ const FormFieldInput: FunctionComponent<FormFieldInputProps> = ({
         <select
           aria-labelledby={labelId}
           disabled={disabled}
+          name={name}
           onChange={handleChange}
           placeholder={placeholder}
+          required={isRequired}
         >
+          <option disabled selected value="">{placeholder}</option>
           {options.map((option) => (
             <option key={option.id}>{option.name}</option>
           ))}

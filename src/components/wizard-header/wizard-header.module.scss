@@ -27,16 +27,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: var(--rc-wiz-tab-width);
   height: 2rem;
   cursor: pointer;
   font-size: 1rem;
   position: relative;
   transition: background 0.1s ease-in, color 0.1s ease-in;
-
-  &.RTL:first-child {
-    // margin-left: 4rem;
-  }
+  width: var(--rc-wiz-tab-width);
 
   &.disabled {
     cursor: not-allowed;
@@ -138,15 +134,15 @@
 
   &.success::after {
     background: var(--rc-wiz-primary);
+    box-shadow: 0 0 4px 1px rgba(var(--rc-wiz-primary), 0.5);
   }
 
-  &.selected.fail::after {
-    border: 2px solid var(--rc-wiz-fail);
+  &.fail::after {
     background: var(--rc-wiz-fail);
     box-shadow: 0 0 4px 1px rgba(var(--rc-wiz-fail), 0.5);
   }
 
-  &:not(.selected):not(.success)::after {
+  &:not(.selected):not(.success):not(.fail)::after {
     background: var(--rc-wiz-tabColor);
     color: var(--rc-wiz-primary);
   }
