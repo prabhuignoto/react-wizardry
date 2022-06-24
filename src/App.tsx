@@ -152,7 +152,6 @@ function App() {
         // ]}
         // silent
         showStepperTitles
-        silent
         strict={false}
         theme={{
           background: "#000",
