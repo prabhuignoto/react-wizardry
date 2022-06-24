@@ -102,7 +102,7 @@ The example shows a simple wizard with two pages.
 | `silent`                      | Validation errors are flagged subtly. Validation messages are displayed only when the mouse is hovered over the field                                                                                   | false   |
 | `stepperItemWidth`            | Sets the width of each stepper item                                                                                                                                                                     | "200px" |
 | `strict`                      | Validation rules are applied to all inputs that have been marked for validation or that are required.<br>The component prevents the user from moving on until the current step's errors have been fixed | false   |
-| `theme`                       | [Theme](#🎨-theme) object for customized styling                                                                                                                                                       |         |
+| `theme`                       | [Theme](#🎨-theme) object for customized styling                                                                                                                                                         |         |
 
 ## Page
 
@@ -327,6 +327,7 @@ Here is a short example of how to use the theme object.
   4. [Custom Icons](https://codesandbox.io/s/react-wizardy-custom-icons-d2rkin?file=/src/App.js)
   5. [RTL](https://codesandbox.io/s/react-wizardy-rtl-misojt)
   6. [Silent Mode](https://codesandbox.io/s/react-wizardy-silent-m4m3j8?file=/src/App.js)
+  7. [Display stepper titles](https://codesandbox.io/s/react-wizardy-stepper-title-2yhqx7?file=/src/App.js)
 
 ## ⛏️ Built With
 
