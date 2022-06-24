@@ -11,13 +11,14 @@ function App() {
         bodyHeight={750}
         highlightFieldsOnValidation
         noPageTitle
+        onFinish={(val) => console.log(val)}
+        // noPageTitle
         // icons={[
         //   <User key="usr" />,
         //   <Box key="box" />,
         //   <Twitter key="twitter" />,
         //   <Dollar key="dollar" />,
         // ]}
-        onFinish={(val) => console.log(val)}
         pages={[
           {
             fields: [
@@ -149,6 +150,7 @@ function App() {
             title: "salary",
           },
         ]}
+        showStepperTitles
         // silent
         strict={false}
         // RTL

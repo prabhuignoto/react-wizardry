@@ -2,7 +2,10 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  margin-bottom: 2rem;
+
+  &.stepper_title_enabled {
+    margin-bottom: 2rem;
+  }
 
   &.RTL {
     direction: rtl;

@@ -11,10 +11,16 @@ const WizardHeader: FunctionComponent<WizardHeaderProps> = ({
   activeIndex,
   icons,
 }) => {
-  const { strict, RTL } = useContext(WizardContext);
+  const { strict, RTL, noPageTitle, showStepperTitles } =
+    useContext(WizardContext);
 
   const wrapperClass = useMemo(
-    () => classNames(styles.wrapper, RTL ? styles.RTL : ""),
+    () =>
+      classNames(
+        styles.wrapper,
+        RTL ? styles.RTL : "",
+        noPageTitle || showStepperTitles ? styles.stepper_title_enabled : ""
+      ),
     []
   );
   return (
