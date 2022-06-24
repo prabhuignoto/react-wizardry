@@ -12,13 +12,6 @@ function App() {
         highlightFieldsOnValidation
         noPageTitle
         onFinish={(val) => console.log(val)}
-        // noPageTitle
-        // icons={[
-        //   <User key="usr" />,
-        //   <Box key="box" />,
-        //   <Twitter key="twitter" />,
-        //   <Dollar key="dollar" />,
-        // ]}
         pages={[
           {
             fields: [
@@ -150,9 +143,17 @@ function App() {
             title: "salary",
           },
         ]}
+        // noPageTitle
+        // icons={[
+        //   <User key="usr" />,
+        //   <Box key="box" />,
+        //   <Twitter key="twitter" />,
+        //   <Dollar key="dollar" />,
+        // ]}
         showStepperTitles
+        silent
         // silent
-        strict={false}
+        // strict={false}
         // RTL
         theme={{
           background: "#000",

@@ -44,7 +44,7 @@
   &.disabled {
     cursor: not-allowed;
     pointer-events: none;
-    opacity: 0.75;
+    // opacity: 0.75;
   }
 
   &.selected:not(.fail),
@@ -81,10 +81,6 @@
     z-index: 0;
   }
 
-  &:not(:last-child):not(.RTL)::after {
-    // left: 1.5rem;
-  }
-
   &:not(:last-child).RTL::after {
     right: 1.5rem;
   }
@@ -106,7 +102,6 @@
     background: var(--rc-wiz-primary);
   }
 
-  // &:not(:last-child):not(.highlight)::after {
   &:not(.highlight)::after {
     background: var(--rc-wiz-tabLineColor);
   }
