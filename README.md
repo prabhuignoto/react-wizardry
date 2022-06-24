@@ -91,16 +91,18 @@ The example shows a simple wizard with two pages.
 
 ## ⚙️ Properties
 
-| Name                          | Description                                                                                                                                                                                              | Default |
-| :---------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| `bodyHeight`                  | Sets the height of the form body.                                                                                                                                                                        | 500     |
-| `highlightFieldsOnValidation` | Highlights the fields when the validation fails or succeeds                                                                                                                                              | false   |
-| `onFinish`                    | Callback executed on final step                                                                                                                                                                          |         |
-| `pages`                       | Collection of [Page](#Page) object                                                                                                                                                                       |         |
-| `strict`                      | Validation rules are applied to all inputs that have been marked for validation or that are required.<br>The component prevents the user from moving on until the current step's errors have been fixed. | false   |
-| `theme`                       | [Theme](#🎨-theme) object for customized styling                                                                                                                                                          |         |
-| `silent`                      | Validation errors are flagged subtly. Validation messages are displayed only when the mouse is hovered over the field.                                                                                   | false   |
-| `RTL`                         | Enables right to left mode                                                                                                                                                                               | false   |
+| Name                          | Description                                                                                                                                                                                             | Default |
+| :---------------------------- | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------- |
+| `bodyHeight`                  | Sets the height of the form body                                                                                                                                                                        | 500     |
+| `highlightFieldsOnValidation` | Highlights the fields when the validation fails or succeeds                                                                                                                                             | false   |
+| `onFinish`                    | Callback executed on final step                                                                                                                                                                         |         |
+| `pages`                       | Collection of [Page](#Page) object                                                                                                                                                                      |         |
+| `RTL`                         | Enables right to left mode                                                                                                                                                                              | false   |
+| `showStepperTitles`           | Use this prop to display page titles under the stepper points                                                                                                                                           | false   |
+| `silent`                      | Validation errors are flagged subtly. Validation messages are displayed only when the mouse is hovered over the field                                                                                   | false   |
+| `stepperItemWidth`            | Sets the width of each stepper item                                                                                                                                                                     | "200px" |
+| `strict`                      | Validation rules are applied to all inputs that have been marked for validation or that are required.<br>The component prevents the user from moving on until the current step's errors have been fixed | false   |
+| `theme`                       | [Theme](#🎨-theme) object for customized styling                                                                                                                                                       |         |
 
 ## Page
 
