@@ -178,9 +178,7 @@ const Wizard: FunctionComponent<WizardProps> = ({
           page.querySelectorAll("input[type='checkbox']")
         ) as HTMLInputElement[];
 
-        const dropDowns = Array.from(
-          page.querySelectorAll("select")
-        ) as HTMLSelectElement[];
+        const dropDowns = page.querySelectorAll("select");
 
         if (title) {
           result[title] = inputs.reduce(
