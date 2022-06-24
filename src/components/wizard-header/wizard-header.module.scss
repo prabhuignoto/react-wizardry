@@ -23,7 +23,6 @@
 
 .tab {
   border-radius: 50%;
-  // background: var(--rc-wiz-tabColor);
   color: #000;
   display: flex;
   align-items: center;
@@ -33,26 +32,22 @@
   cursor: pointer;
   font-size: 1rem;
   position: relative;
-  box-shadow: inset 0 0 14px 2px rgba(0, 0, 0, 0.1),
-    0 0 2px 1px rgba(0, 0, 0, 0.2);
   transition: background 0.1s ease-in, color 0.1s ease-in;
-
+  
   &.RTL:first-child {
     margin-left: 4rem;
   }
-
+  
   &.disabled {
     cursor: not-allowed;
     pointer-events: none;
-    // opacity: 0.75;
   }
 
   &.selected:not(.fail),
   &.success {
-    // background: var(--rc-wiz-primary);
     color: #fff;
   }
-
+  
   &.selected {
     outline-width: 2px;
     outline-offset: 3px;
@@ -70,8 +65,7 @@
     transition: opacity 0.1s ease-in;
     z-index: 1;
   }
-
-  // &:not(:last-child)::after {
+  
   &::after {
     content: "";
     display: block;
@@ -80,7 +74,7 @@
     position: absolute;
     z-index: 0;
   }
-
+  
   &:not(:last-child).RTL::after {
     right: 1.5rem;
   }
@@ -88,7 +82,7 @@
   &:not(:last-child):not(.selected).highlight::after {
     background: var(--rc-wiz-primary);
   }
-
+  
   &.selected.highlight:not(:last-child)::after {
     background: linear-gradient(
       to right,
@@ -101,7 +95,7 @@
   &.selected:last-child::after {
     background: var(--rc-wiz-primary);
   }
-
+  
   &:not(.highlight)::after {
     background: var(--rc-wiz-tabLineColor);
   }
@@ -115,9 +109,11 @@
   width: 1.25rem;
   z-index: 1;
   position: relative;
-
+  
   &::after {
     content: "";
+    box-shadow: inset 0 0 14px 2px rgba(0, 0, 0, 0.1),
+      0 0 2px 1px rgba(0, 0, 0, 0.2);
     position: absolute;
     top: 50%;
     left: 50%;

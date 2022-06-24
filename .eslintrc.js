@@ -20,7 +20,6 @@ module.exports = {
   plugins: ["react", "@typescript-eslint", "sort-keys-fix"],
   rules: {
     "react/jsx-sort-props": 1,
-    "sort-keys-fix/sort-keys-fix": "warn",
     "sort-keys": [
       "error",
       "asc",
@@ -29,5 +28,6 @@ module.exports = {
         natural: true,
       },
     ],
+    "sort-keys-fix/sort-keys-fix": "warn",
   },
 };
