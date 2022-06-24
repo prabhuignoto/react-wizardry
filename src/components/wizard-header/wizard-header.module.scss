@@ -95,7 +95,7 @@
     );
   }
 
-  &.selected.highlight:not(:last-child)::after {
+  &.selected.highlight:not(:last-child).RTL::after {
     background: linear-gradient(
       to left,
       var(--rc-wiz-primary) 0%,
