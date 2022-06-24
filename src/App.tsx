@@ -1,50 +1,27 @@
 import "./App.css";
 import { Wizard } from "./components/wizard";
-import { Box, Dollar, Twitter, User } from "./example-assets";
 
 function App() {
   return (
     <div
       className="App"
-      style={{ width: "950px", margin: "0 auto", marginTop: "1rem" }}
+      style={{ margin: "0 auto", marginTop: "1rem", width: "950px" }}
     >
       <Wizard
-        silent
-        theme={{
-          primary: "#007fff",
-          background: "#000",
-          textColor: "#fff",
-          formFieldBackground: "#282828",
-          formFieldBorder: "#000",
-          success: "#519259",
-          fail: "#cf352e",
-          inputBackground: "#464646",
-          inputTextColor: "#fff",
-          tabLineColor: "#464646",
-          tabColor: "#7d7d7d",
-        }}
-        icons={[
-          <User key="usr" />,
-          <Box key="box" />,
-          <Twitter key="twitter" />,
-          <Dollar key="dollar" />,
-        ]}
         bodyHeight={750}
         highlightFieldsOnValidation
-        validationDelay={100}
+        noPageTitle
         strict={false}
-        // RTL
         onFinish={(val) => console.log(val)}
         pages={[
           {
-            title: "Introduction",
             fields: [
               {
+                isRequired: true,
                 label: "First Name",
                 name: "firstName",
-                type: "text",
-                isRequired: true,
                 placeholder: "Enter your first name",
+                type: "text",
                 validationMessage: "You cannot leave this field empty",
               },
               {
@@ -53,26 +30,26 @@ function App() {
                 type: "text",
               },
               {
+                label: "Date of Birth",
                 name: "dateOfBirth",
                 type: "date",
-                label: "Date of Birth",
               },
               {
+                isRequired: true,
                 label: "Email",
                 name: "email",
                 type: "email",
-                isRequired: true,
                 validationMessage: "Incorrect email id. example: xxxx@yyy.com",
               },
               {
-                name: "Phone number",
                 label: "Phone",
+                name: "Phone number",
                 type: "phone",
               },
             ],
+            title: "Introduction",
           },
           {
-            title: "Employment",
             fields: [
               {
                 label: "Company Name",
@@ -90,42 +67,42 @@ function App() {
                 type: "textarea",
               },
               {
+                isRequired: true,
                 label: "Are you currently working?",
                 name: "employed",
-                type: "radio",
-                isRequired: true,
                 options: [
                   { name: "yes", value: true },
                   { name: "no", value: false },
                 ],
+                type: "radio",
               },
               {
+                isRequired: true,
                 label: "Choose your skills",
                 name: "skills",
-                type: "checkbox",
-                isRequired: true,
                 options: [
                   { name: "HTML", value: "html" },
                   { name: "CSS", value: "css" },
                   { name: "JavaScript", value: "javascript" },
                   { name: "React", value: "react" },
                 ],
+                type: "checkbox",
               },
             ],
+            title: "Employment",
           },
           {
-            title: "CV & Social Links",
             fields: [
               {
-                name: "CV",
                 label: "Upload your CV",
+                name: "CV",
                 type: "file",
               },
               {
+                isRequired: true,
                 label: "Portfolio URL",
                 name: "Portfolio",
                 type: "url",
-                isRequired: true,
               },
               {
                 label: "Linkedin URL",
@@ -138,25 +115,25 @@ function App() {
                 type: "url",
               },
               {
-                name: "twitter",
                 label: "Twitter URL",
+                name: "twitter",
                 type: "url",
               },
             ],
+            title: "CV & Social Links",
           },
           {
-            title: "salary",
             fields: [
               {
+                isRequired: true,
                 label: "Select your current salary range",
                 name: "salaryRange",
-                type: "select",
-                isRequired: true,
-
                 options: [
                   { name: "10,000$ - 50,000$", value: "10-50k" },
                   { name: "50,000$ - 100,000$", value: "50-100k" },
                 ],
+
+                type: "select",
               },
               {
                 label: "Expected Salary",
@@ -164,8 +141,35 @@ function App() {
                 type: "text",
               },
             ],
+            title: "salary",
           },
         ]}
+        // noPageTitle
+        // icons={[
+        //   <User key="usr" />,
+        //   <Box key="box" />,
+        //   <Twitter key="twitter" />,
+        //   <Dollar key="dollar" />,
+        // ]}
+        showStepperTitles
+        silent
+        // silent
+        // strict={false}
+        // RTL
+        theme={{
+          background: "#000",
+          fail: "#cf352e",
+          formFieldBackground: "#282828",
+          formFieldBorder: "#000",
+          inputBackground: "#464646",
+          inputTextColor: "#fff",
+          primary: "#007fff",
+          success: "#519259",
+          tabColor: "#7d7d7d",
+          tabLineColor: "#464646",
+          textColor: "#fff",
+        }}
+        validationDelay={100}
       />
     </div>
   );

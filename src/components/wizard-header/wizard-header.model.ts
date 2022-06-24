@@ -16,4 +16,5 @@ export type WizardTabProps = Pick<WizardHeaderProps, "onSelect"> &
     highlight?: boolean;
     RTL?: boolean;
     icon?: ReactNode;
+    title?: string;
   };

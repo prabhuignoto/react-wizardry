@@ -2,8 +2,8 @@ import classNames from "classnames";
 import { FunctionComponent, useContext, useMemo } from "react";
 import ChevronLeft from "../../icons/chevron-left";
 import ChevronRight from "../../icons/chevron-right";
-import { WizardContext } from "../wizard";
 import { WizardFooterProps } from "../wizard-footer/wizard-footer.model";
+import { WizardContext } from "./../wizard-context";
 import styles from "./wizard-footer.module.scss";
 
 const WizardFooter: FunctionComponent<WizardFooterProps> = ({
@@ -86,13 +86,13 @@ const WizardFooter: FunctionComponent<WizardFooterProps> = ({
       <div className={buttonControlsClass}>
         {!hideBack && (
           <button
+            aria-label="go back"
             className={classNames(
               styles.button,
               styles.back,
               RTL ? styles.RTL : ""
             )}
             onClick={onPrev}
-            aria-label="go back"
           >
             <span className={styles.btn_icon}>
               <ChevronLeft />
@@ -102,11 +102,11 @@ const WizardFooter: FunctionComponent<WizardFooterProps> = ({
         )}
         {!hideNext && (
           <button
-            className={nextButtonClass}
-            onClick={handleNext}
-            aria-label="go forward"
             aria-disabled={disableNext}
+            aria-label="go forward"
+            className={nextButtonClass}
             disabled={disableNext}
+            onClick={handleNext}
           >
             <span>Next</span>
             <span className={styles.btn_icon}>
@@ -116,10 +116,10 @@ const WizardFooter: FunctionComponent<WizardFooterProps> = ({
         )}
         {showFinish && (
           <button
-            className={nextButtonClass}
             aria-label="finish"
-            onClick={onFinish}
+            className={nextButtonClass}
             disabled={disableNext}
+            onClick={onFinish}
           >
             <span>Finish</span>
             <span className={styles.btn_icon}>

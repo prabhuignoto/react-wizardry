@@ -119,6 +119,7 @@
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-react": "^7.30.0",
     "eslint-plugin-security": "^1.5.0",
+    "eslint-plugin-sort-keys-fix": "^1.1.2",
     "husky": "^8.0.1",
     "jsdom": "^20.0.0",
     "mini-css-extract-plugin": "^2.6.1",

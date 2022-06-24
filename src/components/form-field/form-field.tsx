@@ -10,7 +10,7 @@ import {
 } from "react";
 import CheckIcon from "../../icons/check";
 import Exclamation from "../../icons/exclamation";
-import { WizardContext } from "./../wizard";
+import { WizardContext } from "../wizard-context";
 import { FormFieldInput } from "./form-field-input";
 import { FormFieldMessage } from "./form-field-message";
 import { FormChangeEvent, FormFieldProps } from "./form-field.model";
@@ -75,7 +75,7 @@ const FormField: FunctionComponent<FormFieldProps> = ({
         isValid ? styles.is_valid : isValid !== null ? styles.is_not_valid : "",
         highlight ? styles.highlight : "",
         RTL ? styles.RTL : "",
-        silent ? styles.no_border : ''
+        silent ? styles.no_border : ""
       ),
     [isValid, highlight, silent]
   );
@@ -119,11 +119,11 @@ const FormField: FunctionComponent<FormFieldProps> = ({
   return (
     <div className={fieldClass} {...conditionalProps}>
       {canShowCheckIcon ? (
-        <span className={checkClass} role="img" aria-label="success">
+        <span aria-label="success" className={checkClass} role="img">
           <CheckIcon />
         </span>
       ) : !isValid && isValid !== null ? (
-        <span className={warnClass} role="img" aria-label="fail">
+        <span aria-label="fail" className={warnClass} role="img">
           <Exclamation />
         </span>
       ) : null}
@@ -132,21 +132,21 @@ const FormField: FunctionComponent<FormFieldProps> = ({
       </label>
       <div className={styles.input_wrapper}>
         <FormFieldInput
-          type={type}
           disabled={disabled}
-          id={id}
-          options={_options.current}
-          isRequired={isRequired}
-          name={name}
-          placeholder={placeholder}
           handleChange={
             type === "checkbox" ? handleCheckBoxChange : handleChange
           }
+          id={id}
+          isRequired={isRequired}
+          name={name}
+          options={_options.current}
+          placeholder={placeholder}
+          type={type}
         />
         <FormFieldMessage
-          message={validationMessage}
           RTL={RTL}
           isValid={isValid}
+          message={validationMessage}
           show={showFieldMessage}
         />
       </div>

@@ -1,67 +1,9 @@
 import classNames from "classnames";
 import { FunctionComponent, useContext, useMemo } from "react";
-import CheckIcon from "../../icons/check";
-import WarnIcon from "../../icons/warning";
-import { WizardContext } from "../wizard";
-import { WizardHeaderProps, WizardTabProps } from "./wizard-header.model";
+import { WizardContext } from "../wizard-context";
+import { WizardHeaderTab } from "./wizard-header-tab";
+import { WizardHeaderProps } from "./wizard-header.model";
 import styles from "./wizard-header.module.scss";
-
-const WizardTab: FunctionComponent<WizardTabProps> = ({
-  id,
-  onSelect,
-  selected,
-  state,
-  label,
-  highlight,
-  disable,
-  RTL,
-  icon,
-}) => {
-  const containerClass = useMemo(
-    () =>
-      classNames(styles.icon_container, {
-        [styles[state.toLowerCase()]]: true,
-      }),
-    [state]
-  );
-
-  const tabClass = useMemo(
-    () =>
-      classNames(
-        styles.tab,
-        selected ? styles.selected : "",
-        {
-          [styles[state.toLowerCase()]]: true,
-        },
-        highlight ? styles.highlight : "",
-        disable ? styles.disabled : "",
-        RTL ? styles.RTL : ""
-      ),
-    [state, selected, highlight, disable]
-  );
-
-  const getLabel = useMemo(
-    () => state.split("_").join(" ").toLowerCase(),
-    [state]
-  );
-
-  return (
-    <li
-      key={id}
-      className={tabClass}
-      onClick={() => onSelect?.(id)}
-      role="tab"
-      aria-disabled={disable}
-      tabIndex={0}
-    >
-      <span className={containerClass} role="img" aria-label={getLabel}>
-        {icon || (state === "NOT_VALIDATED" ? label : null)}
-        {state === "SUCCESS" && !icon ? <CheckIcon /> : null}
-        {state === "FAIL" && !icon ? <WarnIcon /> : null}
-      </span>
-    </li>
-  );
-};
 
 const WizardHeader: FunctionComponent<WizardHeaderProps> = ({
   pages,
@@ -69,28 +11,34 @@ const WizardHeader: FunctionComponent<WizardHeaderProps> = ({
   activeIndex,
   icons,
 }) => {
-  const { strict } = useContext(WizardContext);
-  const { RTL } = useContext(WizardContext);
+  const { strict, RTL, noPageTitle, showStepperTitles } =
+    useContext(WizardContext);
 
   const wrapperClass = useMemo(
-    () => classNames(styles.wrapper, RTL ? styles.RTL : ""),
+    () =>
+      classNames(
+        styles.wrapper,
+        RTL ? styles.RTL : "",
+        noPageTitle || showStepperTitles ? styles.stepper_title_enabled : ""
+      ),
     []
   );
   return (
     <div className={wrapperClass}>
       <ul className={styles.tabs} role="tablist">
-        {pages.map(({ id, isActive, state }, index) => (
-          <WizardTab
-            key={id}
-            id={id}
-            selected={isActive}
-            onSelect={(id) => onSelect?.(id)}
-            state={state}
-            label={index + 1 + ""}
-            highlight={index < activeIndex}
-            disable={strict && state !== "SUCCESS"}
+        {pages.map(({ id, isActive, state, title }, index) => (
+          <WizardHeaderTab
             RTL={RTL}
+            disable={strict && state !== "SUCCESS"}
+            highlight={index <= activeIndex}
             icon={icons && icons[index]}
+            id={id}
+            key={id}
+            label={index + 1 + ""}
+            onSelect={(id) => onSelect?.(id)}
+            selected={isActive}
+            state={state}
+            title={title}
           />
         ))}
       </ul>

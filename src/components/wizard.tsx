@@ -1,6 +1,5 @@
 import { nanoid } from "nanoid";
 import {
-  createContext,
   CSSProperties,
   FunctionComponent,
   useCallback,
@@ -13,20 +12,12 @@ import { FormFieldProps } from "./form-field/form-field.model";
 import { Page } from "./page/page";
 import { PageModelProps } from "./page/page.model";
 import { ThemeDefaults } from "./theme-default";
+import { WizardContext } from "./wizard-context";
 import { WizardFinish } from "./wizard-finish";
 import { WizardFooter } from "./wizard-footer/wizard-footer";
 import { WizardHeader } from "./wizard-header/wizard-header";
-import { contextType, PageDim, WizardProps } from "./wizard.model";
+import { PageDim, WizardProps } from "./wizard.model";
 import styles from "./wizard.module.scss";
-
-export const WizardContext = createContext<contextType>({
-  highlightFieldsOnValidation: false,
-  strict: true,
-  validationDelay: 250,
-  RTL: false,
-  noPageTitle: false,
-  silent: false,
-});
 
 const Wizard: FunctionComponent<WizardProps> = ({
   pages = [],
@@ -42,6 +33,8 @@ const Wizard: FunctionComponent<WizardProps> = ({
   noPageTitle = false,
   icons = [],
   silent = false,
+  stepperItemWidth = "200px",
+  showStepperTitles = false
 }) => {
   /** pages state */
   const [wizardPages, setWizardPages] = useState<PageModelProps[]>(
@@ -212,36 +205,38 @@ const Wizard: FunctionComponent<WizardProps> = ({
   return (
     <WizardContext.Provider
       value={{
-        highlightFieldsOnValidation,
-        strict,
-        validationDelay,
         RTL,
+        highlightFieldsOnValidation,
         noPageTitle,
+        showStepperTitles,
         silent,
+        stepperItemWidth,
+        strict,
+        validationDelay
       }}
     >
       <div className={styles.wrapper} style={rootStyle}>
         <div className={styles.header_wrapper}>
           {!wizardComplete && (
             <WizardHeader
-              pages={wizardPages}
-              onSelect={handleSelection}
               activeIndex={activeIndex}
               icons={icons}
+              onSelect={handleSelection}
+              pages={wizardPages}
             />
           )}
         </div>
-        <div className={styles.body_wrapper} style={bodyStyle} ref={onBodyRef}>
+        <div className={styles.body_wrapper} ref={onBodyRef} style={bodyStyle}>
           <div className={styles.pages_wrapper} style={pagesStyle}>
             {!wizardComplete &&
               wizardPages.map((page, index) => (
                 <Page
                   {...page}
+                  hide={activeIndex !== index}
                   key={page.id}
+                  onChange={onChange}
                   ref={initHeights}
                   width={wizardWidth}
-                  hide={activeIndex !== index}
-                  onChange={onChange}
                 />
               ))}
           </div>
@@ -250,12 +245,12 @@ const Wizard: FunctionComponent<WizardProps> = ({
         <div className={styles.footer_wrapper}>
           {!wizardComplete && (
             <WizardFooter
-              onNext={handleNext}
-              onPrev={handlePrevious}
-              onFinish={handleFinish}
-              pages={wizardPages}
               activeId={activePageId}
               message={globalFormErrorMessage}
+              onFinish={handleFinish}
+              onNext={handleNext}
+              onPrev={handlePrevious}
+              pages={wizardPages}
             />
           )}
         </div>

@@ -32,6 +32,8 @@ export type WizardProps = {
   noPageTitle?: boolean;
   icons?: ReactNode[];
   silent?: boolean;
+  stepperItemWidth?: string;
+  showStepperTitles?: boolean;
 };
 
 export type PageDim = {
@@ -47,4 +49,6 @@ export type contextType = Pick<
   | "RTL"
   | "noPageTitle"
   | "silent"
+  | "stepperItemWidth"
+  | "showStepperTitles"
 >;

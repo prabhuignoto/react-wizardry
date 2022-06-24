@@ -1,5 +1,4 @@
 import { fireEvent, render } from "@testing-library/react";
-import React from "react";
 import { describe, expect, it, vi } from "vitest";
 import { PageModelProps } from "../../page/page.model";
 import { WizardFooter } from "../wizard-footer";
@@ -82,12 +81,12 @@ describe.concurrent("WizardFooter", () => {
       <WizardFooter
         pages={pages}
         activeId={"page2"}
-        message="Please correct the errors in the form."
+        message="Please correct errors in the form."
       />
     );
 
     expect(getByRole("alert")).toHaveTextContent(
-      "Please correct the errors in the form."
+      "Please correct errors in the form."
     );
   });
 });
