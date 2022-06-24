@@ -1,16 +1,16 @@
 import { Theme } from "./wizard.model";
 
 export const ThemeDefaults: Theme = {
-  primary: "#007fff",
   background: "#f8f8f8",
-  formFieldBackground: "#fff",
-  success: "#1db954",
   fail: "#de1738",
-  textColor: "#000",
+  formFieldBackground: "#fff",
   formFieldBorder: "#dcdcdc",
   inputBackground: "#e8e8e8",
   inputTextColor: "#000",
+  primary: "#007fff",
+  success: "#1db954",
   tabColor: "#f8f8f8",
   tabLineColor: "#ccc",
+  textColor: "#000",
   warning: "#ffae42",
 };

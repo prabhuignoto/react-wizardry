@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { FunctionComponent, useContext, useMemo } from "react";
 import Asterisk from "../../icons/asterisk";
-import { WizardContext } from "../wizard";
+import { WizardContext } from "../wizard-context";
 import { FormChangeEvent, FormFieldProps } from "./form-field.model";
 import styles from "./form-field.module.scss";
 
@@ -39,21 +39,21 @@ const FormFieldInput: FunctionComponent<FormFieldInputProps> = ({
     if (isTextField) {
       return (
         <input
-          type={type === "datetime" ? "datetime-local" : type}
-          required={isRequired}
           aria-labelledby={labelId}
+          disabled={disabled}
+          name={name}
           onChange={handleChange}
           placeholder={placeholder}
-          name={name}
-          disabled={disabled}
+          required={isRequired}
+          type={type === "datetime" ? "datetime-local" : type}
         />
       );
     } else if (type === "select") {
       return (
         <select
-          onChange={handleChange}
-          disabled={disabled}
           aria-labelledby={labelId}
+          disabled={disabled}
+          onChange={handleChange}
           placeholder={placeholder}
         >
           {options.map((option) => (
@@ -64,12 +64,12 @@ const FormFieldInput: FunctionComponent<FormFieldInputProps> = ({
     } else if (type === "textarea") {
       return (
         <textarea
-          disabled={disabled}
           aria-labelledby={labelId}
-          required={isRequired}
-          onChange={handleChange}
+          disabled={disabled}
           name={name}
+          onChange={handleChange}
           placeholder={placeholder}
+          required={isRequired}
         ></textarea>
       );
     } else if (type === "radio" || type === "checkbox") {
@@ -78,13 +78,13 @@ const FormFieldInput: FunctionComponent<FormFieldInputProps> = ({
           {options.map(({ name: optionName, id, value }) => (
             <label key={id}>
               <input
-                type={type}
-                name={name}
-                value={value as string}
-                onChange={handleChange}
                 id={id}
                 key={id}
+                name={name}
+                onChange={handleChange}
                 placeholder={placeholder}
+                type={type}
+                value={value as string}
               />
               {optionName}
             </label>
@@ -99,9 +99,9 @@ const FormFieldInput: FunctionComponent<FormFieldInputProps> = ({
       {getInputType}
       {isRequired && (
         <span
+          aria-label="important field"
           className={classNames(styles.asterisk, RTL ? styles.RTL : "")}
           role="img"
-          aria-label="important field"
         >
           <Asterisk />
         </span>

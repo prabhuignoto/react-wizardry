@@ -17,6 +17,17 @@ module.exports = {
     ecmaVersion: "latest",
     sourceType: "module",
   },
-  plugins: ["react", "@typescript-eslint"],
-  rules: {},
+  plugins: ["react", "@typescript-eslint", "sort-keys-fix"],
+  rules: {
+    "react/jsx-sort-props": 1,
+    "sort-keys-fix/sort-keys-fix": "warn",
+    "sort-keys": [
+      "error",
+      "asc",
+      {
+        caseSensitive: true,
+        natural: true,
+      },
+    ],
+  },
 };

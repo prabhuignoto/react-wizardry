@@ -7,13 +7,13 @@ import {
   useImperativeHandle,
   useMemo,
   useRef,
-  useState,
+  useState
 } from "react";
 import { getValidationMessage, validator } from "../../utils";
 import { FormField } from "../form-field/form-field";
 import { FormFieldProps } from "../form-field/form-field.model";
 import { PageModelProps } from "../page/page.model";
-import { WizardContext } from "../wizard";
+import { WizardContext } from './../wizard-context';
 import styles from "./page.module.scss";
 
 const Page = forwardRef<{ height: number; id: string }, PageModelProps>(
@@ -109,7 +109,7 @@ const Page = forwardRef<{ height: number; id: string }, PageModelProps>(
     }, [JSON.stringify(_fields)]);
 
     return (
-      <div className={pageClass} ref={pageRef} style={style} data-title={title}>
+      <div className={pageClass} data-title={title} ref={pageRef} style={style}>
         {!noPageTitle && (
           <header className={classNames(styles.header, RTL ? styles.RTL : "")}>
             {title}
@@ -122,8 +122,8 @@ const Page = forwardRef<{ height: number; id: string }, PageModelProps>(
             <FormField
               key={field.id}
               {...field}
-              onInput={onHandleInput}
               disabled={hide}
+              onInput={onHandleInput}
             />
           ))}
         </div>
@@ -135,3 +135,4 @@ const Page = forwardRef<{ height: number; id: string }, PageModelProps>(
 Page.displayName = "Page";
 
 export { Page };
+
