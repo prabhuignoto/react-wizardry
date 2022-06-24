@@ -8,6 +8,7 @@ function App() {
       style={{ margin: "0 auto", marginTop: "1rem", width: "950px" }}
     >
       <Wizard
+        RTL
         bodyHeight={750}
         highlightFieldsOnValidation
         noPageTitle
@@ -152,7 +153,7 @@ function App() {
         //   <Dollar key="dollar" />,
         // ]}
         silent
-        strict={false}
+        // strict={false}
         // silent
         // strict={false}
         // RTL
