@@ -11,6 +11,7 @@ function App() {
         bodyHeight={750}
         highlightFieldsOnValidation
         noPageTitle
+        strict={false}
         onFinish={(val) => console.log(val)}
         pages={[
           {
