@@ -1,6 +1,11 @@
 import "./App.css";
 import { Wizard } from "./components/wizard";
 
+import Box from "./example-assets/box";
+import Dollar from "./example-assets/dollar";
+import Twitter from "./example-assets/twitter";
+import User from "./example-assets/user";
+
 function App() {
   return (
     <div
@@ -144,12 +149,12 @@ function App() {
           },
         ]}
         // noPageTitle
-        // icons={[
-        //   <User key="usr" />,
-        //   <Box key="box" />,
-        //   <Twitter key="twitter" />,
-        //   <Dollar key="dollar" />,
-        // ]}
+        icons={[
+          <User key="usr" />,
+          <Box key="box" />,
+          <Twitter key="twitter" />,
+          <Dollar key="dollar" />,
+        ]}
         // silent
         showStepperTitles
         strict={false}

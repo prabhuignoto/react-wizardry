@@ -16,54 +16,8 @@ const isProduction = process.env.NODE_ENV === "production";
 const stylesHandler = MiniCssExtractPlugin.loader;
 
 const config = {
-  entry: "./src/react-wizardry.ts",
   devtool: "source-map",
-  output: {
-    path: path.resolve(__dirname, "dist"),
-    clean: true,
-    filename: pkg.name + ".js",
-    library: {
-      name: pkg.name,
-      type: "umd",
-    },
-  },
-  optimization: {
-    minimize: isProduction,
-    minimizer: [
-      new TerserPlugin({
-        terserOptions: {
-          output: {
-            comments: false,
-          },
-          compress: {
-            drop_console: true,
-          },
-        },
-      }),
-    ],
-  },
-  plugins: [
-    new MiniCssExtractPlugin({
-      filename: pkg.name + ".css",
-    }),
-    new BundleAnalyzerPlugin({
-      openAnalyzer: false,
-      analyzerMode: "static",
-    }),
-    new CopyPlugin({
-      patterns: [
-        {
-          from: "README.md",
-          to: "README.md",
-        },
-      ],
-    }),
-    new BannerPlugin({
-      banner: `${pkg.name} v${pkg.version} | ${pkg.license} | ${pkg.homepage} | ${pkg.author}`,
-    }),
-    // Add your plugins here
-    // Learn more about plugins from https://webpack.js.org/configuration/plugins/
-  ],
+  entry: "./src/react-wizardry.ts",
   externals: [
     NodeExternals({
       allowlist: ["nanoid", "classnames", "use-debounce"],
@@ -72,18 +26,18 @@ const config = {
   module: {
     rules: [
       {
+        exclude: /node_modules/,
         test: /\.(tsx|ts)$/,
         use: [
           {
             loader: "babel-loader",
             options: {
-              presets: ["@babel/preset-env", "@babel/preset-react"],
               plugins: ["@babel/plugin-transform-runtime"],
+              presets: ["@babel/preset-env", "@babel/preset-react"],
             },
           },
           "ts-loader",
         ],
-        exclude: /node_modules/,
       },
       {
         test: /\.s[ac]ss$/i,
@@ -114,6 +68,52 @@ const config = {
       // Learn more about loaders from https://webpack.js.org/loaders/
     ],
   },
+  optimization: {
+    minimize: isProduction,
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          compress: {
+            drop_console: true,
+          },
+          output: {
+            comments: false,
+          },
+        },
+      }),
+    ],
+  },
+  output: {
+    clean: true,
+    filename: pkg.name + ".js",
+    library: {
+      name: pkg.name,
+      type: "umd",
+    },
+    path: path.resolve(__dirname, "dist"),
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: pkg.name + ".css",
+    }),
+    new BundleAnalyzerPlugin({
+      analyzerMode: "static",
+      openAnalyzer: false,
+    }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: "README.md",
+          to: "README.md",
+        },
+      ],
+    }),
+    new BannerPlugin({
+      banner: `${pkg.name} v${pkg.version} | ${pkg.license} | ${pkg.homepage} | ${pkg.author}`,
+    }),
+    // Add your plugins here
+    // Learn more about plugins from https://webpack.js.org/configuration/plugins/
+  ],
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
   },
