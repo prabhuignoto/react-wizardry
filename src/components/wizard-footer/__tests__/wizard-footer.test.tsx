@@ -6,22 +6,22 @@ import styles from "../wizard-footer.module.scss";
 
 const pages: PageModelProps[] = [
   {
+    fields: [],
     id: "page1",
+    state: "NOT_VALIDATED",
     title: "Page 1",
-    state: "NOT_VALIDATED",
-    fields: [],
   },
   {
+    fields: [],
     id: "page2",
-    title: "Page 2",
     state: "FAIL",
-    fields: [],
+    title: "Page 2",
   },
   {
-    id: "page3",
-    title: "Page 3",
-    state: "NOT_VALIDATED",
     fields: [],
+    id: "page3",
+    state: "NOT_VALIDATED",
+    title: "Page 3",
   },
 ];
 
@@ -34,7 +34,7 @@ describe.concurrent("WizardFooter", () => {
 
   it("should render buttons", () => {
     const { getAllByRole } = render(
-      <WizardFooter pages={pages} activeId={"page2"} />
+      <WizardFooter activeId={"page2"} pages={pages} />
     );
 
     expect(getAllByRole("button")[0]).toHaveAttribute("aria-label", "go back");
@@ -46,7 +46,7 @@ describe.concurrent("WizardFooter", () => {
 
   it("should render finish button", () => {
     const { getAllByRole } = render(
-      <WizardFooter pages={pages} activeId={"page3"} />
+      <WizardFooter activeId={"page3"} pages={pages} />
     );
 
     expect(getAllByRole("button")[1]).toHaveAttribute("aria-label", "finish");
@@ -56,7 +56,7 @@ describe.concurrent("WizardFooter", () => {
     const handler = vi.fn();
 
     const { getByRole } = render(
-      <WizardFooter pages={pages} onNext={handler} />
+      <WizardFooter onNext={handler} pages={pages} />
     );
 
     fireEvent.click(getByRole("button", { name: "go forward" }));
@@ -68,7 +68,7 @@ describe.concurrent("WizardFooter", () => {
     const handler = vi.fn();
 
     const { getByRole } = render(
-      <WizardFooter pages={pages} onPrev={handler} />
+      <WizardFooter onPrev={handler} pages={pages} />
     );
 
     fireEvent.click(getByRole("button", { name: "go back" }));
@@ -79,9 +79,9 @@ describe.concurrent("WizardFooter", () => {
   it("should render alert message", () => {
     const { getByRole } = render(
       <WizardFooter
-        pages={pages}
         activeId={"page2"}
         message="Please correct errors in the form."
+        pages={pages}
       />
     );
 

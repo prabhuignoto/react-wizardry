@@ -6,15 +6,15 @@ module.exports = {
   extends: [
     "plugin:react/recommended",
     "standard",
-    "plugin:react/jsx-runtime",
     "prettier",
+    "plugin:react/jsx-runtime",
   ],
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: "latest",
+    ecmaVersion: 12,
     sourceType: "module",
   },
   plugins: ["react", "@typescript-eslint", "sort-keys-fix"],
