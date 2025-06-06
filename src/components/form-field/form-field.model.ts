@@ -1,10 +1,10 @@
 import { ChangeEvent } from "react";
 
-export type Option = {
+export interface Option {
   id?: string;
   name: string;
   value: string | number | boolean;
-};
+}
 
 export type InputType =
   | "text"
@@ -20,7 +20,7 @@ export type InputType =
   | "radio"
   | "textarea";
 
-export type FormFieldProps = {
+export interface FormFieldProps {
   name: string;
   id?: string;
   isRequired?: boolean;
@@ -35,7 +35,7 @@ export type FormFieldProps = {
   placeholder?: string;
   disabled?: boolean;
   validationMessage?: string;
-};
+}
 
 export type FormChangeEvent = (
   e: ChangeEvent<

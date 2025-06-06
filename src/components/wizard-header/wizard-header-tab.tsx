@@ -1,8 +1,10 @@
 import classNames from "classnames";
 import { CSSProperties, FunctionComponent, useContext, useMemo } from "react";
+
 import CheckIcon from "../../icons/check";
 import WarnIcon from "../../icons/warning";
 import { WizardContext } from "../wizard-context";
+
 import { WizardTabProps } from "./wizard-header.model";
 import styles from "./wizard-header.module.scss";
 

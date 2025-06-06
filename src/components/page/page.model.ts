@@ -1,6 +1,6 @@
 import { FormFieldProps } from "../form-field/form-field.model";
 
-export type PageModelProps = {
+export interface PageModelProps {
   id: string;
   onChange?: (id: string, success: boolean) => void;
   fields: FormFieldProps[];
@@ -10,4 +10,4 @@ export type PageModelProps = {
   width?: number;
   hide?: boolean;
   state: "NOT_VALIDATED" | "SUCCESS" | "FAIL";
-};
+}

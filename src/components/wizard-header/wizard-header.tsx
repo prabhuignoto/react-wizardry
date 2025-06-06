@@ -1,6 +1,8 @@
 import classNames from "classnames";
 import { FunctionComponent, useContext, useMemo } from "react";
+
 import { WizardContext } from "../wizard-context";
+
 import { WizardHeaderTab } from "./wizard-header-tab";
 import { WizardHeaderProps } from "./wizard-header.model";
 import styles from "./wizard-header.module.scss";

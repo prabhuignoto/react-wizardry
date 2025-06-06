@@ -1,9 +1,10 @@
 import { ReactNode } from "react";
+
 import { PageModelProps } from "./page/page.model";
 
 export type WizardPageProps = Pick<PageModelProps, "fields" | "title">;
 
-export type Theme = {
+export interface Theme {
   background?: string;
   fail?: string;
   formFieldBackground?: string;
@@ -16,9 +17,9 @@ export type Theme = {
   tabColor?: string;
   tabLineColor?: string;
   warning?: string;
-};
+}
 
-export type WizardProps = {
+export interface WizardProps {
   pages: WizardPageProps[];
   theme?: Theme;
   highlightFieldsOnValidation?: boolean;
@@ -34,12 +35,12 @@ export type WizardProps = {
   silent?: boolean;
   stepperItemWidth?: string;
   showStepperTitles?: boolean;
-};
+}
 
-export type PageDim = {
+export interface PageDim {
   height: number;
   id: string;
-};
+}
 
 export type contextType = Pick<
   WizardProps,

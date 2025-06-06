@@ -1,8 +1,10 @@
 import classNames from "classnames";
 import { FunctionComponent, useContext, useMemo } from "react";
+
 import ChevronLeft from "../../icons/chevron-left";
 import ChevronRight from "../../icons/chevron-right";
 import { WizardFooterProps } from "../wizard-footer/wizard-footer.model";
+
 import { WizardContext } from "./../wizard-context";
 import styles from "./wizard-footer.module.scss";
 

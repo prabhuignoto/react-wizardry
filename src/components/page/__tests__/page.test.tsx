@@ -1,22 +1,23 @@
 import { fireEvent, render, waitFor } from "@testing-library/react";
 import React from "react";
 import { describe, expect, it, vi } from "vitest";
+
 import { FormFieldProps } from "../../form-field/form-field.model";
 import { Page } from "../page";
 
 const fields: FormFieldProps[] = [
   {
-    name: "name",
-    label: "name",
     id: "name",
     isRequired: true,
+    label: "name",
+    name: "name",
     type: "text",
   },
   {
-    name: "email",
     id: "email",
-    label: `email`,
     isRequired: true,
+    label: "email",
+    name: "email",
     type: "email",
   },
 ];
@@ -24,7 +25,7 @@ const fields: FormFieldProps[] = [
 describe("Page", () => {
   it("should render the page", () => {
     const { getByText } = render(
-      <Page title="Introduction" id="2" fields={fields} state="NOT_VALIDATED" />
+      <Page fields={fields} id="2" state="NOT_VALIDATED" title="Introduction" />
     );
 
     expect(getByText("Introduction")).toBeInTheDocument();
@@ -32,7 +33,7 @@ describe("Page", () => {
 
   it("should render the fields", () => {
     const { getByLabelText } = render(
-      <Page title="Introduction" id="2" fields={fields} state="NOT_VALIDATED" />
+      <Page fields={fields} id="2" state="NOT_VALIDATED" title="Introduction" />
     );
 
     expect(getByLabelText("name")).toBeInTheDocument();
@@ -43,11 +44,11 @@ describe("Page", () => {
     const onChange = vi.fn();
     const { container } = render(
       <Page
-        title="Introduction"
-        id="2"
         fields={fields}
-        state="NOT_VALIDATED"
+        id="2"
         onChange={onChange}
+        state="NOT_VALIDATED"
+        title="Introduction"
       />
     );
 
@@ -72,11 +73,11 @@ describe("Page", () => {
     const onChange = vi.fn();
     const { container } = render(
       <Page
-        title="Introduction"
-        id="2"
         fields={fields}
-        state="NOT_VALIDATED"
+        id="2"
         onChange={onChange}
+        state="NOT_VALIDATED"
+        title="Introduction"
       />
     );
 

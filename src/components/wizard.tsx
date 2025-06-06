@@ -8,6 +8,7 @@ import {
   useRef,
   useState,
 } from "react";
+
 import { FormFieldProps } from "./form-field/form-field.model";
 import { Page } from "./page/page";
 import { PageModelProps } from "./page/page.model";
@@ -53,7 +54,7 @@ const Wizard: FunctionComponent<WizardProps> = ({
   const bodyNode = useRef<HTMLDivElement | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const finalTheme = useRef<{ [key: string]: Object }>(
+  const finalTheme = useRef<Record<string, object>>(
     Object.assign({}, ThemeDefaults, theme)
   );
 
@@ -166,7 +167,7 @@ const Wizard: FunctionComponent<WizardProps> = ({
     const node = bodyNode.current;
     if (node) {
       const pages = node.querySelectorAll(".rc-wiz-page");
-      const result: { [key: string]: Object } = {};
+      const result: Record<string, object> = {};
 
       pages.forEach((page) => {
         const title = page.getAttribute("data-title")?.toLowerCase();

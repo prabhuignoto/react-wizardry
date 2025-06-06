@@ -1,13 +1,14 @@
 import { fireEvent, render, waitFor } from "@testing-library/react";
 import React from "react";
 import { describe, expect, it, vi } from "vitest";
+
 import { FormField } from "../form-field";
 import styles from "../form-field.module.scss";
 
 describe("FormField", () => {
   it("should render text box", () => {
     const { getByText } = render(
-      <FormField id="123" name="date" label="first name" />
+      <FormField id="123" label="first name" name="date" />
     );
 
     expect(getByText("first name")).toBeInTheDocument();
@@ -15,7 +16,7 @@ describe("FormField", () => {
 
   it("should render checkbox", () => {
     const { getByText } = render(
-      <FormField id="123" name="option" label="option" type="checkbox" />
+      <FormField id="123" label="option" name="option" type="checkbox" />
     );
 
     expect(getByText("option")).toBeInTheDocument();
@@ -23,7 +24,7 @@ describe("FormField", () => {
 
   it("should render datetime", () => {
     const { getByText } = render(
-      <FormField id="123" name="date" label="date" type="datetime" />
+      <FormField id="123" label="date" name="date" type="datetime" />
     );
 
     expect(getByText("date")).toBeInTheDocument();
@@ -31,7 +32,7 @@ describe("FormField", () => {
 
   it("should render file", () => {
     const { getByText } = render(
-      <FormField id="123" name="file" label="file" type="file" />
+      <FormField id="123" label="file" name="file" type="file" />
     );
 
     expect(getByText("file")).toBeInTheDocument();
@@ -42,7 +43,6 @@ describe("FormField", () => {
       <FormField
         id="234"
         label="select options"
-        type="select"
         name="select"
         options={[
           { name: "one", value: "one" },
@@ -51,6 +51,7 @@ describe("FormField", () => {
             value: "two",
           },
         ]}
+        type="select"
       />
     );
 
@@ -60,7 +61,7 @@ describe("FormField", () => {
 
   it("should render text area", () => {
     const { getByText } = render(
-      <FormField id="123" name="text" label="text" type="textarea" />
+      <FormField id="123" label="text" name="text" type="textarea" />
     );
 
     expect(getByText("text")).toBeInTheDocument();
@@ -68,7 +69,7 @@ describe("FormField", () => {
 
   it("should render valid icon", () => {
     const { getByLabelText } = render(
-      <FormField id="123" name="field" label="field" type="datetime" isValid />
+      <FormField id="123" isValid label="field" name="field" type="datetime" />
     );
 
     expect(getByLabelText("success")).toBeInTheDocument();
@@ -80,10 +81,10 @@ describe("FormField", () => {
     const { getByLabelText } = render(
       <FormField
         id="123"
-        name="field"
-        label="field"
-        type="datetime"
         isValid={false}
+        label="field"
+        name="field"
+        type="datetime"
       />
     );
 
@@ -94,7 +95,7 @@ describe("FormField", () => {
 
   it("should render the label", () => {
     const { getByLabelText } = render(
-      <FormField id="123" name="field" label="field 123" type="text" />
+      <FormField id="123" label="field 123" name="field" type="text" />
     );
 
     expect(getByLabelText("field 123")).toBeInTheDocument();
@@ -102,7 +103,7 @@ describe("FormField", () => {
 
   it("should have the valid class", () => {
     const { container } = render(
-      <FormField id="123" name="field" label="field" type="text" isValid />
+      <FormField id="123" isValid label="field" name="field" type="text" />
     );
 
     expect(container.firstChild).toHaveClass(
@@ -113,7 +114,7 @@ describe("FormField", () => {
 
   it("should render asterisk icon for required field", () => {
     const { getByLabelText } = render(
-      <FormField type="text" label="field 12" isRequired name="field 12" />
+      <FormField isRequired label="field 12" name="field 12" type="text" />
     );
 
     expect(getByLabelText("important field")).toBeInTheDocument();
@@ -125,10 +126,10 @@ describe("FormField", () => {
     const { container } = render(
       <FormField
         id="123"
-        name="field"
         label="field"
-        type="text"
+        name="field"
         onInput={onChange}
+        type="text"
       />
     );
 
