@@ -9,9 +9,8 @@ export default defineConfig({
     globals: true,
     setupFiles: "./jest-setup.ts",
     silent: true,
-    threads: true,
     update: true,
-    watch: true,
+    watch: false,
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
