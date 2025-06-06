@@ -17,17 +17,17 @@
     "dev": "vite",
     "build": "webpack --mode=production --node-env=production",
     "preview": "vite preview",
-    "format": "npx prettier --write ./src/components/*.{ts,tsx}",
-    "test": "npx vitest --config ./vitest.config.ts --coverage",
-    "lint": "npx eslint ./src/components/**/*.{ts,tsx}",
-    "fix-lint": "npx eslint ./src/components/**/*.{ts,tsx} --fix",
+    "format": "pnpm prettier --write ./src/components/*.{ts,tsx}",
+    "test": "pnpm vitest --config ./vitest.config.ts --coverage",
+    "lint": "pnpm eslint ./src/components/**/*.{ts,tsx}",
+    "fix-lint": "pnpm eslint ./src/components/**/*.{ts,tsx} --fix",
     "build:dev": "webpack --mode=development",
     "build:prod": "webpack --mode=production --node-env=production",
     "analyze": "webpack --mode=production --node-env=production --env analyze",
     "serve": "webpack serve --mode=development",
     "watch": "webpack --watch",
-    "snyk:monitor": "npx snyk monitor",
-    "snyk:test": "npx snyk test"
+    "snyk:monitor": "pnpm snyk monitor",
+    "snyk:test": "pnpm snyk test"
   },
   "publishConfig": {
     "cache": "cache/.npm",
