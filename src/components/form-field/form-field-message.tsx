@@ -1,14 +1,16 @@
 import classNames from "classnames";
 import { FunctionComponent, useMemo } from "react";
+
 import InfoIcon from "../../icons/info";
+
 import styles from "./form-field-message.module.scss";
 
-export type FormFieldMessageProps = {
+export interface FormFieldMessageProps {
   message?: string;
   RTL?: boolean;
   isValid?: boolean | null;
   show?: boolean;
-};
+}
 
 const FormFieldMessage: FunctionComponent<FormFieldMessageProps> = ({
   message,

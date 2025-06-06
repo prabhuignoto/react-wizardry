@@ -1,2 +1,12 @@
 coverage/
 __tests__
+node_modules/
+dist/
+.github/
+.vscode/
+.husky/
+public/
+*.config.js
+*.config.ts
+*.d.ts
+vite-env.d.ts
