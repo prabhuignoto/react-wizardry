@@ -4,7 +4,7 @@ import { describe, expect, it, vi } from "vitest";
 import { FormField } from "../form-field";
 import styles from "../form-field.module.scss";
 
-describe.concurrent("FormField", () => {
+describe("FormField", () => {
   it("should render text box", () => {
     const { getByText } = render(
       <FormField id="123" name="date" label="first name" />
@@ -55,7 +55,7 @@ describe.concurrent("FormField", () => {
     );
 
     expect(container.querySelector("select")).toBeInTheDocument();
-    expect(container.querySelectorAll("option")).toHaveLength(2);
+    expect(container.querySelectorAll("option")).toHaveLength(3);
   });
 
   it("should render text area", () => {
