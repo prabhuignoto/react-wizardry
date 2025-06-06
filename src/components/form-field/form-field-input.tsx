@@ -75,7 +75,7 @@ const FormFieldInput: FunctionComponent<FormFieldInputProps> = ({
           onChange={handleChange}
           placeholder={placeholder}
           required={isRequired}
-        ></textarea>
+        />
       );
     } else if (type === "radio" || type === "checkbox") {
       return (

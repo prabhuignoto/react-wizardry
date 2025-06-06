@@ -16,7 +16,7 @@ const fields: FormFieldProps[] = [
   {
     id: "email",
     isRequired: true,
-    label: `email`,
+    label: "email",
     name: "email",
     type: "email",
   },

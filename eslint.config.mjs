@@ -7,7 +7,6 @@ import jsxA11yPlugin from 'eslint-plugin-jsx-a11y';
 import * as importPlugin from 'eslint-plugin-import';
 import securityPlugin from 'eslint-plugin-security';
 import sortKeysFixPlugin from 'eslint-plugin-sort-keys-fix';
-import { glob } from 'glob';
 
 export default tseslint.config(
   // Base ESLint recommended configuration
