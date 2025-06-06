@@ -1,22 +1,61 @@
-// Generated using webpack-cli https://github.com/webpack/webpack-cli
+// Updated to modern ESM format with 2025 standards
 
-const autoprefixer = require("autoprefixer");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const path = require("path");
-const PostCSSpresetEnv = require("postcss-preset-env");
-const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
-const NodeExternals = require("webpack-node-externals");
-const pkg = require("./package.json");
-const CopyPlugin = require("copy-webpack-plugin");
-const { BannerPlugin } = require("webpack");
-const TerserPlugin = require("terser-webpack-plugin");
+import autoprefixer from 'autoprefixer';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import PostCSSpresetEnv from 'postcss-preset-env';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import NodeExternals from 'webpack-node-externals';
+import { createRequire } from 'module';
+import CopyPlugin from 'copy-webpack-plugin';
+import webpack from 'webpack';
+import TerserPlugin from 'terser-webpack-plugin';
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
+import CompressionPlugin from 'compression-webpack-plugin';
+import DotenvPlugin from 'dotenv-webpack';
+import SpeedMeasurePlugin from 'speed-measure-webpack-plugin';
+import browserslistToEsbuild from 'browserslist-to-esbuild';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const require = createRequire(import.meta.url);
+const pkg = require('./package.json');
+const { BannerPlugin, DefinePlugin } = webpack;
 
 const isProduction = process.env.NODE_ENV === "production";
 
 const stylesHandler = MiniCssExtractPlugin.loader;
 
 const config = {
-  devtool: "source-map",
+  devtool: isProduction ? "source-map" : "eval-cheap-module-source-map",
+  target: "browserslist",
+  cache: {
+    type: "filesystem",
+    buildDependencies: { config: [import.meta.url] },
+    compression: 'gzip',
+  },
+  experiments: { 
+    topLevelAwait: true,
+    outputModule: true,
+    lazyCompilation: !isProduction,
+  },
+  // Dev server configuration for development mode
+  devServer: {
+    hot: true,
+    open: true,
+    port: 3000,
+    static: {
+      directory: path.join(new URL('.', import.meta.url).pathname, 'dist'),
+    },
+    client: {
+      overlay: {
+        errors: true,
+        warnings: false,
+      },
+    },
+    compress: true,
+  },
   entry: "./src/react-wizardry.ts",
   externals: [
     NodeExternals({
@@ -30,13 +69,24 @@ const config = {
         test: /\.(tsx|ts)$/,
         use: [
           {
-            loader: "babel-loader",
+            loader: "swc-loader",
             options: {
-              plugins: ["@babel/plugin-transform-runtime"],
-              presets: ["@babel/preset-env", "@babel/preset-react"],
-            },
-          },
-          "ts-loader",
+              jsc: {
+                parser: {
+                  syntax: "typescript",
+                  tsx: true,
+                },
+                transform: {
+                  react: {
+                    runtime: "automatic",
+                    development: !isProduction,
+                    refresh: !isProduction
+                  }
+                },
+                target: "es2022"
+              }
+            }
+          }
         ],
       },
       {
@@ -70,6 +120,8 @@ const config = {
   },
   optimization: {
     minimize: isProduction,
+    moduleIds: "deterministic",
+    chunkIds: "deterministic",
     minimizer: [
       new TerserPlugin({
         terserOptions: {
@@ -81,15 +133,18 @@ const config = {
           },
         },
       }),
+      new CssMinimizerPlugin(),
     ],
   },
   output: {
     clean: true,
     filename: pkg.name + ".js",
+    assetModuleFilename: "assets/[hash][ext][query]",
     library: {
       name: pkg.name,
       type: "umd",
     },
+    iife: true,
     path: path.resolve(__dirname, "dist"),
   },
   plugins: [
@@ -111,19 +166,40 @@ const config = {
     new BannerPlugin({
       banner: `${pkg.name} v${pkg.version} | ${pkg.license} | ${pkg.homepage} | ${pkg.author}`,
     }),
+    new DotenvPlugin({
+      systemvars: true,
+    }),
+    isProduction && new CompressionPlugin({
+      algorithm: 'gzip',
+      test: /\.(js|css|html|svg)$/,
+      threshold: 10240,
+      minRatio: 0.8,
+    }),
     // Add your plugins here
     // Learn more about plugins from https://webpack.js.org/configuration/plugins/
-  ],
+  ].filter(Boolean),
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
+    fallback: { fs: false, path: false, os: false },
   },
 };
 
-module.exports = () => {
+export default (env) => {
   if (isProduction) {
     config.mode = "production";
   } else {
     config.mode = "development";
   }
+  
+  // Only include BundleAnalyzerPlugin when analyze flag is passed
+  if (env && env.analyze) {
+    config.plugins.push(
+      new BundleAnalyzerPlugin({
+        analyzerMode: "server",
+        openAnalyzer: true,
+      })
+    );
+  }
+  
   return config;
 };
