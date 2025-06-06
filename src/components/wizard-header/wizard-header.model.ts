@@ -5,7 +5,7 @@ export type WizardHeaderProps = {
   pages: PageModelProps[];
   onSelect?: (id?: string) => void;
   activeIndex: number;
-  icons: ReactNode[];
+  icons?: ReactNode[];
 };
 
 export type WizardTabProps = Pick<WizardHeaderProps, "onSelect"> &

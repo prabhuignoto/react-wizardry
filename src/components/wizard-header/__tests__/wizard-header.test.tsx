@@ -25,7 +25,7 @@ const pages: PageModelProps[] = [
   },
 ];
 
-describe.concurrent("Wizard Header", () => {
+describe("Wizard Header", () => {
   it("should render the header", () => {
     const { getByRole, getAllByRole } = render(
       <WizardHeader pages={pages} activeIndex={0} />
