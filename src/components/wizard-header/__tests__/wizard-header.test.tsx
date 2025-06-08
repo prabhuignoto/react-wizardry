@@ -1,34 +1,35 @@
 import { render } from "@testing-library/react";
 import React from "react";
 import { describe, expect, it } from "vitest";
+
 import { PageModelProps } from "../../page/page.model";
 import { WizardHeader } from "../wizard-header";
 
 const pages: PageModelProps[] = [
   {
+    fields: [],
     id: "page1",
+    state: "NOT_VALIDATED",
     title: "Page 1",
-    state: "NOT_VALIDATED",
-    fields: [],
   },
   {
+    fields: [],
     id: "page2",
-    title: "Page 2",
     state: "FAIL",
-    fields: [],
+    title: "Page 2",
   },
   {
-    id: "page3",
-    title: "Page 3",
-    state: "NOT_VALIDATED",
     fields: [],
+    id: "page3",
+    state: "NOT_VALIDATED",
+    title: "Page 3",
   },
 ];
 
 describe("Wizard Header", () => {
   it("should render the header", () => {
     const { getByRole, getAllByRole } = render(
-      <WizardHeader pages={pages} activeIndex={0} />
+      <WizardHeader activeIndex={0} pages={pages} />
     );
 
     expect(getByRole("tablist")).toBeInTheDocument();
@@ -37,7 +38,7 @@ describe("Wizard Header", () => {
 
   it("should render icon states", () => {
     const { getAllByRole } = render(
-      <WizardHeader pages={pages} activeIndex={0} />
+      <WizardHeader activeIndex={0} pages={pages} />
     );
 
     expect(getAllByRole("img")).toHaveLength(3);

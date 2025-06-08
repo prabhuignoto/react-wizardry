@@ -1,5 +1,6 @@
 import { fireEvent, render } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
+
 import { PageModelProps } from "../../page/page.model";
 import { WizardFooter } from "../wizard-footer";
 import styles from "../wizard-footer.module.scss";

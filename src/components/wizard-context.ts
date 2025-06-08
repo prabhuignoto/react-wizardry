@@ -1,4 +1,5 @@
 import { createContext } from "react";
+
 import { contextType } from "./wizard.model";
 
 export const WizardContext = createContext<contextType>({

@@ -1,6 +1,5 @@
 import "./App.css";
 import { Wizard } from "./components/wizard";
-
 import Box from "./example-assets/box";
 import Dollar from "./example-assets/dollar";
 import Twitter from "./example-assets/twitter";
