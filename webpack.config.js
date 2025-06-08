@@ -4,7 +4,6 @@ import autoprefixer from 'autoprefixer';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import PostCSSpresetEnv from 'postcss-preset-env';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import NodeExternals from 'webpack-node-externals';
 import { createRequire } from 'module';
@@ -93,21 +92,68 @@ const config = {
         test: /\.s[ac]ss$/i,
         use: [
           stylesHandler,
-          "css-loader",
+          {
+            loader: "css-loader",
+            options: {
+              modules: {
+                auto: true, // Enable CSS modules for .module.scss files
+                localIdentName: isProduction 
+                  ? '[hash:base64:8]' 
+                  : '[name]__[local]__[hash:base64:5]',
+              },
+              sourceMap: !isProduction,
+              importLoaders: 3, // Apply loaders to @import resources
+            },
+          },
           {
             loader: "postcss-loader",
             options: {
-              postcssOptions: {
-                plugins: [autoprefixer(), PostCSSpresetEnv()],
+              sourceMap: !isProduction,
+              // PostCSS config will be automatically loaded from postcss.config.js
+            },
+          },
+          {
+            loader: "sass-loader",
+            options: {
+              sourceMap: !isProduction,
+              sassOptions: {
+                outputStyle: isProduction ? 'compressed' : 'expanded',
+                includePaths: [
+                  path.resolve(__dirname, 'src'),
+                  path.resolve(__dirname, 'src/components/styles'),
+                  path.resolve(__dirname, 'node_modules'),
+                ],
+                silenceDeprecations: ['legacy-js-api'], // Silence Sass deprecation warnings
               },
             },
           },
-          "sass-loader",
         ],
       },
       {
         test: /\.css$/i,
-        use: [stylesHandler, "css-loader", "postcss-loader"],
+        use: [
+          stylesHandler, 
+          {
+            loader: "css-loader",
+            options: {
+              modules: {
+                auto: true, // Enable CSS modules for .module.css files
+                localIdentName: isProduction 
+                  ? '[hash:base64:8]' 
+                  : '[name]__[local]__[hash:base64:5]',
+              },
+              sourceMap: !isProduction,
+              importLoaders: 1,
+            },
+          },
+          {
+            loader: "postcss-loader",
+            options: {
+              sourceMap: !isProduction,
+              // PostCSS config will be automatically loaded from postcss.config.js
+            },
+          },
+        ],
       },
       {
         test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,

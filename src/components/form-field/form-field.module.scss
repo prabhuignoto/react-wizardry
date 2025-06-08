@@ -1,9 +1,8 @@
 @use "sass:color";
+@use '../styles' as s;
 
 .form_field {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  @include s.flex-column(flex-start);
   margin-bottom: 1rem;
   padding: 1.5rem 1rem;
   background: var(--rc-wiz-formFieldBackground);
@@ -11,7 +10,7 @@
   width: calc(100% - 3rem);
   position: relative;
   border: 1px solid transparent;
-  transition: border 0.2s ease-in, box-shadow 0.2s ease-in;
+  @include s.transition(border 0.2s ease-in, box-shadow 0.2s ease-in);
 
   input:not([type="radio"], [type="checkbox"]),
   textarea {
@@ -48,9 +47,7 @@
 }
 
 .input_wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  @include s.flex-start;
   flex-wrap: wrap;
 }
 
@@ -61,24 +58,21 @@
 }
 
 .status {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include s.flex-center;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   height: 1.25rem;
   width: 1.25rem;
   border-radius: 50%;
-  transition: background 0.25s ease-in, color 0.25s ease-in, fill 0.25s ease-in;
+  @include s.transition(background 0.25s ease-in, color 0.25s ease-in, fill 0.25s ease-in);
 
   &.success {
-    background: var(--rc-wiz-success);
-    color: #fff;
+    @include s.status-indicator(var(--rc-wiz-success));
   }
 
   &.fail {
-    background: var(--rc-wiz-fail);
+    @include s.status-indicator(var(--rc-wiz-fail));
 
     svg {
       fill: #fff;
@@ -86,7 +80,7 @@
   }
 
   &.warning {
-    background: var(--rc-wiz-warning);
+    @include s.status-indicator(var(--rc-wiz-warning));
 
     svg {
       fill: #fff;
@@ -110,40 +104,23 @@
 }
 
 .asterisk {
-  width: 0.7rem;
-  height: 0.7rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  &.RTL {
-    margin-right: 0.5rem;
-  }
-
-  &:not(.RTL) {
-    margin-left: 0.5rem;
-  }
+  @include s.icon-base(0.7rem);
+  @include s.margin-side(0.5rem);
 
   svg {
     fill: var(--rc-wiz-fail);
-    height: 100%;
-    width: 100%;
   }
 }
 
 .collection_wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  @include s.flex-start;
 
   input {
     margin-right: 0.5rem;
   }
 
   label {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    @include s.flex-center;
     color: var(--rc-wiz-textColor);
     padding: 0.5rem;
   }

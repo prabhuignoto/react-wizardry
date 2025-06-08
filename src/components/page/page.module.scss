@@ -1,3 +1,5 @@
+@use '../styles' as s;
+
 .page_wrapper {
   padding: 0.5rem 0;
   transition: opacity 0.25s ease-out;
@@ -8,15 +10,10 @@
 }
 
 .fields_wrapper {
-  display: flex;
-  flex-direction: column;
+  @include s.flex-column;
 
   &.RTL {
     align-items: flex-end;
-  }
-
-  &:not(.RTL) {
-    align-items: flex-start;
   }
 }
 
@@ -25,9 +22,7 @@
 }
 
 .header {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
+  @include s.flex-start;
   font-size: 1rem;
   font-weight: 500;
   border-bottom: 2px solid var(--rc-wiz-primary);
@@ -35,8 +30,6 @@
   margin-bottom: 1rem;
   text-transform: uppercase;
   color: var(--rc-wiz-textColor);
-
-  &.RTL {
-    direction: rtl;
-  }
+  
+  @include s.rtl-support;
 }

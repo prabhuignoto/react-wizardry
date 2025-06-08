@@ -1,0 +1,67 @@
+// Common mixins and variables for react-wizardry
+@use "sass:color";
+@use "_variables" as vars;
+
+// Flexbox mixins
+@mixin flex($direction: row, $align: center, $justify: center) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: $align;
+  justify-content: $justify;
+}
+
+@mixin flex-center {
+  @include flex(row, center, center);
+}
+
+@mixin flex-start {
+  @include flex(row, center, flex-start);
+}
+
+@mixin flex-end {
+  @include flex(row, center, flex-end);
+}
+
+@mixin flex-column($align: flex-start) {
+  @include flex(column, $align, flex-start);
+}
+
+// RTL handling
+@mixin rtl-support {
+  &.RTL {
+    direction: rtl;
+  }
+}
+
+@mixin margin-side($size) {
+  &.RTL {
+    margin-right: $size;
+  }
+  
+  &:not(.RTL) {
+    margin-left: $size;
+  }
+}
+
+// Transitions
+@mixin transition($properties...) {
+  transition: $properties;
+}
+
+// Common styling
+@mixin icon-base($size: 1rem) {
+  width: $size;
+  height: $size;
+  @include flex-center;
+  
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+// Status indicators
+@mixin status-indicator($color, $text-color: #fff) {
+  background: $color;
+  color: $text-color;
+}
